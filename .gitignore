@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Ferramentas
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editor / ferramentas locais
+.idea/
+.vscode/
+*.swp
+.claude/settings.local.json
+
+# ATENÇÃO: os .xsd oficiais em schemas/ NÃO entram aqui.
+# A RN05 exige que o sistema valide contra os arquivos reais da SEFAZ, e o
+# validador degrada para o aviso XSD-INDISPONIVEL sem eles. Eles são parte da
+# entrega, não artefato de build.

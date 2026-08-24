@@ -1,0 +1,16 @@
+Coloque aqui os XSDs oficiais de NFC-e (modelo 65) da versao 4.00.
+
+Esta pasta esta VAZIA de proposito: a SEFAZ nao publica um leiaute separado
+para NFC-e, e este projeto ainda nao tem o pacote proprio instalado. Enquanto
+estiver assim, uma NFC-e recebe o aviso XSD-INDISPONIVEL e roda apenas as
+regras de negocio (RN08..RN19), sem validacao estrutural.
+
+O ponto de entrada esperado e "nfce_v4.00.xsd" (ver ARQUIVOS_ENTRADA em
+nfe_validator/schema.py). A RN05 exige o arquivo oficial da SEFAZ/ENCAT: nao
+recrie o schema a mao.
+
+Alternativa ja implementada, desligada por padrao: layout.carregar_modelo com
+permitir_leiaute_equivalente=True faz a NFC-e usar o leiaute de NF-e da MESMA
+versao apenas para TEXTO EXPLICATIVO de campo - nunca para validar. O default
+e False porque, se a SEFAZ publicar um leiaute de NFC-e divergente, o
+emprestimo passaria a explicar campos com o documento errado, em silencio.

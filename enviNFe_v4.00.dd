@@ -1,0 +1,1039 @@
+# Dicionario de campos para NfeServico.getXSDTagInf()
+# Raiz: <enviNFe>   Layout: 4.00
+#
+# COMO O ERP USA ESTE ARQUIVO
+#   getXSDTagInf() troca a extensao do XSD validado por .dd, carrega
+#   como java.util.Properties e busca a descricao pela chave. A chave e
+#   o caminho pontilhado que NfeReaderXML.pathToString() monta, sem
+#   indice de repeticao. Basta colocar este arquivo ao lado do
+#   enviNFe_v4.00.xsd no diretorio do pacote de schemas.
+#
+# ENCODING
+#   Properties.load(InputStream) le em ISO-8859-1, entao todo caractere
+#   fora de ASCII esta escapado como \uXXXX. Nao converta o arquivo.
+#
+# ORIGEM DOS TEXTOS
+#   99 de 1016 chaves usam o catalogo de negocio do
+#   nfe_validator (texto proprio, com o motivo da rejeicao e como
+#   corrigir). As demais usam o xs:documentation oficial do XSD,
+#   copiado literalmente.
+#
+# Gerado por nfe_validator/gerador_dd.py - nao editar a mao:
+# regerar mantem o arquivo em sincronia com o XSD.
+
+enviNFe=Schema XML de valida\u00e7\u00e3o do Pedido de Concess\u00e3o de Autoriza\u00e7\u00e3o da Nota Fiscal Eletr\u00f4nica
+enviNFe.NFe.infNFe=Informa\u00e7\u00f5es da Nota Fiscal eletr\u00f4nica
+enviNFe.NFe.infNFe.agropecuario=Produtos Agropecur\u00e1rios Animais, Vegetais e Florestais
+enviNFe.NFe.infNFe.agropecuario.defensivo=Defensivo Agr\u00edcola / Agrot\u00f3xico
+enviNFe.NFe.infNFe.agropecuario.defensivo.CPFRespTec=CPF do Respons\u00e1vel T\u00e9cnico pelo receitu\u00e1rio
+enviNFe.NFe.infNFe.agropecuario.defensivo.nReceituario=N\u00famero do Receitu\u00e1rio ou Receita do Defensivo / Agrot\u00f3xico
+enviNFe.NFe.infNFe.agropecuario.guiaTransito=Guias De Tr\u00e2nsito de produtos agropecur\u00e1rios animais, vegetais e de origem florestal.
+enviNFe.NFe.infNFe.agropecuario.guiaTransito.nGuia=N\u00famero da Guia
+enviNFe.NFe.infNFe.agropecuario.guiaTransito.serieGuia=S\u00e9rie da Guia
+enviNFe.NFe.infNFe.agropecuario.guiaTransito.tpGuia=Tipo da Guia: 1 - GTA; 2 - TTA; 3 - DTA; 4 - ATV; 5 - PTV; 6 - GTV; 7 - Guia Florestal (DOF, SisFlora - PA e MT, SIAM - MG)
+enviNFe.NFe.infNFe.autXML=Pessoas autorizadas para o download do XML da NF-e
+enviNFe.NFe.infNFe.autXML.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.autXML.CPF=CPF. O CPF identifica a pessoa f\u00edsica da opera\u00e7\u00e3o. Um CPF com d\u00edgito verificador inv\u00e1lido impede a identifica\u00e7\u00e3o segura do destinat\u00e1rio. Como corrigir: Envie os 11 d\u00edgitos do CPF sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador.
+enviNFe.NFe.infNFe.avulsa=Emiss\u00e3o de avulsa, informar os dados do Fisco emitente
+enviNFe.NFe.infNFe.avulsa.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.avulsa.UF=Sigla da Unidade da Federa\u00e7\u00e3o
+enviNFe.NFe.infNFe.avulsa.dEmi=Data de emiss\u00e3o do DAR (AAAA-MM-DD)
+enviNFe.NFe.infNFe.avulsa.dPag=Data de pagamento do DAR (AAAA-MM-DD)
+enviNFe.NFe.infNFe.avulsa.fone=Telefone
+enviNFe.NFe.infNFe.avulsa.matr=Matr\u00edcula do agente
+enviNFe.NFe.infNFe.avulsa.nDAR=N\u00famero do Documento de Arrecada\u00e7\u00e3o de Receita
+enviNFe.NFe.infNFe.avulsa.repEmi=Reparti\u00e7\u00e3o Fiscal emitente
+enviNFe.NFe.infNFe.avulsa.vDAR=Valor Total constante no DAR
+enviNFe.NFe.infNFe.avulsa.xAgente=Nome do agente
+enviNFe.NFe.infNFe.avulsa.xOrgao=\u00d3rg\u00e3o emitente
+enviNFe.NFe.infNFe.cana=Informa\u00e7\u00f5es de registro aquisi\u00e7\u00f5es de cana
+enviNFe.NFe.infNFe.cana.deduc=Dedu\u00e7\u00f5es - Taxas e Contribui\u00e7\u00f5es
+enviNFe.NFe.infNFe.cana.deduc.vDed=valor da dedu\u00e7\u00e3o
+enviNFe.NFe.infNFe.cana.deduc.xDed=Descri\u00e7\u00e3o da Dedu\u00e7\u00e3o
+enviNFe.NFe.infNFe.cana.forDia=Fornecimentos di\u00e1rios
+enviNFe.NFe.infNFe.cana.forDia.qtde=Quantidade em quilogramas - peso l\u00edquido
+enviNFe.NFe.infNFe.cana.qTotAnt=Total Anterior
+enviNFe.NFe.infNFe.cana.qTotGer=Total Geral
+enviNFe.NFe.infNFe.cana.qTotMes=Total do m\u00eas
+enviNFe.NFe.infNFe.cana.ref=M\u00eas e Ano de Refer\u00eancia, formato: MM/AAAA
+enviNFe.NFe.infNFe.cana.safra=Identifica\u00e7\u00e3o da safra
+enviNFe.NFe.infNFe.cana.vFor=Valor dos fornecimentos
+enviNFe.NFe.infNFe.cana.vLiqFor=Valor L\u00edquido dos fornecimentos
+enviNFe.NFe.infNFe.cana.vTotDed=Valor Total das Dedu\u00e7\u00f5es
+enviNFe.NFe.infNFe.cobr=Dados da cobran\u00e7a da NF-e
+enviNFe.NFe.infNFe.cobr.dup=Dados das duplicatas NT 2011/004
+enviNFe.NFe.infNFe.cobr.dup.dVenc=Data de vencimento da duplicata (AAAA-MM-DD)
+enviNFe.NFe.infNFe.cobr.dup.nDup=N\u00famero da duplicata
+enviNFe.NFe.infNFe.cobr.dup.vDup=Valor da duplicata
+enviNFe.NFe.infNFe.cobr.fat=Dados da fatura
+enviNFe.NFe.infNFe.cobr.fat.nFat=N\u00famero da fatura
+enviNFe.NFe.infNFe.cobr.fat.vDesc=Valor do desconto da fatura
+enviNFe.NFe.infNFe.cobr.fat.vLiq=Valor l\u00edquido da fatura
+enviNFe.NFe.infNFe.cobr.fat.vOrig=Valor original da fatura
+enviNFe.NFe.infNFe.compra=Informa\u00e7\u00f5es de compras (Nota de Empenho, Pedido e Contrato)
+enviNFe.NFe.infNFe.compra.xCont=Informa\u00e7\u00e3o do contrato
+enviNFe.NFe.infNFe.compra.xNEmp=Informa\u00e7\u00e3o da Nota de Empenho de compras p\u00fablicas (NT2011/004)
+enviNFe.NFe.infNFe.compra.xPed=Informa\u00e7\u00e3o do pedido
+enviNFe.NFe.infNFe.dest=Identifica\u00e7\u00e3o do Destinat\u00e1rio
+enviNFe.NFe.infNFe.dest.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.dest.CPF=CPF. O CPF identifica a pessoa f\u00edsica da opera\u00e7\u00e3o. Um CPF com d\u00edgito verificador inv\u00e1lido impede a identifica\u00e7\u00e3o segura do destinat\u00e1rio. Como corrigir: Envie os 11 d\u00edgitos do CPF sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador.
+enviNFe.NFe.infNFe.dest.IE=Inscri\u00e7\u00e3o Estadual (IE). A IE comprova o cadastro estadual do contribuinte na UF da opera\u00e7\u00e3o. A SEFAZ consulta esse cadastro; IE ausente ou em formato inv\u00e1lido para a UF impede a confirma\u00e7\u00e3o. Como corrigir: Informe a IE no formato da UF, sem pontua\u00e7\u00e3o. Para destinat\u00e1rio n\u00e3o contribuinte, use indIEDest=9 e n\u00e3o envie a tag IE; para isento, indIEDest=2 com IE ausente.
+enviNFe.NFe.infNFe.dest.IM=Inscri\u00e7\u00e3o Municipal do tomador do servi\u00e7o
+enviNFe.NFe.infNFe.dest.ISUF=Inscri\u00e7\u00e3o na SUFRAMA (Obrigat\u00f3rio nas opera\u00e7\u00f5es com as \u00e1reas com benef\u00edcios de incentivos fiscais sob controle da SUFRAMA) PL_005d - 11/08/09 - alterado para aceitar 8 ou 9 d\u00edgitos
+enviNFe.NFe.infNFe.dest.email=Informar o e-mail do destinat\u00e1rio. O campo pode ser utilizado para informar o e-mail de recep\u00e7\u00e3o da NF-e indicada pelo destinat\u00e1rio
+enviNFe.NFe.infNFe.dest.enderDest=Dados do endere\u00e7o
+enviNFe.NFe.infNFe.dest.enderDest.CEP=CEP
+enviNFe.NFe.infNFe.dest.enderDest.UF=Sigla da UF, informar EX para opera\u00e7\u00f5es com o exterior.
+enviNFe.NFe.infNFe.dest.enderDest.cMun=C\u00f3digo do munic\u00edpio (utilizar a tabela do IBGE), informar 9999999 para opera\u00e7\u00f5es com o exterior.
+enviNFe.NFe.infNFe.dest.enderDest.cPais=C\u00f3digo de Pais
+enviNFe.NFe.infNFe.dest.enderDest.fone=Telefone, preencher com C\u00f3digo DDD + n\u00famero do telefone , nas opera\u00e7\u00f5es com exterior \u00e9 permtido informar o c\u00f3digo do pa\u00eds + c\u00f3digo da localidade + n\u00famero do telefone
+enviNFe.NFe.infNFe.dest.enderDest.nro=N\u00famero
+enviNFe.NFe.infNFe.dest.enderDest.xBairro=Bairro
+enviNFe.NFe.infNFe.dest.enderDest.xCpl=Complemento
+enviNFe.NFe.infNFe.dest.enderDest.xLgr=Logradouro
+enviNFe.NFe.infNFe.dest.enderDest.xMun=Nome do munic\u00edpio, informar EXTERIOR para opera\u00e7\u00f5es com o exterior.
+enviNFe.NFe.infNFe.dest.enderDest.xPais=Nome do pa\u00eds
+enviNFe.NFe.infNFe.dest.idEstrangeiro=Identificador do destinat\u00e1rio, em caso de comprador estrangeiro
+enviNFe.NFe.infNFe.dest.indIEDest=Indicador da IE do destinat\u00e1rio: 1 \u2013 Contribuinte ICMSpagamento \u00e0 vista; 2 \u2013 Contribuinte isento de inscri\u00e7\u00e3o; 9 \u2013 N\u00e3o Contribuinte
+enviNFe.NFe.infNFe.dest.xNome=Raz\u00e3o Social ou nome do destinat\u00e1rio
+enviNFe.NFe.infNFe.det=Dados dos detalhes da NF-e
+enviNFe.NFe.infNFe.det.DFeReferenciado=Referenciamento de item de outros DFe
+enviNFe.NFe.infNFe.det.DFeReferenciado.chaveAcesso=Chave de Acesso do DFe referenciado
+enviNFe.NFe.infNFe.det.DFeReferenciado.nItem=N\u00famero do item do documento referenciado. Corresponde ao atributo nItem do elemento det do documento original.
+enviNFe.NFe.infNFe.det.imposto=Tributos incidentes nos produtos ou servi\u00e7os da NF-e
+enviNFe.NFe.infNFe.det.imposto.COFINS=Dados do COFINS
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSAliq=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do COFINS. 01 \u2013 Opera\u00e7\u00e3o Tribut\u00e1vel - Base de C\u00e1lculo = Valor da Opera\u00e7\u00e3o Al\u00edquota Normal (Cumulativo/N\u00e3o Cumulativo); 02 - Opera\u00e7\u00e3o Tribut\u00e1vel - Base de Calculo = Valor da Opera\u00e7\u00e3o (Al\u00edquota Diferenciada);
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSAliq.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do COFINS. 01 \u2013 Opera\u00e7\u00e3o Tribut\u00e1vel - Base de C\u00e1lculo = Valor da Opera\u00e7\u00e3o Al\u00edquota Normal (Cumulativo/N\u00e3o Cumulativo); 02 - Opera\u00e7\u00e3o Tribut\u00e1vel - Base de Calculo = Valor da Opera\u00e7\u00e3o (Al\u00edquota Diferenciada);
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSAliq.pCOFINS=Al\u00edquota do COFINS (em percentual)
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSAliq.vBC=Base de C\u00e1lculo da COFINS (vBC). A base de c\u00e1lculo da COFINS \u00e9 obrigat\u00f3ria no grupo COFINSAliq e \u00e9 usada para conferir vCOFINS. Como corrigir: Informe vBC da COFINS e confira se vBC x pCOFINS / 100 = vCOFINS.
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSAliq.vCOFINS=Valor da COFINS (vCOFINS). vCOFINS \u00e9 a contribui\u00e7\u00e3o devida no item e \u00e9 recalculada pela Receita a partir de vBC x pCOFINS. Como corrigir: Recalcule vCOFINS = vBC x pCOFINS / 100, com 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSNT=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do COFINS: 04 - Opera\u00e7\u00e3o Tribut\u00e1vel - Tributa\u00e7\u00e3o Monof\u00e1sica - (Al\u00edquota Zero); 06 - Opera\u00e7\u00e3o Tribut\u00e1vel - Al\u00edquota Zero; 07 - Opera\u00e7\u00e3o Isenta da contribui\u00e7\u00e3o; 08 - Opera\u00e7\u00e3o Sem Incid\u00eancia da contribui\u00e7\u00e3o; 09 - Opera\u00e7\u00e3o com suspens\u00e3o da contribui\u00e7\u00e3o;
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSNT.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do COFINS: 04 - Opera\u00e7\u00e3o Tribut\u00e1vel - Tributa\u00e7\u00e3o Monof\u00e1sica - (Al\u00edquota Zero); 05 - Opera\u00e7\u00e3o Tribut\u00e1vel (ST); 06 - Opera\u00e7\u00e3o Tribut\u00e1vel - Al\u00edquota Zero; 07 - Opera\u00e7\u00e3o Isenta da contribui\u00e7\u00e3o; 08 - Opera\u00e7\u00e3o Sem Incid\u00eancia da contribui\u00e7\u00e3o; 09 - Opera\u00e7\u00e3o com suspens\u00e3o da contribui\u00e7\u00e3o;
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSOutr=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do COFINS: 49 - Outras Opera\u00e7\u00f5es de Sa\u00edda 50 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno 51 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito \u2013 Vinculada Exclusivamente a Receita N\u00e3o Tributada no Mercado Interno 52 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada Exclusivamente a Receita de Exporta\u00e7\u00e3o 53 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada a Receitas Tributadas e N\u00e3o-Tributadas no Mercado Interno 54 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada a Receitas Tributadas no Mercado Interno e de Exporta\u00e7\u00e3o 55 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada a Receitas N\u00e3o-Tributadas no Mercado Interno e de Exporta\u00e7\u00e3o 56 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada a Receitas Tributadas e N\u00e3o-Tributadas no Mercado Interno, e de Exporta\u00e7\u00e3o 60 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada Exclusivamente a Receita Tributada no Mercado Interno 61 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada Exclusivamente a Receita N\u00e3o-Tributada no Mercado Interno 62 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada Exclusivamente a Receita de Exporta\u00e7\u00e3o 63 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada a Receitas Tributadas e N\u00e3o-Tributadas no Mercado Interno 64 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada a Receitas Tributadas no Mercado Interno e de Exporta\u00e7\u00e3o 65 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada a Receitas N\u00e3o-Tributadas no Mercado Interno e de Exporta\u00e7\u00e3o 66 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada a Receitas Tributadas e N\u00e3o-Tributadas no Mercado Interno, e de Exporta\u00e7\u00e3o 67 - Cr\u00e9dito Presumido - Outras Opera\u00e7\u00f5es 70 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o sem Direito a Cr\u00e9dito 71 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o com Isen\u00e7\u00e3o 72 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o com Suspens\u00e3o 73 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o a Al\u00edquota Zero 74 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o sem Incid\u00eancia da Contribui\u00e7\u00e3o 75 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o por Substitui\u00e7\u00e3o Tribut\u00e1ria 98 - Outras Opera\u00e7\u00f5es de Entrada 99 - Outras Opera\u00e7\u00f5es.
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSOutr.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do COFINS: 49 - Outras Opera\u00e7\u00f5es de Sa\u00edda 50 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno 51 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito \u2013 Vinculada Exclusivamente a Receita N\u00e3o Tributada no Mercado Interno 52 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada Exclusivamente a Receita de Exporta\u00e7\u00e3o 53 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada a Receitas Tributadas e N\u00e3o-Tributadas no Mercado Interno 54 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada a Receitas Tributadas no Mercado Interno e de Exporta\u00e7\u00e3o 55 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada a Receitas N\u00e3o-Tributadas no Mercado Interno e de Exporta\u00e7\u00e3o 56 - Opera\u00e7\u00e3o com Direito a Cr\u00e9dito - Vinculada a Receitas Tributadas e N\u00e3o-Tributadas no Mercado Interno, e de Exporta\u00e7\u00e3o 60 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada Exclusivamente a Receita Tributada no Mercado Interno 61 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada Exclusivamente a Receita N\u00e3o-Tributada no Mercado Interno 62 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada Exclusivamente a Receita de Exporta\u00e7\u00e3o 63 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada a Receitas Tributadas e N\u00e3o-Tributadas no Mercado Interno 64 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada a Receitas Tributadas no Mercado Interno e de Exporta\u00e7\u00e3o 65 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada a Receitas N\u00e3o-Tributadas no Mercado Interno e de Exporta\u00e7\u00e3o 66 - Cr\u00e9dito Presumido - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o Vinculada a Receitas Tributadas e N\u00e3o-Tributadas no Mercado Interno, e de Exporta\u00e7\u00e3o 67 - Cr\u00e9dito Presumido - Outras Opera\u00e7\u00f5es 70 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o sem Direito a Cr\u00e9dito 71 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o com Isen\u00e7\u00e3o 72 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o com Suspens\u00e3o 73 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o a Al\u00edquota Zero 74 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o sem Incid\u00eancia da Contribui\u00e7\u00e3o 75 - Opera\u00e7\u00e3o de Aquisi\u00e7\u00e3o por Substitui\u00e7\u00e3o Tribut\u00e1ria 98 - Outras Opera\u00e7\u00f5es de Entrada 99 - Outras Opera\u00e7\u00f5es.
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSOutr.pCOFINS=Al\u00edquota do COFINS (em percentual)
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSOutr.qBCProd=Quantidade Vendida (NT2011/004)
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSOutr.vAliqProd=Al\u00edquota do COFINS (em reais) (NT2011/004)
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSOutr.vBC=Base de C\u00e1lculo da COFINS (vBC). A base de c\u00e1lculo da COFINS \u00e9 obrigat\u00f3ria no grupo COFINSAliq e \u00e9 usada para conferir vCOFINS. Como corrigir: Informe vBC da COFINS e confira se vBC x pCOFINS / 100 = vCOFINS.
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSOutr.vCOFINS=Valor da COFINS (vCOFINS). vCOFINS \u00e9 a contribui\u00e7\u00e3o devida no item e \u00e9 recalculada pela Receita a partir de vBC x pCOFINS. Como corrigir: Recalcule vCOFINS = vBC x pCOFINS / 100, com 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSQtde=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do COFINS. 03 - Opera\u00e7\u00e3o Tribut\u00e1vel - Base de Calculo = Quantidade Vendida x Al\u00edquota por Unidade de Produto;
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSQtde.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do COFINS. 03 - Opera\u00e7\u00e3o Tribut\u00e1vel - Base de Calculo = Quantidade Vendida x Al\u00edquota por Unidade de Produto;
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSQtde.qBCProd=Quantidade Vendida (NT2011/004)
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSQtde.vAliqProd=Al\u00edquota do COFINS (em reais) (NT2011/004)
+enviNFe.NFe.infNFe.det.imposto.COFINS.COFINSQtde.vCOFINS=Valor da COFINS (vCOFINS). vCOFINS \u00e9 a contribui\u00e7\u00e3o devida no item e \u00e9 recalculada pela Receita a partir de vBC x pCOFINS. Como corrigir: Recalcule vCOFINS = vBC x pCOFINS / 100, com 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.COFINSST=Dados do COFINS da Substitui\u00e7\u00e3o Tributaria;
+enviNFe.NFe.infNFe.det.imposto.COFINSST.indSomaCOFINSST=Indica se o valor da COFINS ST comp\u00f5e o valor total da NFe
+enviNFe.NFe.infNFe.det.imposto.COFINSST.pCOFINS=Al\u00edquota do COFINS ST(em percentual)
+enviNFe.NFe.infNFe.det.imposto.COFINSST.qBCProd=Quantidade Vendida
+enviNFe.NFe.infNFe.det.imposto.COFINSST.vAliqProd=Al\u00edquota do COFINS ST(em reais)
+enviNFe.NFe.infNFe.det.imposto.COFINSST.vBC=Valor da BC do COFINS ST
+enviNFe.NFe.infNFe.det.imposto.COFINSST.vCOFINS=Valor do COFINS ST
+enviNFe.NFe.infNFe.det.imposto.IBSCBS=Grupo de informa\u00e7\u00f5es dos tributos IBS, CBS e Imposto Seletivo
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.CST=C\u00f3digo Situa\u00e7\u00e3o Tribut\u00e1ria do IBS/CBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gAjusteCompet=Informar essa op\u00e7\u00e3o da Choice para o CST 811
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gAjusteCompet.competApur=Ano e m\u00eas refer\u00eancia do per\u00edodo de apura\u00e7\u00e3o (AAAA-MM)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gAjusteCompet.vCBS=Valor da CBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gAjusteCompet.vIBS=Valor do IBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresIBSZFM=Classifica\u00e7\u00e3o de acordo com o art. 450, \u00a7 1\u00ba, da LC 214/25 para o c\u00e1lculo do cr\u00e9dito presumido na ZFM. Informado conforme indicador no cClassTrib.
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresIBSZFM.competApur=Ano e m\u00eas refer\u00eancia do per\u00edodo de apura\u00e7\u00e3o (AAAA-MM)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresIBSZFM.tpCredPresIBSZFM=Classifica\u00e7\u00e3o de acordo com o art. 450, \u00a7 1\u00ba, da LC 214/25 para o c\u00e1lculo do cr\u00e9dito presumido na ZFM
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresIBSZFM.vCredPresIBSZFM=Valor do cr\u00e9dito presumido calculado sobre o saldo devedor apurado
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresOper=Cr\u00e9dito Presumido da Opera\u00e7\u00e3o. Informado conforme indicador no cClassTrib.
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresOper.cCredPres=C\u00f3digo de Classifica\u00e7\u00e3o do Cr\u00e9dito Presumido do IBS e da CBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresOper.gCBSCredPres=Grupo de Informa\u00e7\u00f5es do Cr\u00e9dito Presumido referente a CBS, quando aproveitado pelo emitente do documento.
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresOper.gCBSCredPres.pCredPres=Percentual do Cr\u00e9dito Presumido
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresOper.gCBSCredPres.vCredPres=Valor do Cr\u00e9dito Presumido
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresOper.gCBSCredPres.vCredPresCondSus=Valor do Cr\u00e9dito Presumido Condi\u00e7\u00e3o Suspensiva, preencher apenas para cCredPres que possui indica\u00e7\u00e3o de Condi\u00e7\u00e3o Suspensiva
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresOper.gIBSCredPres=Grupo de Informa\u00e7\u00f5es do Cr\u00e9dito Presumido referente ao IBS, quando aproveitado pelo emitente do documento.
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresOper.gIBSCredPres.pCredPres=Percentual do Cr\u00e9dito Presumido
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresOper.gIBSCredPres.vCredPres=Valor do Cr\u00e9dito Presumido
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresOper.gIBSCredPres.vCredPresCondSus=Valor do Cr\u00e9dito Presumido Condi\u00e7\u00e3o Suspensiva, preencher apenas para cCredPres que possui indica\u00e7\u00e3o de Condi\u00e7\u00e3o Suspensiva
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gCredPresOper.vBCCredPres=Valor da Base de C\u00e1lculo do Cr\u00e9dito Presumido da Opera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gEstornoCred=Informado conforme indicador no cClassTrib
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gEstornoCred.vCBSEstCred=Valor da CBS a ser estornada
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gEstornoCred.vIBSEstCred=Valor do IBS a ser estornado
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS=Grupo de Tributa\u00e7\u00e3o da CBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gALCZFMCBS=Grupo de opera\u00e7\u00f5es em \u00e1reas incentivadas (ALC/ZFM) - CBS (al\u00edquota zero)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gALCZFMCBS.nProcSuframa=N\u00famero do processo na Suframa para o item comercializado.
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gALCZFMCBS.pAliqEfetRegCBS=Percentual efetivo sem a redu\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gALCZFMCBS.tpALCZFMCBS=Tipo de aplica\u00e7\u00e3o da al\u00edquota zero da CBS.
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gALCZFMCBS.vTribRegCBS=Valor efetivo sem a redu\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gDevTrib=Grupo de Informa\u00e7\u00f5es da devolu\u00e7\u00e3o de tributos
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gDevTrib.pDevTrib=Percentual de devolu\u00e7\u00e3o do tributo, conforme LC 214/25 art. 118.
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gDevTrib.vDevTrib=Valor do tributo devolvido ("cashback" de desconto na pr\u00f3pria Nota Fiscal / Fatura)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gDif=Grupo de campos do Diferimento
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gDif.pDif=Percentual do diferimento
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gDif.vDif=Valor do diferimento
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gRed=Grupo de campos da redu\u00e7\u00e3o de aliquota
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gRed.pAliqEfet=Aliquota Efetiva que ser\u00e1 aplicada a Base de Calculo (em percentual)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.gRed.pRedAliq=Percentual de redu\u00e7\u00e3o de aliquota do cClassTrib
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.pCBS=Aliquota da CBS (em percentual)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.vCBS=Valor da CBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun=Grupo de Informa\u00e7\u00f5es do IBS no Munic\u00edpio
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.gDevTrib=Grupo de Informa\u00e7\u00f5es da devolu\u00e7\u00e3o de tributos
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.gDevTrib.pDevTrib=Percentual de devolu\u00e7\u00e3o do tributo, conforme LC 214/25 art. 118.
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.gDevTrib.vDevTrib=Valor do tributo devolvido ("cashback" de desconto na pr\u00f3pria Nota Fiscal / Fatura)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.gDif=Grupo de campos do Diferimento
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.gDif.pDif=Percentual do diferimento
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.gDif.vDif=Valor do diferimento
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.gRed=Grupo de campos da redu\u00e7\u00e3o de aliquota
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.gRed.pAliqEfet=Aliquota Efetiva que ser\u00e1 aplicada a Base de Calculo (em percentual)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.gRed.pRedAliq=Percentual de redu\u00e7\u00e3o de aliquota do cClassTrib
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.pIBSMun=Aliquota do IBS Municipal (em percentual)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.vIBSMun=Valor do IBS Municipal
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF=Grupo de informa\u00e7\u00f5es do IBS na UF
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.gDevTrib=Grupo de Informa\u00e7\u00f5es da devolu\u00e7\u00e3o de tributos
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.gDevTrib.pDevTrib=Percentual de devolu\u00e7\u00e3o do tributo, conforme LC 214/25 art. 118.
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.gDevTrib.vDevTrib=Valor do tributo devolvido ("cashback" de desconto na pr\u00f3pria Nota Fiscal / Fatura)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.gDif=Grupo de campos do Diferimento
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.gDif.pDif=Percentual do diferimento
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.gDif.vDif=Valor do diferimento
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.gRed=Grupo de campos da redu\u00e7\u00e3o de aliquota
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.gRed.pAliqEfet=Aliquota Efetiva que ser\u00e1 aplicada a Base de Calculo (em percentual)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.gRed.pRedAliq=Percentual de redu\u00e7\u00e3o de aliquota do cClassTrib
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.pIBSUF=Aliquota do IBS de compet\u00eancia das UF (em percentual)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.vIBSUF=Valor do IBS de compet\u00eancia das UF
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribCompraGov=Grupo de informa\u00e7\u00f5es da composi\u00e7\u00e3o do valor do IBS e da CBS em compras governamental
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribCompraGov.vTribCBS=Valor que seria devido a CBS, sem aplica\u00e7\u00e3o do Art. 473. da LC 214/2025
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribCompraGov.vTribIBSMun=Valor que seria devido ao munic\u00edpio, sem aplica\u00e7\u00e3o do Art. 473. da LC 214/2025
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribCompraGov.vTribIBSUF=Valor que seria devido a UF, sem aplica\u00e7\u00e3o do Art. 473. da LC 214/2025
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribRegular=Grupo de informa\u00e7\u00f5es da Tributa\u00e7\u00e3o Regular. Informar como seria a tributa\u00e7\u00e3o caso n\u00e3o cumprida a condi\u00e7\u00e3o resolut\u00f3ria/suspensiva. Exemplo 1: Art. 442, \u00a74. Opera\u00e7\u00f5es com ZFM e ALC. Exemplo 2: Opera\u00e7\u00f5es com suspens\u00e3o do tributo.
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribRegular.CSTReg=C\u00f3digo da Situa\u00e7\u00e3o Tribut\u00e1ria do IBS e CBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribRegular.cClassTribReg=Informar qual seria o cClassTrib caso n\u00e3o cumprida a condi\u00e7\u00e3o resolut\u00f3ria/suspensiva
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegCBS=Al\u00edquota da CBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegIBSMun=Al\u00edquota do IBS do Munic\u00edpio
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribRegular.pAliqEfetRegIBSUF=Al\u00edquota do IBS da UF
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribRegular.vTribRegCBS=Valor da CBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribRegular.vTribRegIBSMun=Valor do IBS do Munic\u00edpio
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.gTribRegular.vTribRegIBSUF=Valor do IBS da UF
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.vBC=Valor do BC
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBS.vIBS=Valor do IBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono=Informar essa op\u00e7\u00e3o da Choice para Monofasia (CST 620)
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoDif=Grupo de informa\u00e7\u00f5es do diferimento da Tributa\u00e7\u00e3o Monof\u00e1sica
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoDif.pDifCBS=Percentual do diferimento do imposto monof\u00e1sico
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoDif.pDifIBS=Percentual do diferimento do imposto monof\u00e1sico
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoDif.vCBSMonoDif=Valor da CBS monof\u00e1sica diferida
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoDif.vIBSMonoDif=Valor do IBS monof\u00e1sico diferido
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoPadrao=Grupo de informa\u00e7\u00f5es da Tributa\u00e7\u00e3o Monof\u00e1sica padr\u00e3o
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoPadrao.adRemCBS=Al\u00edquota ad rem da CBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoPadrao.adRemIBS=Al\u00edquota ad rem do IBS
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoPadrao.qBCMono=Quantidade tributada na monofasia
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoPadrao.vCBSMono=Valor da CBS monof\u00e1sica
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoPadrao.vIBSMono=Valor do IBS monof\u00e1sico
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoRet=Grupo de informa\u00e7\u00f5es da Tributa\u00e7\u00e3o Monof\u00e1sica retida anteriormente
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoRet.adRemCBSRet=Al\u00edquota ad rem da CBS retida anteriormente
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoRet.adRemIBSRet=Al\u00edquota ad rem do IBS retido anteriormente
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoRet.qBCMonoRet=Quantidade tributada retida anteriormente
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoRet.vCBSMonoRet=Valor da CBS retida anteriormente
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoRet.vIBSMonoRet=Valor do IBS retido anteriormente
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoReten=Grupo de informa\u00e7\u00f5es da Tributa\u00e7\u00e3o Monof\u00e1sica sujeita a reten\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoReten.adRemCBSReten=Al\u00edquota ad rem da CBS sujeita a reten\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoReten.adRemIBSReten=Al\u00edquota ad rem do IBS sujeito a reten\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoReten.qBCMonoReten=Quantidade tributada sujeita a reten\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoReten.vCBSMonoReten=Valor da CBS monof\u00e1sica sujeita a reten\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.gMonoReten.vIBSMonoReten=Valor do IBS monof\u00e1sico sujeito a reten\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.vTotCBSMonoItem=Total da CBS monof\u00e1sica do item
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gIBSCBSMono.vTotIBSMonoItem=Total de IBS monof\u00e1sico do item
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gTransfCred=Informar essa op\u00e7\u00e3o da Choice para o CST 800
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gTransfCred.vCBS=Valor da CBS a ser transferida
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.gTransfCred.vIBS=Valor do IBS a ser transferido
+enviNFe.NFe.infNFe.det.imposto.IBSCBS.indDoacao=Indica se a opera\u00e7\u00e3o \u00e9 de doa\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS=Dados do ICMS Normal e ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS00=Tributa\u00e7\u00e3o pelo ICMS 00 - Tributada integralmente
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS00.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS00.modBC=Modalidade de determina\u00e7\u00e3o da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Pre\u00e7o Tabelado M\u00e1ximo (valor); 3 - Valor da Opera\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS00.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS00.pFCP=Percentual de ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS00.pICMS=Al\u00edquota do ICMS (pICMS). pICMS \u00e9 a al\u00edquota aplicada sobre a base de c\u00e1lculo. Sem a al\u00edquota a SEFAZ n\u00e3o consegue conferir se o vICMS declarado bate com o c\u00e1lculo esperado. Como corrigir: Informe a al\u00edquota vigente para a UF/opera\u00e7\u00e3o com 2 ou 4 casas decimais (ex.: 18.00) e confira se vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS00.vBC=Base de C\u00e1lculo do ICMS (vBC). vBC \u00e9 a base de c\u00e1lculo do ICMS: \u00e9 sobre esse valor que a al\u00edquota (pICMS) \u00e9 aplicada para chegar ao imposto devido (vICMS). Sem ele a SEFAZ n\u00e3o tem como conferir o imposto declarado no item. Como corrigir: Informe a base de c\u00e1lculo do item (normalmente vProd + frete + seguro + outras despesas - desconto, conforme a opera\u00e7\u00e3o) e garanta que vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS00.vFCP=Valor do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS00.vICMS=Valor do ICMS (vICMS). vICMS \u00e9 o imposto efetivamente devido no item. A SEFAZ recalcula esse valor a partir de vBC e pICMS; diverg\u00eancia ou aus\u00eancia impede a confer\u00eancia e a cobran\u00e7a correta do imposto. Como corrigir: Recalcule vICMS = vBC x pICMS / 100, arredondando para 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS02=Tributa\u00e7\u00e3o monof\u00e1sica pr\u00f3pria sobre combust\u00edveis
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS02.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS02.adRemICMS=Al\u00edquota ad rem do imposto.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS02.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS02.qBCMono=Quantidade tributada.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS02.vICMSMono=Valor do ICMS pr\u00f3pri
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10=Tributa\u00e7\u00e3o pelo ICMS 10 - Tributada e com cobran\u00e7a do ICMS por substitui\u00e7\u00e3o tribut\u00e1ria
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.modBC=Modalidade de determina\u00e7\u00e3o da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Pre\u00e7o Tabelado M\u00e1ximo (valor); 3 - Valor da Opera\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.modBCST=Modalidade de determina\u00e7\u00e3o da BC do ICMS ST: 0 \u2013 Pre\u00e7o tabelado ou m\u00e1ximo sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor) 6-Valor da Opera\u00e7\u00e3o;
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.motDesICMSST=Motivo da desonera\u00e7\u00e3o do ICMS-ST: 3-Uso na agropecu\u00e1ria; 9-Outros; 12-Fomento agropecu\u00e1rio.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.pFCP=Percentual de ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.pFCPST=Percentual de FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.pICMS=Al\u00edquota do ICMS (pICMS). pICMS \u00e9 a al\u00edquota aplicada sobre a base de c\u00e1lculo. Sem a al\u00edquota a SEFAZ n\u00e3o consegue conferir se o vICMS declarado bate com o c\u00e1lculo esperado. Como corrigir: Informe a al\u00edquota vigente para a UF/opera\u00e7\u00e3o com 2 ou 4 casas decimais (ex.: 18.00) e confira se vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.pICMSST=Al\u00edquota do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.pMVAST=Percentual da Margem de Valor Adicionado ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.pRedBCST=Percentual de redu\u00e7\u00e3o da BC ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.vBC=Base de C\u00e1lculo do ICMS (vBC). vBC \u00e9 a base de c\u00e1lculo do ICMS: \u00e9 sobre esse valor que a al\u00edquota (pICMS) \u00e9 aplicada para chegar ao imposto devido (vICMS). Sem ele a SEFAZ n\u00e3o tem como conferir o imposto declarado no item. Como corrigir: Informe a base de c\u00e1lculo do item (normalmente vProd + frete + seguro + outras despesas - desconto, conforme a opera\u00e7\u00e3o) e garanta que vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.vBCFCP=Valor da Base de c\u00e1lculo do FCP.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.vBCFCPST=Valor da Base de c\u00e1lculo do FCP retido por substituicao tributaria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.vBCST=Valor da BC do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.vFCP=Valor do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.vFCPST=Valor do FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.vICMS=Valor do ICMS (vICMS). vICMS \u00e9 o imposto efetivamente devido no item. A SEFAZ recalcula esse valor a partir de vBC e pICMS; diverg\u00eancia ou aus\u00eancia impede a confer\u00eancia e a cobran\u00e7a correta do imposto. Como corrigir: Recalcule vICMS = vBC x pICMS / 100, arredondando para 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.vICMSST=Valor do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS10.vICMSSTDeson=Valor do ICMS-ST desonerado.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS15=Tributa\u00e7\u00e3o monof\u00e1sica pr\u00f3pria e com responsabilidade pela reten\u00e7\u00e3o sobre combust\u00edveis
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS15.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS15.adRemICMS=Al\u00edquota ad rem do imposto.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS15.adRemICMSReten=Al\u00edquota ad rem do imposto com reten\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS15.motRedAdRem=Motivo da redu\u00e7\u00e3o do adrem 1= Transporte coletivo de passageiros; 9=Outros;
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS15.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS15.pRedAdRem=Percentual de redu\u00e7\u00e3o do valor da al\u00edquota ad rem do ICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS15.qBCMono=Quantidade tributada.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS15.qBCMonoReten=Quantidade tributada sujeita a reten\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS15.vICMSMono=Valor do ICMS pr\u00f3prio
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS15.vICMSMonoReten=Valor do ICMS com reten\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20=Tribut\u00e7\u00e3o pelo ICMS 20 - Com redu\u00e7\u00e3o de base de c\u00e1lculo
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.indDeduzDeson=Indica se o valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd): 0=Valor do ICMS desonerado (vICMSDeson) n\u00e3o deduz do valor do item (vProd) / total da NF-e; 1=Valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd) / total da NF-e.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.modBC=Modalidade de determina\u00e7\u00e3o da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Pre\u00e7o Tabelado M\u00e1ximo (valor); 3 - Valor da Opera\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.motDesICMS=Motivo da desonera\u00e7\u00e3o do ICMS:3-Uso na agropecu\u00e1ria;9-Outros; 10=Deficiente Condutor (Conv\u00eanio ICMS 38/12); 11=Deficiente N\u00e3o Condutor (Conv\u00eanio ICMS 38/12); 12-Fomento agropecu\u00e1rio
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.pFCP=Percentual de ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.pICMS=Al\u00edquota do ICMS (pICMS). pICMS \u00e9 a al\u00edquota aplicada sobre a base de c\u00e1lculo. Sem a al\u00edquota a SEFAZ n\u00e3o consegue conferir se o vICMS declarado bate com o c\u00e1lculo esperado. Como corrigir: Informe a al\u00edquota vigente para a UF/opera\u00e7\u00e3o com 2 ou 4 casas decimais (ex.: 18.00) e confira se vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.pRedBC=Percentual de redu\u00e7\u00e3o da BC
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.vBC=Base de C\u00e1lculo do ICMS (vBC). vBC \u00e9 a base de c\u00e1lculo do ICMS: \u00e9 sobre esse valor que a al\u00edquota (pICMS) \u00e9 aplicada para chegar ao imposto devido (vICMS). Sem ele a SEFAZ n\u00e3o tem como conferir o imposto declarado no item. Como corrigir: Informe a base de c\u00e1lculo do item (normalmente vProd + frete + seguro + outras despesas - desconto, conforme a opera\u00e7\u00e3o) e garanta que vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.vBCFCP=Valor da Base de c\u00e1lculo do FCP.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.vFCP=Valor do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.vICMS=Valor do ICMS (vICMS). vICMS \u00e9 o imposto efetivamente devido no item. A SEFAZ recalcula esse valor a partir de vBC e pICMS; diverg\u00eancia ou aus\u00eancia impede a confer\u00eancia e a cobran\u00e7a correta do imposto. Como corrigir: Recalcule vICMS = vBC x pICMS / 100, arredondando para 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS20.vICMSDeson=Valor do ICMS de desonera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30=Tributa\u00e7\u00e3o pelo ICMS 30 - Isenta ou n\u00e3o tributada e com cobran\u00e7a do ICMS por substitui\u00e7\u00e3o tribut\u00e1ria
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.indDeduzDeson=Indica se o valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd): 0=Valor do ICMS desonerado (vICMSDeson) n\u00e3o deduz do valor do item (vProd) / total da NF-e; 1=Valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd) / total da NF-e.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.modBCST=Modalidade de determina\u00e7\u00e3o da BC do ICMS ST: 0 \u2013 Pre\u00e7o tabelado ou m\u00e1ximo sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor). 6 - Valor da Opera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.motDesICMS=Motivo da desonera\u00e7\u00e3o do ICMS:6-Utilit\u00e1rios Motocicleta A\u00c1rea Livre;7-SUFRAMA;9-Outros
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.pFCPST=Percentual de FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.pICMSST=Al\u00edquota do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.pMVAST=Percentual da Margem de Valor Adicionado ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.pRedBCST=Percentual de redu\u00e7\u00e3o da BC ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.vBCFCPST=Valor da Base de c\u00e1lculo do FCP.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.vBCST=Valor da BC do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.vFCPST=Valor do FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.vICMSDeson=Valor do ICMS de desonera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS30.vICMSST=Valor do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS40=Tributa\u00e7\u00e3o pelo ICMS 40 - Isenta 41 - N\u00e3o tributada 50 - Suspens\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS40.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS40.indDeduzDeson=Indica se o valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd): 0=Valor do ICMS desonerado (vICMSDeson) n\u00e3o deduz do valor do item (vProd) / total da NF-e; 1=Valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd) / total da NF-e.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS40.motDesICMS=Este campo ser\u00e1 preenchido quando o campo anterior estiver preenchido. Informar o motivo da desonera\u00e7\u00e3o: 1 \u2013 T\u00e1xi; 3 \u2013 Produtor Agropecu\u00e1rio; 4 \u2013 Frotista/Locadora; 5 \u2013 Diplom\u00e1tico/Consular; 6 \u2013 Utilit\u00e1rios e Motocicletas da Amaz\u00f4nia Ocidental e \u00c1reas de Livre Com\u00e9rcio (Resolu\u00e7\u00e3o 714/88 e 790/94 \u2013 CONTRAN e suas altera\u00e7\u00f5es); 7 \u2013 SUFRAMA; 8 - Venda a \u00f3rg\u00e3o P\u00fablico; 9 \u2013 Outros 10- Deficiente Condutor 11- Deficiente n\u00e3o condutor 16 - Olimp\u00edadas Rio 2016 90 - Solicitado pelo Fisco
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS40.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS40.vICMSDeson=O valor do ICMS ser\u00e1 informado apenas nas opera\u00e7\u00f5es com ve\u00edculos beneficiados com a desonera\u00e7\u00e3o condicional do ICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51=Tribut\u00e7\u00e3o pelo ICMS 51 - Diferimento. A exig\u00eancia do preenchimento das informa\u00e7\u00f5es do ICMS diferido fica \u00e0 crit\u00e9rio de cada UF.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.cBenefRBC=C\u00f3digo de Benef\u00edcio Fiscal na UF aplicado ao item quando houver RBC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.modBC=Modalidade de determina\u00e7\u00e3o da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Pre\u00e7o Tabelado M\u00e1ximo (valor); 3 - Valor da Opera\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.pDif=Percentual do diferemento
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.pFCP=Percentual de ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.pFCPDif=Percentual do diferimento do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.pICMS=Al\u00edquota do ICMS (pICMS). pICMS \u00e9 a al\u00edquota aplicada sobre a base de c\u00e1lculo. Sem a al\u00edquota a SEFAZ n\u00e3o consegue conferir se o vICMS declarado bate com o c\u00e1lculo esperado. Como corrigir: Informe a al\u00edquota vigente para a UF/opera\u00e7\u00e3o com 2 ou 4 casas decimais (ex.: 18.00) e confira se vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.pRedBC=Percentual de redu\u00e7\u00e3o da BC
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.vBC=Base de C\u00e1lculo do ICMS (vBC). vBC \u00e9 a base de c\u00e1lculo do ICMS: \u00e9 sobre esse valor que a al\u00edquota (pICMS) \u00e9 aplicada para chegar ao imposto devido (vICMS). Sem ele a SEFAZ n\u00e3o tem como conferir o imposto declarado no item. Como corrigir: Informe a base de c\u00e1lculo do item (normalmente vProd + frete + seguro + outras despesas - desconto, conforme a opera\u00e7\u00e3o) e garanta que vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.vBCFCP=Valor da Base de c\u00e1lculo do FCP.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.vFCP=Valor do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.vFCPDif=Valor do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP) diferido.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.vFCPEfet=Valor efetivo do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.vICMS=Valor do ICMS (vICMS). vICMS \u00e9 o imposto efetivamente devido no item. A SEFAZ recalcula esse valor a partir de vBC e pICMS; diverg\u00eancia ou aus\u00eancia impede a confer\u00eancia e a cobran\u00e7a correta do imposto. Como corrigir: Recalcule vICMS = vBC x pICMS / 100, arredondando para 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.vICMSDif=Valor do ICMS da diferido
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS51.vICMSOp=Valor do ICMS da Opera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS53=Tributa\u00e7\u00e3o monof\u00e1sica sobre combust\u00edveis com recolhimento diferido
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS53.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS53.adRemICMS=Al\u00edquota ad rem do imposto.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS53.adRemICMSDif=Al\u00edquota ad rem do imposto diferido
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS53.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS53.pDif=Percentual do diferemento
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS53.qBCMono=Quantidade tributada.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS53.qBCMonoDif=Quantidade tributada diferida.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS53.vICMSMono=Valor do ICMS pr\u00f3prio devido
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS53.vICMSMonoDif=Valor do ICMS diferido
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS53.vICMSMonoOp=Valor do ICMS da opera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60=Tributa\u00e7\u00e3o pelo ICMS 60 - ICMS cobrado anteriormente por substitui\u00e7\u00e3o tribut\u00e1ria
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.pFCPSTRet=Percentual de FCP retido anteriormente por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.pICMSEfet=Al\u00edquota do ICMS efetiva.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.pRedBCEfet=Percentual de redu\u00e7\u00e3o da base de c\u00e1lculo efetiva.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.pST=Aliquota suportada pelo consumidor final.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.vBCEfet=Valor da base de c\u00e1lculo efetiva.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.vBCFCPSTRet=Valor da Base de c\u00e1lculo do FCP retido anteriormente por ST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.vBCSTRet=Valor da BC do ICMS ST retido anteriormente
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.vFCPSTRet=Valor do FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.vICMSEfet=Valor do ICMS efetivo.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.vICMSSTRet=Valor do ICMS ST retido anteriormente
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS60.vICMSSubstituto=Valor do ICMS Pr\u00f3prio do Substituto cobrado em opera\u00e7\u00e3o anterior
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS61=Tributa\u00e7\u00e3o monof\u00e1sica sobre combust\u00edveis cobrada anteriormente;
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS61.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS61.adRemICMSRet=Al\u00edquota ad rem do imposto retido anteriormente
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS61.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS61.qBCMonoRet=Quantidade tributada retida anteriormente
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS61.vICMSMonoRet=Valor do ICMS retido anteriormente
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70=Tributa\u00e7\u00e3o pelo ICMS 70 - Com redu\u00e7\u00e3o de base de c\u00e1lculo e cobran\u00e7a do ICMS por substitui\u00e7\u00e3o tribut\u00e1ria
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.indDeduzDeson=Indica se o valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd): 0=Valor do ICMS desonerado (vICMSDeson) n\u00e3o deduz do valor do item (vProd) / total da NF-e; 1=Valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd) / total da NF-e.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.modBC=Modalidade de determina\u00e7\u00e3o da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Pre\u00e7o Tabelado M\u00e1ximo (valor); 3 - Valor da Opera\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.modBCST=Modalidade de determina\u00e7\u00e3o da BC do ICMS ST: 0 \u2013 Pre\u00e7o tabelado ou m\u00e1ximo sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor); 6 - Valor da Opera\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.motDesICMS=Motivo da desonera\u00e7\u00e3o do ICMS:3-Uso na agropecu\u00e1ria;9-Outros;12-Fomento agropecu\u00e1rio
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.motDesICMSST=Motivo da desonera\u00e7\u00e3o do ICMS-ST: 3-Uso na agropecu\u00e1ria; 9-Outros; 12-Fomento agropecu\u00e1rio.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.pFCP=Percentual de ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.pFCPST=Percentual de FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.pICMS=Al\u00edquota do ICMS (pICMS). pICMS \u00e9 a al\u00edquota aplicada sobre a base de c\u00e1lculo. Sem a al\u00edquota a SEFAZ n\u00e3o consegue conferir se o vICMS declarado bate com o c\u00e1lculo esperado. Como corrigir: Informe a al\u00edquota vigente para a UF/opera\u00e7\u00e3o com 2 ou 4 casas decimais (ex.: 18.00) e confira se vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.pICMSST=Al\u00edquota do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.pMVAST=Percentual da Margem de Valor Adicionado ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.pRedBC=Percentual de redu\u00e7\u00e3o da BC
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.pRedBCST=Percentual de redu\u00e7\u00e3o da BC ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.vBC=Base de C\u00e1lculo do ICMS (vBC). vBC \u00e9 a base de c\u00e1lculo do ICMS: \u00e9 sobre esse valor que a al\u00edquota (pICMS) \u00e9 aplicada para chegar ao imposto devido (vICMS). Sem ele a SEFAZ n\u00e3o tem como conferir o imposto declarado no item. Como corrigir: Informe a base de c\u00e1lculo do item (normalmente vProd + frete + seguro + outras despesas - desconto, conforme a opera\u00e7\u00e3o) e garanta que vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.vBCFCP=Valor da Base de c\u00e1lculo do FCP.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.vBCFCPST=Valor da Base de c\u00e1lculo do FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.vBCST=Valor da BC do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.vFCP=Valor do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.vFCPST=Valor do FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.vICMS=Valor do ICMS (vICMS). vICMS \u00e9 o imposto efetivamente devido no item. A SEFAZ recalcula esse valor a partir de vBC e pICMS; diverg\u00eancia ou aus\u00eancia impede a confer\u00eancia e a cobran\u00e7a correta do imposto. Como corrigir: Recalcule vICMS = vBC x pICMS / 100, arredondando para 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.vICMSDeson=Valor do ICMS de desonera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.vICMSST=Valor do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS70.vICMSSTDeson=Valor do ICMS-ST desonerado.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90=Tributa\u00e7\u00e3o pelo ICMS 90 - Outras
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.cBenefRBC=C\u00f3digo de Benef\u00edcio Fiscal na UF aplicado ao item quando houver RBC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.indDeduzDeson=Indica se o valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd): 0=Valor do ICMS desonerado (vICMSDeson) n\u00e3o deduz do valor do item (vProd) / total da NF-e; 1=Valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd) / total da NF-e.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.modBC=Modalidade de determina\u00e7\u00e3o da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Pre\u00e7o Tabelado M\u00e1ximo (valor); 3 - Valor da Opera\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.modBCST=Modalidade de determina\u00e7\u00e3o da BC do ICMS ST: 0 \u2013 Pre\u00e7o tabelado ou m\u00e1ximo sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor); 6 - Valor da Opera\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.motDesICMS=Motivo da desonera\u00e7\u00e3o do ICMS:3-Uso na agropecu\u00e1ria;9-Outros;12-Fomento agropecu\u00e1rio
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.motDesICMSST=Motivo da desonera\u00e7\u00e3o do ICMS-ST: 3-Uso na agropecu\u00e1ria; 9-Outros; 12-Fomento agropecu\u00e1rio.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.pDif=Percentual do diferemento
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.pFCP=Percentual de ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.pFCPDif=Percentual do diferimento do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.pFCPST=Percentual de FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.pICMS=Al\u00edquota do ICMS (pICMS). pICMS \u00e9 a al\u00edquota aplicada sobre a base de c\u00e1lculo. Sem a al\u00edquota a SEFAZ n\u00e3o consegue conferir se o vICMS declarado bate com o c\u00e1lculo esperado. Como corrigir: Informe a al\u00edquota vigente para a UF/opera\u00e7\u00e3o com 2 ou 4 casas decimais (ex.: 18.00) e confira se vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.pICMSST=Al\u00edquota do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.pMVAST=Percentual da Margem de Valor Adicionado ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.pRedBC=Percentual de redu\u00e7\u00e3o da BC
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.pRedBCST=Percentual de redu\u00e7\u00e3o da BC ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vBC=Base de C\u00e1lculo do ICMS (vBC). vBC \u00e9 a base de c\u00e1lculo do ICMS: \u00e9 sobre esse valor que a al\u00edquota (pICMS) \u00e9 aplicada para chegar ao imposto devido (vICMS). Sem ele a SEFAZ n\u00e3o tem como conferir o imposto declarado no item. Como corrigir: Informe a base de c\u00e1lculo do item (normalmente vProd + frete + seguro + outras despesas - desconto, conforme a opera\u00e7\u00e3o) e garanta que vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vBCFCP=Valor da Base de c\u00e1lculo do FCP.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vBCFCPST=Valor da Base de c\u00e1lculo do FCP.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vBCST=Valor da BC do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vFCP=Valor do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vFCPDif=Valor do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP) diferido.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vFCPEfet=Valor efetivo do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP).
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vFCPST=Valor do FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vICMS=Valor do ICMS (vICMS). vICMS \u00e9 o imposto efetivamente devido no item. A SEFAZ recalcula esse valor a partir de vBC e pICMS; diverg\u00eancia ou aus\u00eancia impede a confer\u00eancia e a cobran\u00e7a correta do imposto. Como corrigir: Recalcule vICMS = vBC x pICMS / 100, arredondando para 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vICMSDeson=Valor do ICMS de desonera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vICMSDif=Valor do ICMS da diferido
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vICMSOp=Valor do ICMS da Opera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vICMSST=Valor do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMS90.vICMSSTDeson=Valor do ICMS-ST desonerado.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart=Partilha do ICMS entre a UF de origem e UF de destino ou a UF definida na legisla\u00e7\u00e3o Opera\u00e7\u00e3o interestadual para consumidor final com partilha do ICMS devido na opera\u00e7\u00e3o entre a UF de origem e a UF do destinat\u00e1rio ou ou a UF definida na legisla\u00e7\u00e3o. (Ex. UF da concession\u00e1ria de entrega do ve\u00edculos)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do ICMS (CST). O CST define como o ICMS deve ser tratado na opera\u00e7\u00e3o (tributado, isento, substitui\u00e7\u00e3o tribut\u00e1ria, diferido etc.). \u00c9 ele que determina quais campos do grupo ICMS s\u00e3o obrigat\u00f3rios - sem CST a SEFAZ n\u00e3o sabe como processar o grupo. Como corrigir: Informe o CST de 2 d\u00edgitos compat\u00edvel com a opera\u00e7\u00e3o e com o regime do emitente. Emitente do Simples Nacional usa CSOSN, n\u00e3o CST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.UFST=Sigla da UF para qual \u00e9 devido o ICMS ST da opera\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.indDeduzDeson=Indica se o valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd): 0=Valor do ICMS desonerado (vICMSDeson) n\u00e3o deduz do valor do item (vProd) / total da NF-e; 1=Valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd) / total da NF-e.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.modBC=Modalidade de determina\u00e7\u00e3o da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Pre\u00e7o Tabelado M\u00e1ximo (valor); 3 - Valor da Opera\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.modBCST=Modalidade de determina\u00e7\u00e3o da BC do ICMS ST: 0 \u2013 Pre\u00e7o tabelado ou m\u00e1ximo sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor). 6 - Valor da Opera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.motDesICMS=Motivo da desonera\u00e7\u00e3o do ICMS:9-Outros;10=Deficiente Condutor (Conv\u00eanio ICMS 38/12) 11=Deficiente N\u00e3o Condutor (Conv\u00eanio ICMS 38/12)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.orig=Origem da Mercadoria (orig). orig indica a proced\u00eancia da mercadoria (nacional, importada etc.) e \u00e9 o primeiro campo obrigat\u00f3rio de todo grupo ICMS. Ele afeta a al\u00edquota interestadual aplic\u00e1vel. Como corrigir: Informe orig com um d\u00edgito de 0 a 8, conforme a tabela de origem do MOC.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.pBCOp=Percentual para determina\u00e7\u00e3o do valor da Base de C\u00e1lculo da opera\u00e7\u00e3o pr\u00f3pria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.pFCPST=Percentual de FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.pICMS=Al\u00edquota do ICMS (pICMS). pICMS \u00e9 a al\u00edquota aplicada sobre a base de c\u00e1lculo. Sem a al\u00edquota a SEFAZ n\u00e3o consegue conferir se o vICMS declarado bate com o c\u00e1lculo esperado. Como corrigir: Informe a al\u00edquota vigente para a UF/opera\u00e7\u00e3o com 2 ou 4 casas decimais (ex.: 18.00) e confira se vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.pICMSST=Al\u00edquota do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.pMVAST=Percentual da Margem de Valor Adicionado ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.pRedBC=Percentual de redu\u00e7\u00e3o da BC
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.pRedBCST=Percentual de redu\u00e7\u00e3o da BC ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.vBC=Base de C\u00e1lculo do ICMS (vBC). vBC \u00e9 a base de c\u00e1lculo do ICMS: \u00e9 sobre esse valor que a al\u00edquota (pICMS) \u00e9 aplicada para chegar ao imposto devido (vICMS). Sem ele a SEFAZ n\u00e3o tem como conferir o imposto declarado no item. Como corrigir: Informe a base de c\u00e1lculo do item (normalmente vProd + frete + seguro + outras despesas - desconto, conforme a opera\u00e7\u00e3o) e garanta que vBC x pICMS / 100 = vICMS.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.vBCFCPST=Valor da Base de c\u00e1lculo do FCP retido por substituicao tributaria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.vBCST=Valor da BC do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.vFCPST=Valor do FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.vICMS=Valor do ICMS (vICMS). vICMS \u00e9 o imposto efetivamente devido no item. A SEFAZ recalcula esse valor a partir de vBC e pICMS; diverg\u00eancia ou aus\u00eancia impede a confer\u00eancia e a cobran\u00e7a correta do imposto. Como corrigir: Recalcule vICMS = vBC x pICMS / 100, arredondando para 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.vICMSDeson=Valor do ICMS de desonera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSPart.vICMSST=Valor do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN101=Tributa\u00e7\u00e3o do ICMS pelo SIMPLES NACIONAL e CSOSN=101 (v.2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN101.CSOSN=101- Tributada pelo Simples Nacional com permiss\u00e3o de cr\u00e9dito. (v.2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN101.orig=origem da mercadoria: 0 - Nacional 1 - Estrangeira - Importa\u00e7\u00e3o direta 2 - Estrangeira - Adquirida no mercado interno (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN101.pCredSN=Al\u00edquota aplic\u00e1vel de c\u00e1lculo do cr\u00e9dito (Simples Nacional). (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN101.vCredICMSSN=Valor cr\u00e9dito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123 (Simples Nacional) (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN102=Tributa\u00e7\u00e3o do ICMS pelo SIMPLES NACIONAL e CSOSN=102, 103, 300 ou 400 (v.2.0))
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN102.CSOSN=102- Tributada pelo Simples Nacional sem permiss\u00e3o de cr\u00e9dito. 103 \u2013 Isen\u00e7\u00e3o do ICMS no Simples Nacional para faixa de receita bruta. 300 \u2013 Imune. 400 \u2013 N\u00e3o tributda pelo Simples Nacional (v.2.0) (v.2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN102.orig=origem da mercadoria: 0 - Nacional 1 - Estrangeira - Importa\u00e7\u00e3o direta 2 - Estrangeira - Adquirida no mercado interno (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201=Tributa\u00e7\u00e3o do ICMS pelo SIMPLES NACIONAL e CSOSN=201 (v.2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.CSOSN=201- Tributada pelo Simples Nacional com permiss\u00e3o de cr\u00e9dito e com cobran\u00e7a do ICMS por Substitui\u00e7\u00e3o Tribut\u00e1ria (v.2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.modBCST=Modalidade de determina\u00e7\u00e3o da BC do ICMS ST: 0 \u2013 Pre\u00e7o tabelado ou m\u00e1ximo sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor). (v2.0) 6 - Valor da Opera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.orig=Origem da mercadoria: 0 \u2013 Nacional; 1 \u2013 Estrangeira \u2013 Importa\u00e7\u00e3o direta; 2 \u2013 Estrangeira \u2013 Adquirida no mercado interno. (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.pCredSN=Al\u00edquota aplic\u00e1vel de c\u00e1lculo do cr\u00e9dito (Simples Nacional). (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.pFCPST=Percentual de FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.pICMSST=Al\u00edquota do ICMS ST (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.pMVAST=Percentual da Margem de Valor Adicionado ICMS ST (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.pRedBCST=Percentual de redu\u00e7\u00e3o da BC ICMS ST (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.vBCFCPST=Valor da Base de c\u00e1lculo do FCP.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.vBCST=Valor da BC do ICMS ST (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.vCredICMSSN=Valor cr\u00e9dito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123 (Simples Nacional) (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.vFCPST=Valor do FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN201.vICMSST=Valor do ICMS ST (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202=Tributa\u00e7\u00e3o do ICMS pelo SIMPLES NACIONAL e CSOSN=202 ou 203 (v.2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202.CSOSN=202- Tributada pelo Simples Nacional sem permiss\u00e3o de cr\u00e9dito e com cobran\u00e7a do ICMS por Substitui\u00e7\u00e3o Tribut\u00e1ria; 203- Isen\u00e7\u00e3o do ICMS nos Simples Nacional para faixa de receita bruta e com cobran\u00e7a do ICMS por Substitui\u00e7\u00e3o Tribut\u00e1ria (v.2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202.modBCST=Modalidade de determina\u00e7\u00e3o da BC do ICMS ST: 0 \u2013 Pre\u00e7o tabelado ou m\u00e1ximo sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor). (v2.0) 6 - Valor da Opera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202.orig=Origem da mercadoria: 0 \u2013 Nacional; 1 \u2013 Estrangeira \u2013 Importa\u00e7\u00e3o direta; 2 \u2013 Estrangeira \u2013 Adquirida no mercado interno. (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202.pFCPST=Percentual de FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202.pICMSST=Al\u00edquota do ICMS ST (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202.pMVAST=Percentual da Margem de Valor Adicionado ICMS ST (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202.pRedBCST=Percentual de redu\u00e7\u00e3o da BC ICMS ST (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202.vBCFCPST=Valor da Base de c\u00e1lculo do FCP.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202.vBCST=Valor da BC do ICMS ST (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202.vFCPST=Valor do FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN202.vICMSST=Valor do ICMS ST (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500=Tributa\u00e7\u00e3o do ICMS pelo SIMPLES NACIONAL,CRT=1 \u2013 Simples Nacional e CSOSN=500 (v.2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.CSOSN=500 \u2013 ICMS cobrado anterirmente por substitui\u00e7\u00e3o tribut\u00e1ria (substitu\u00eddo) ou por antecipa\u00e7\u00e3o (v.2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.orig=origem da mercadoria: 0 - Nacional 1 - Estrangeira - Importa\u00e7\u00e3o direta 2 - Estrangeira - Adquirida no mercado interno
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.pFCPSTRet=Percentual de FCP retido anteriormente por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.pICMSEfet=Al\u00edquota do ICMS efetiva.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.pRedBCEfet=Percentual de redu\u00e7\u00e3o da base de c\u00e1lculo efetiva.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.pST=Aliquota suportada pelo consumidor final.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.vBCEfet=Valor da base de c\u00e1lculo efetiva.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.vBCFCPSTRet=Valor da Base de c\u00e1lculo do FCP retido anteriormente.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.vBCSTRet=Valor da BC do ICMS ST retido anteriormente (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.vFCPSTRet=Valor do FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.vICMSEfet=Valor do ICMS efetivo.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.vICMSSTRet=Valor do ICMS ST retido anteriormente (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN500.vICMSSubstituto=Valor do ICMS pr\u00f3prio do substituto
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900=Tributa\u00e7\u00e3o do ICMS pelo SIMPLES NACIONAL, CRT=1 \u2013 Simples Nacional, CRT=4 - MEI e CSOSN=900 (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.CSOSN=Tributa\u00e7\u00e3o pelo ICMS 900 - Outros(v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.modBC=Modalidade de determina\u00e7\u00e3o da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Pre\u00e7o Tabelado M\u00e1ximo (valor); 3 - Valor da Opera\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.modBCST=Modalidade de determina\u00e7\u00e3o da BC do ICMS ST: 0 \u2013 Pre\u00e7o tabelado ou m\u00e1ximo sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor). 6 - Valor da Opera\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.orig=origem da mercadoria: 0 - Nacional 1 - Estrangeira - Importa\u00e7\u00e3o direta 2 - Estrangeira - Adquirida no mercado interno
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.pCredSN=Al\u00edquota aplic\u00e1vel de c\u00e1lculo do cr\u00e9dito (Simples Nacional). (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.pFCPST=Percentual de FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.pICMS=Al\u00edquota do ICMS
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.pICMSST=Al\u00edquota do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.pMVAST=Percentual da Margem de Valor Adicionado ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.pRedBC=Percentual de redu\u00e7\u00e3o da BC
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.pRedBCST=Percentual de redu\u00e7\u00e3o da BC ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.vBC=Valor da BC do ICMS
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.vBCFCPST=Valor da Base de c\u00e1lculo do FCP.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.vBCST=Valor da BC do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.vCredICMSSN=Valor cr\u00e9dito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123 (Simples Nacional) (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.vFCPST=Valor do FCP retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.vICMS=Valor do ICMS
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSSN900.vICMSST=Valor do ICMS ST
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST=Grupo de informa\u00e7\u00e3o do ICMSST devido para a UF de destino, nas opera\u00e7\u00f5es interestaduais de produtos que tiveram reten\u00e7\u00e3o antecipada de ICMS por ST na UF do remetente. Repasse via Substituto Tribut\u00e1rio.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.CST=Tribut\u00e7\u00e3o pelo ICMS 41-N\u00e3o Tributado. 60-Cobrado anteriormente por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.orig=origem da mercadoria: 0 - Nacional 1 - Estrangeira - Importa\u00e7\u00e3o direta 2 - Estrangeira - Adquirida no mercado interno
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.pFCPSTRet=Percentual relativo ao Fundo de Combate \u00e0 Pobreza (FCP) retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.pICMSEfet=Al\u00edquota do ICMS efetivo.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.pRedBCEfet=Percentual de redu\u00e7\u00e3o da base de c\u00e1lculo efetiva.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.pST=Aliquota suportada pelo consumidor final.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.vBCEfet=Valor da base de c\u00e1lculo efetiva.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.vBCFCPSTRet=Informar o valor da Base de C\u00e1lculo do FCP retido anteriormente por ST.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.vBCSTDest=Informar o valor da BC do ICMS ST da UF destino
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.vBCSTRet=Informar o valor da BC do ICMS ST retido na UF remetente
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.vFCPSTRet=Valor do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP) retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.vICMSEfet=Valor do ICMS efetivo.
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.vICMSSTDest=Informar o valor da BC do ICMS ST da UF destino (v2.0)
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.vICMSSTRet=Informar o valor do ICMS ST retido na UF remetente (iv2.0))
+enviNFe.NFe.infNFe.det.imposto.ICMS.ICMSST.vICMSSubstituto=Valor do ICMS Pr\u00f3prio do Substituto cobrado em opera\u00e7\u00e3o anterior
+enviNFe.NFe.infNFe.det.imposto.ICMSUFDest=Grupo a ser informado nas vendas interestarduais para consumidor final, n\u00e3o contribuinte de ICMS
+enviNFe.NFe.infNFe.det.imposto.ICMSUFDest.pFCPUFDest=Percentual adicional inserido na al\u00edquota interna da UF de destino, relativo ao Fundo de Combate \u00e0 Pobreza (FCP) naquela UF.
+enviNFe.NFe.infNFe.det.imposto.ICMSUFDest.pICMSInter=Al\u00edquota interestadual das UF envolvidas: - 4% al\u00edquota interestadual para produtos importados; - 7% para os Estados de origem do Sul e Sudeste (exceto ES), destinado para os Estados do Norte e Nordeste ou ES; - 12% para os demais casos.
+enviNFe.NFe.infNFe.det.imposto.ICMSUFDest.pICMSInterPart=Percentual de partilha para a UF do destinat\u00e1rio: - 40% em 2016; - 60% em 2017; - 80% em 2018; - 100% a partir de 2019.
+enviNFe.NFe.infNFe.det.imposto.ICMSUFDest.pICMSUFDest=Al\u00edquota adotada nas opera\u00e7\u00f5es internas na UF do destinat\u00e1rio para o produto / mercadoria.
+enviNFe.NFe.infNFe.det.imposto.ICMSUFDest.vBCFCPUFDest=Valor da Base de C\u00e1lculo do FCP na UF do destinat\u00e1rio.
+enviNFe.NFe.infNFe.det.imposto.ICMSUFDest.vBCUFDest=Valor da Base de C\u00e1lculo do ICMS na UF do destinat\u00e1rio.
+enviNFe.NFe.infNFe.det.imposto.ICMSUFDest.vFCPUFDest=Valor do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP) da UF de destino.
+enviNFe.NFe.infNFe.det.imposto.ICMSUFDest.vICMSUFDest=Valor do ICMS de partilha para a UF do destinat\u00e1rio.
+enviNFe.NFe.infNFe.det.imposto.ICMSUFDest.vICMSUFRemet=Valor do ICMS de partilha para a UF do remetente. Nota: A partir de 2019, este valor ser\u00e1 zero.
+enviNFe.NFe.infNFe.det.imposto.II=Dados do Imposto de Importa\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.II.vBC=Base da BC do Imposto de Importa\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.II.vDespAdu=Valor das despesas aduaneiras
+enviNFe.NFe.infNFe.det.imposto.II.vII=Valor do Imposto de Importa\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.II.vIOF=Valor do Imposto sobre Opera\u00e7\u00f5es Financeiras
+enviNFe.NFe.infNFe.det.imposto.IPI.CNPJProd=CNPJ do produtor da mercadoria, quando diferente do emitente. Somente para os casos de exporta\u00e7\u00e3o direta ou indireta.
+enviNFe.NFe.infNFe.det.imposto.IPI.IPINT.CST=C\u00f3digo da Situa\u00e7\u00e3o Tribut\u00e1ria do IPI: 01-Entrada tributada com al\u00edquota zero 02-Entrada isenta 03-Entrada n\u00e3o-tributada 04-Entrada imune 05-Entrada com suspens\u00e3o 51-Sa\u00edda tributada com al\u00edquota zero 52-Sa\u00edda isenta 53-Sa\u00edda n\u00e3o-tributada 54-Sa\u00edda imune 55-Sa\u00edda com suspens\u00e3o
+enviNFe.NFe.infNFe.det.imposto.IPI.IPITrib.CST=C\u00f3digo da Situa\u00e7\u00e3o Tribut\u00e1ria do IPI: 00-Entrada com recupera\u00e7\u00e3o de cr\u00e9dito 49 - Outras entradas 50-Sa\u00edda tributada 99-Outras sa\u00eddas
+enviNFe.NFe.infNFe.det.imposto.IPI.IPITrib.pIPI=Al\u00edquota do IPI
+enviNFe.NFe.infNFe.det.imposto.IPI.IPITrib.qUnid=Quantidade total na unidade padr\u00e3o para tributa\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.imposto.IPI.IPITrib.vBC=Base de C\u00e1lculo do IPI (vBC). A base de c\u00e1lculo do IPI \u00e9 exigida quando o grupo IPI \u00e9 informado como tributado (IPITrib). Sem ela o valor do IPI n\u00e3o pode ser conferido. Como corrigir: Informe vBC do IPI, ou troque para o grupo IPINT se a opera\u00e7\u00e3o n\u00e3o \u00e9 tributada.
+enviNFe.NFe.infNFe.det.imposto.IPI.IPITrib.vIPI=Valor do IPI (vIPI). vIPI \u00e9 o imposto devido no item e \u00e9 recalculado pela SEFAZ a partir de vBC x pIPI. Como corrigir: Recalcule vIPI = vBC x pIPI / 100 (ou qUnid x vUnid, na tributa\u00e7\u00e3o por unidade).
+enviNFe.NFe.infNFe.det.imposto.IPI.IPITrib.vUnid=Valor por Unidade Tribut\u00e1vel. Informar o valor do imposto Pauta por unidade de medida.
+enviNFe.NFe.infNFe.det.imposto.IPI.cEnq=C\u00f3digo de Enquadramento Legal do IPI (tabela a ser criada pela RFB)
+enviNFe.NFe.infNFe.det.imposto.IPI.cSelo=C\u00f3digo do selo de controle do IPI
+enviNFe.NFe.infNFe.det.imposto.IPI.qSelo=Quantidade de selo de controle do IPI
+enviNFe.NFe.infNFe.det.imposto.IS=Grupo de informa\u00e7\u00f5es do Imposto Seletivo
+enviNFe.NFe.infNFe.det.imposto.IS.CSTIS=C\u00f3digo Situa\u00e7\u00e3o Tribut\u00e1ria do Imposto Seletivo
+enviNFe.NFe.infNFe.det.imposto.IS.adRemIS=Al\u00edquota do Imposto Seletivo (por valor)
+enviNFe.NFe.infNFe.det.imposto.IS.pIS=Al\u00edquota do Imposto Seletivo (percentual)
+enviNFe.NFe.infNFe.det.imposto.IS.qTrib=Quantidade com abse no campo uTrib informado
+enviNFe.NFe.infNFe.det.imposto.IS.uTrib=Unidade de medida apropriada especificada em Lei Ordinaria para fins de apura\u00e7\u00e3o do Imposto Seletivo
+enviNFe.NFe.infNFe.det.imposto.IS.vBCIS=Valor do BC
+enviNFe.NFe.infNFe.det.imposto.IS.vIS=Valor do Imposto Seletivo calculado
+enviNFe.NFe.infNFe.det.imposto.ISSQN=ISSQN
+enviNFe.NFe.infNFe.det.imposto.ISSQN.cListServ=Informar o Item da lista de servi\u00e7os da LC 116/03 em que se classifica o servi\u00e7o.
+enviNFe.NFe.infNFe.det.imposto.ISSQN.cMun=C\u00f3digo do Munic\u00edpio de Incid\u00eancia do Imposto
+enviNFe.NFe.infNFe.det.imposto.ISSQN.cMunFG=Informar o munic\u00edpio de ocorr\u00eancia do fato gerador do ISSQN. Utilizar a Tabela do IBGE (Anexo VII - Tabela de UF, Munic\u00edpio e Pa\u00eds). \u201cAten\u00e7\u00e3o, n\u00e3o vincular com os campos B12, C10 ou E10\u201d v2.0
+enviNFe.NFe.infNFe.det.imposto.ISSQN.cPais=C\u00f3digo de Pais
+enviNFe.NFe.infNFe.det.imposto.ISSQN.cServico=C\u00f3digo do servi\u00e7o prestado dentro do munic\u00edpio
+enviNFe.NFe.infNFe.det.imposto.ISSQN.indISS=Exibilidade do ISS:1-Exig\u00edvel;2-N\u00e3o incidente;3-Isen\u00e7\u00e3o;4-Exporta\u00e7\u00e3o;5-Imunidade;6-Exig.Susp. Judicial;7-Exig.Susp. ADM
+enviNFe.NFe.infNFe.det.imposto.ISSQN.indIncentivo=Indicador de Incentivo Fiscal. 1=Sim; 2=N\u00e3o
+enviNFe.NFe.infNFe.det.imposto.ISSQN.nProcesso=N\u00famero do Processo administrativo ou judicial de suspen\u00e7\u00e3o do processo
+enviNFe.NFe.infNFe.det.imposto.ISSQN.vAliq=Al\u00edquota do ISSQN
+enviNFe.NFe.infNFe.det.imposto.ISSQN.vBC=Valor da BC do ISSQN
+enviNFe.NFe.infNFe.det.imposto.ISSQN.vDeducao=Valor dedu\u00e7\u00e3o para redu\u00e7\u00e3o da base de c\u00e1lculo
+enviNFe.NFe.infNFe.det.imposto.ISSQN.vDescCond=Valor desconto condicionado
+enviNFe.NFe.infNFe.det.imposto.ISSQN.vDescIncond=Valor desconto incondicionado
+enviNFe.NFe.infNFe.det.imposto.ISSQN.vISSQN=Valor da do ISSQN
+enviNFe.NFe.infNFe.det.imposto.ISSQN.vISSRet=Valor Reten\u00e7\u00e3o ISS
+enviNFe.NFe.infNFe.det.imposto.ISSQN.vOutro=Valor outras reten\u00e7\u00f5es
+enviNFe.NFe.infNFe.det.imposto.PIS=Dados do PIS
+enviNFe.NFe.infNFe.det.imposto.PIS.PISAliq=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do PIS. 01 \u2013 Opera\u00e7\u00e3o Tribut\u00e1vel - Base de C\u00e1lculo = Valor da Opera\u00e7\u00e3o Al\u00edquota Normal (Cumulativo/N\u00e3o Cumulativo); 02 - Opera\u00e7\u00e3o Tribut\u00e1vel - Base de Calculo = Valor da Opera\u00e7\u00e3o (Al\u00edquota Diferenciada);
+enviNFe.NFe.infNFe.det.imposto.PIS.PISAliq.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do PIS. 01 \u2013 Opera\u00e7\u00e3o Tribut\u00e1vel - Base de C\u00e1lculo = Valor da Opera\u00e7\u00e3o Al\u00edquota Normal (Cumulativo/N\u00e3o Cumulativo); 02 - Opera\u00e7\u00e3o Tribut\u00e1vel - Base de Calculo = Valor da Opera\u00e7\u00e3o (Al\u00edquota Diferenciada);
+enviNFe.NFe.infNFe.det.imposto.PIS.PISAliq.pPIS=Al\u00edquota do PIS (em percentual)
+enviNFe.NFe.infNFe.det.imposto.PIS.PISAliq.vBC=Base de C\u00e1lculo do PIS (vBC). A base de c\u00e1lculo do PIS \u00e9 obrigat\u00f3ria no grupo PISAliq e \u00e9 usada para conferir vPIS. Como corrigir: Informe vBC do PIS e confira se vBC x pPIS / 100 = vPIS.
+enviNFe.NFe.infNFe.det.imposto.PIS.PISAliq.vPIS=Valor do PIS (vPIS). vPIS \u00e9 a contribui\u00e7\u00e3o devida no item e \u00e9 recalculada pela Receita a partir de vBC x pPIS. Como corrigir: Recalcule vPIS = vBC x pPIS / 100, com 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.PIS.PISNT=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do PIS. 04 - Opera\u00e7\u00e3o Tribut\u00e1vel - Tributa\u00e7\u00e3o Monof\u00e1sica - (Al\u00edquota Zero); 06 - Opera\u00e7\u00e3o Tribut\u00e1vel - Al\u00edquota Zero; 07 - Opera\u00e7\u00e3o Isenta da contribui\u00e7\u00e3o; 08 - Opera\u00e7\u00e3o Sem Incid\u00eancia da contribui\u00e7\u00e3o; 09 - Opera\u00e7\u00e3o com suspens\u00e3o da contribui\u00e7\u00e3o;
+enviNFe.NFe.infNFe.det.imposto.PIS.PISNT.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do PIS. 04 - Opera\u00e7\u00e3o Tribut\u00e1vel - Tributa\u00e7\u00e3o Monof\u00e1sica - (Al\u00edquota Zero); 05 - Opera\u00e7\u00e3o Tribut\u00e1vel (ST); 06 - Opera\u00e7\u00e3o Tribut\u00e1vel - Al\u00edquota Zero; 07 - Opera\u00e7\u00e3o Isenta da contribui\u00e7\u00e3o; 08 - Opera\u00e7\u00e3o Sem Incid\u00eancia da contribui\u00e7\u00e3o; 09 - Opera\u00e7\u00e3o com suspens\u00e3o da contribui\u00e7\u00e3o;
+enviNFe.NFe.infNFe.det.imposto.PIS.PISOutr=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do PIS. 99 - Outras Opera\u00e7\u00f5es.
+enviNFe.NFe.infNFe.det.imposto.PIS.PISOutr.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do PIS. 99 - Outras Opera\u00e7\u00f5es.
+enviNFe.NFe.infNFe.det.imposto.PIS.PISOutr.pPIS=Al\u00edquota do PIS (em percentual)
+enviNFe.NFe.infNFe.det.imposto.PIS.PISOutr.qBCProd=Quantidade Vendida (NT2011/004)
+enviNFe.NFe.infNFe.det.imposto.PIS.PISOutr.vAliqProd=Al\u00edquota do PIS (em reais) (NT2011/004)
+enviNFe.NFe.infNFe.det.imposto.PIS.PISOutr.vBC=Base de C\u00e1lculo do PIS (vBC). A base de c\u00e1lculo do PIS \u00e9 obrigat\u00f3ria no grupo PISAliq e \u00e9 usada para conferir vPIS. Como corrigir: Informe vBC do PIS e confira se vBC x pPIS / 100 = vPIS.
+enviNFe.NFe.infNFe.det.imposto.PIS.PISOutr.vPIS=Valor do PIS (vPIS). vPIS \u00e9 a contribui\u00e7\u00e3o devida no item e \u00e9 recalculada pela Receita a partir de vBC x pPIS. Como corrigir: Recalcule vPIS = vBC x pPIS / 100, com 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.PIS.PISQtde=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do PIS. 03 - Opera\u00e7\u00e3o Tribut\u00e1vel - Base de Calculo = Quantidade Vendida x Al\u00edquota por Unidade de Produto;
+enviNFe.NFe.infNFe.det.imposto.PIS.PISQtde.CST=C\u00f3digo de Situa\u00e7\u00e3o Tribut\u00e1ria do PIS. 03 - Opera\u00e7\u00e3o Tribut\u00e1vel - Base de Calculo = Quantidade Vendida x Al\u00edquota por Unidade de Produto;
+enviNFe.NFe.infNFe.det.imposto.PIS.PISQtde.qBCProd=Quantidade Vendida (NT2011/004)
+enviNFe.NFe.infNFe.det.imposto.PIS.PISQtde.vAliqProd=Al\u00edquota do PIS (em reais) (NT2011/004)
+enviNFe.NFe.infNFe.det.imposto.PIS.PISQtde.vPIS=Valor do PIS (vPIS). vPIS \u00e9 a contribui\u00e7\u00e3o devida no item e \u00e9 recalculada pela Receita a partir de vBC x pPIS. Como corrigir: Recalcule vPIS = vBC x pPIS / 100, com 2 casas decimais.
+enviNFe.NFe.infNFe.det.imposto.PISST=Dados do PIS Substitui\u00e7\u00e3o Tribut\u00e1ria
+enviNFe.NFe.infNFe.det.imposto.PISST.indSomaPISST=Indica se o valor do PISST comp\u00f5e o valor total da NF-e
+enviNFe.NFe.infNFe.det.imposto.PISST.pPIS=Al\u00edquota do PIS ST (em percentual)
+enviNFe.NFe.infNFe.det.imposto.PISST.qBCProd=Quantidade Vendida
+enviNFe.NFe.infNFe.det.imposto.PISST.vAliqProd=Al\u00edquota do PIS ST (em reais)
+enviNFe.NFe.infNFe.det.imposto.PISST.vBC=Valor da BC do PIS ST
+enviNFe.NFe.infNFe.det.imposto.PISST.vPIS=Valor do PIS ST
+enviNFe.NFe.infNFe.det.imposto.vTotTrib=Valor estimado total de impostos federais, estaduais e municipais
+enviNFe.NFe.infNFe.det.impostoDevol.IPI=Informa\u00e7\u00e3o de IPI devolvido
+enviNFe.NFe.infNFe.det.impostoDevol.IPI.vIPIDevol=Valor do IPI devolvido
+enviNFe.NFe.infNFe.det.impostoDevol.pDevol=Percentual de mercadoria devolvida
+enviNFe.NFe.infNFe.det.infAdProd=Informa\u00e7\u00f5es adicionais do produto (norma referenciada, informa\u00e7\u00f5es complementares, etc)
+enviNFe.NFe.infNFe.det.obsItem=Grupo de observa\u00e7\u00f5es de uso livre (para o item da NF-e)
+enviNFe.NFe.infNFe.det.obsItem.obsCont=Grupo de observa\u00e7\u00f5es de uso livre (para o item da NF-e)
+enviNFe.NFe.infNFe.det.obsItem.obsFisco=Grupo de observa\u00e7\u00f5es de uso livre (para o item da NF-e)
+enviNFe.NFe.infNFe.det.prod=Dados dos produtos e servi\u00e7os da NF-e
+enviNFe.NFe.infNFe.det.prod.CEST=Codigo especificador da Substuicao Tributaria - CEST, que identifica a mercadoria sujeita aos regimes de substituicao tribut\u00e1ria e de antecipa\u00e7\u00e3o do recolhimento do imposto
+enviNFe.NFe.infNFe.det.prod.CFOP=CFOP. O CFOP classifica fiscalmente a opera\u00e7\u00e3o (venda, devolu\u00e7\u00e3o, remessa, dentro ou fora do estado, para o exterior). \u00c9 o que diz \u00e0 SEFAZ o que essa nota representa; um CFOP incompat\u00edvel com o tipo de opera\u00e7\u00e3o (tpNF) ou com as UFs envolvidas derruba a nota. Como corrigir: Informe um CFOP de 4 d\u00edgitos coerente com tpNF (0=entrada / 1=sa\u00edda) e com as UFs de emitente e destinat\u00e1rio: 1xxx/5xxx dentro do estado, 2xxx/6xxx interestadual, 3xxx/7xxx exterior.
+enviNFe.NFe.infNFe.det.prod.CNPJFab=CNPJ do Fabricante da Mercadoria, obrigat\u00f3rio para produto em escala N\u00c3O relevante.
+enviNFe.NFe.infNFe.det.prod.DI=Declara\u00e7\u00e3o de Importa\u00e7\u00e3o (NT 2011/004)
+enviNFe.NFe.infNFe.det.prod.DI.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.det.prod.DI.CPF=CPF. O CPF identifica a pessoa f\u00edsica da opera\u00e7\u00e3o. Um CPF com d\u00edgito verificador inv\u00e1lido impede a identifica\u00e7\u00e3o segura do destinat\u00e1rio. Como corrigir: Envie os 11 d\u00edgitos do CPF sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador.
+enviNFe.NFe.infNFe.det.prod.DI.UFDesemb=UF onde ocorreu o desembara\u00e7o aduaneiro
+enviNFe.NFe.infNFe.det.prod.DI.UFTerceiro=Sigla da UF do adquirente ou do encomendante
+enviNFe.NFe.infNFe.det.prod.DI.adi=Adi\u00e7\u00f5es (NT 2011/004)
+enviNFe.NFe.infNFe.det.prod.DI.adi.cFabricante=C\u00f3digo do fabricante estrangeiro (usado nos sistemas internos de informa\u00e7\u00e3o do emitente da NF-e)
+enviNFe.NFe.infNFe.det.prod.DI.adi.nAdicao=N\u00famero da Adi\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.prod.DI.adi.nDraw=N\u00famero do ato concess\u00f3rio de Drawback
+enviNFe.NFe.infNFe.det.prod.DI.adi.nSeqAdic=N\u00famero seq\u00fcencial do item
+enviNFe.NFe.infNFe.det.prod.DI.adi.vDescDI=Valor do desconto do item
+enviNFe.NFe.infNFe.det.prod.DI.cExportador=C\u00f3digo do exportador (usado nos sistemas internos de informa\u00e7\u00e3o do emitente da NF-e)
+enviNFe.NFe.infNFe.det.prod.DI.dDI=Data de registro da DI/DSI/DA (AAAA-MM-DD)
+enviNFe.NFe.infNFe.det.prod.DI.dDesemb=Data do desembara\u00e7o aduaneiro (AAAA-MM-DD)
+enviNFe.NFe.infNFe.det.prod.DI.nDI=N\u00famero do Documento de Importa\u00e7\u00e3o (DI, DSI, DIRE, DUImp) (NT2011/004)
+enviNFe.NFe.infNFe.det.prod.DI.tpIntermedio=Forma de Importa\u00e7\u00e3o quanto a intermedia\u00e7\u00e3o 1-por conta propria;2-por conta e ordem;3-encomenda
+enviNFe.NFe.infNFe.det.prod.DI.tpViaTransp=Via de transporte internacional informada na DI ou na Declara\u00e7\u00e3o \u00danica de Importa\u00e7\u00e3o (DUImp): 1-Maritima;2-Fluvial;3-Lacustre;4-Aerea;5-Postal;6-Ferroviaria;7-Rodoviaria;8-Conduto;9-Meios Proprios;10-Entrada/Saida Ficta; 11-Courier;12-Em maos;13-Por reboque.
+enviNFe.NFe.infNFe.det.prod.DI.vAFRMM=Valor Adicional ao frete para renova\u00e7\u00e3o de marinha mercante
+enviNFe.NFe.infNFe.det.prod.DI.xLocDesemb=Local do desembara\u00e7o aduaneiro
+enviNFe.NFe.infNFe.det.prod.EXTIPI=C\u00f3digo EX TIPI (3 posi\u00e7\u00f5es)
+enviNFe.NFe.infNFe.det.prod.NCM=NCM. O NCM classifica a mercadoria e determina al\u00edquotas e regras tribut\u00e1rias aplic\u00e1veis ao item (IPI, ICMS-ST, PIS/COFINS monof\u00e1sicos). Sem NCM v\u00e1lido a SEFAZ n\u00e3o consegue validar a tributa\u00e7\u00e3o do produto. Como corrigir: Informe os 8 d\u00edgitos do NCM da tabela vigente. S\u00f3 use '00' no caso previsto no MOC (item sem mercadoria / nota complementar de servi\u00e7o).
+enviNFe.NFe.infNFe.det.prod.NVE=Nomenclatura de Valor aduaneio e Estat\u00edstico
+enviNFe.NFe.infNFe.det.prod.arma=Armamentos
+enviNFe.NFe.infNFe.det.prod.arma.descr=Descri\u00e7\u00e3o completa da arma, compreendendo: calibre, marca, capacidade, tipo de funcionamento, comprimento e demais elementos que permitam a sua perfeita identifica\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.prod.arma.nCano=N\u00famero de s\u00e9rie do cano
+enviNFe.NFe.infNFe.det.prod.arma.nSerie=N\u00famero de s\u00e9rie da arma
+enviNFe.NFe.infNFe.det.prod.arma.tpArma=Indicador do tipo de arma de fogo (0 - Uso permitido; 1 - Uso restrito)
+enviNFe.NFe.infNFe.det.prod.cBarra=Codigo de barras diferente do padr\u00e3o GTIN
+enviNFe.NFe.infNFe.det.prod.cBarraTrib=C\u00f3digo de barras da unidade tribut\u00e1vel diferente do padr\u00e3o GTIN
+enviNFe.NFe.infNFe.det.prod.cEAN=GTIN (Global Trade Item Number) do produto, antigo c\u00f3digo EAN ou c\u00f3digo de barras
+enviNFe.NFe.infNFe.det.prod.cEANTrib=GTIN (Global Trade Item Number) da unidade tribut\u00e1vel, antigo c\u00f3digo EAN ou c\u00f3digo de barras
+enviNFe.NFe.infNFe.det.prod.cProd=C\u00f3digo do produto ou servi\u00e7o. Preencher com CFOP caso se trate de itens n\u00e3o relacionados com mercadorias/produto e que o contribuinte n\u00e3o possua codifica\u00e7\u00e3o pr\u00f3pria Formato \u201dCFOP9999\u201d.
+enviNFe.NFe.infNFe.det.prod.comb=Informar apenas para opera\u00e7\u00f5es com combust\u00edveis l\u00edquidos
+enviNFe.NFe.infNFe.det.prod.comb.CIDE=CIDE Combust\u00edveis
+enviNFe.NFe.infNFe.det.prod.comb.CIDE.qBCProd=BC do CIDE ( Quantidade comercializada)
+enviNFe.NFe.infNFe.det.prod.comb.CIDE.vAliqProd=Al\u00edquota do CIDE (em reais)
+enviNFe.NFe.infNFe.det.prod.comb.CIDE.vCIDE=Valor do CIDE
+enviNFe.NFe.infNFe.det.prod.comb.CODIF=C\u00f3digo de autoriza\u00e7\u00e3o / registro do CODIF. Informar apenas quando a UF utilizar o CODIF (Sistema de Controle do Diferimento do Imposto nas Opera\u00e7\u00f5es com AEAC - \u00c1lcool Et\u00edlico Anidro Combust\u00edvel).
+enviNFe.NFe.infNFe.det.prod.comb.UFCons=Sigla da UF de Consumo
+enviNFe.NFe.infNFe.det.prod.comb.cProdANP=C\u00f3digo de produto da ANP. codifica\u00e7\u00e3o de produtos do SIMP (http://www.anp.gov.br)
+enviNFe.NFe.infNFe.det.prod.comb.descANP=Descri\u00e7\u00e3o do Produto conforme ANP. Utilizar a descri\u00e7\u00e3o de produtos do Sistema de Informa\u00e7\u00f5es de Movimenta\u00e7\u00e3o de Produtos - SIMP (http://www.anp.gov.br/simp/).
+enviNFe.NFe.infNFe.det.prod.comb.encerrante=Informa\u00e7\u00f5es do grupo de "encerrante"
+enviNFe.NFe.infNFe.det.prod.comb.encerrante.nBico=Numero de identifica\u00e7\u00e3o do Bico utilizado no abastecimento
+enviNFe.NFe.infNFe.det.prod.comb.encerrante.nBomba=Numero de identifica\u00e7\u00e3o da bomba ao qual o bico est\u00e1 interligado
+enviNFe.NFe.infNFe.det.prod.comb.encerrante.nTanque=Numero de identifica\u00e7\u00e3o do tanque ao qual o bico est\u00e1 interligado
+enviNFe.NFe.infNFe.det.prod.comb.encerrante.vEncFin=Valor do Encerrante no final do abastecimento
+enviNFe.NFe.infNFe.det.prod.comb.encerrante.vEncIni=Valor do Encerrante no \u00ednicio do abastecimento
+enviNFe.NFe.infNFe.det.prod.comb.origComb=Grupo indicador da origem do combust\u00edvel
+enviNFe.NFe.infNFe.det.prod.comb.origComb.cUFOrig=UF de origem do produtor ou do importado
+enviNFe.NFe.infNFe.det.prod.comb.origComb.indImport=Indicador de importa\u00e7\u00e3o 0=Nacional; 1=Importado;
+enviNFe.NFe.infNFe.det.prod.comb.origComb.pOrig=Percentual origin\u00e1rio para a UF
+enviNFe.NFe.infNFe.det.prod.comb.pBio=Percentual do \u00edndice de mistura do Biodiesel (B100) no \u00d3leo Diesel B institu\u00eddo pelo \u00f3rg\u00e3o regulamentador
+enviNFe.NFe.infNFe.det.prod.comb.pGLP=Percentual do GLP derivado do petr\u00f3leo no produto GLP (cProdANP=210203001). Informar em n\u00famero decimal o percentual do GLP derivado de petr\u00f3leo no produto GLP. Valores 0 a 100.
+enviNFe.NFe.infNFe.det.prod.comb.pGNi=Percentual de g\u00e1s natural importado GLGNi para o produto GLP (cProdANP=210203001). Informar em n\u00famero deciaml o percentual do G\u00e1s Natural Importado - GLGNi para o produto GLP. Valores de 0 a 100.
+enviNFe.NFe.infNFe.det.prod.comb.pGNn=Percentual de g\u00e1s natural nacional - GLGNn para o produto GLP (cProdANP=210203001). Informar em n\u00famero decimal o percentual do G\u00e1s Natural Nacional - GLGNn para o produto GLP. Valores de 0 a 100.
+enviNFe.NFe.infNFe.det.prod.comb.qTemp=Quantidade de combust\u00edvel faturada \u00e0 temperatura ambiente. Informar quando a quantidade faturada informada no campo qCom (I10) tiver sido ajustada para uma temperatura diferente da ambiente.
+enviNFe.NFe.infNFe.det.prod.comb.vPart=Valor de partida (cProdANP=210203001). Deve ser informado neste campo o valor por quilograma sem ICMS.
+enviNFe.NFe.infNFe.det.prod.detExport=Detalhe da exporta\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.prod.detExport.exportInd=Exporta\u00e7\u00e3o indireta
+enviNFe.NFe.infNFe.det.prod.detExport.exportInd.chNFe=Chave de Acesso (chNFe). A chave de acesso de 44 d\u00edgitos \u00e9 o identificador \u00fanico da nota em todo o sistema nacional e embute cUF, AAMM, CNPJ do emitente, modelo, s\u00e9rie, n\u00famero, tipo de emiss\u00e3o, c\u00f3digo num\u00e9rico e o DV. Chave ausente ou inconsistente \u00e9 rejeitada de imediato. Como corrigir: Regere a chave a partir dos campos do pr\u00f3prio XML e recalcule o DV (m\u00f3dulo 11), conferindo o atributo Id do elemento <infNFe> (formato NFe + 44 d\u00edgitos).
+enviNFe.NFe.infNFe.det.prod.detExport.exportInd.nRE=Registro de exporta\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.prod.detExport.exportInd.qExport=Quantidade do item efetivamente exportado
+enviNFe.NFe.infNFe.det.prod.detExport.nDraw=N\u00famero do ato concess\u00f3rio de Drawback
+enviNFe.NFe.infNFe.det.prod.gCred=Grupo de informa\u00e7\u00f5es sobre o Cr\u00e9ditoPresumido
+enviNFe.NFe.infNFe.det.prod.gCred.cCredPresumido=C\u00f3digo de Benef\u00edcio Fiscal de Cr\u00e9dito Presumido na UF aplicado ao item
+enviNFe.NFe.infNFe.det.prod.gCred.pCredPresumido=Percentual do Cr\u00e9dito Presumido
+enviNFe.NFe.infNFe.det.prod.gCred.vCredPresumido=Valor do Cr\u00e9dito Presumido
+enviNFe.NFe.infNFe.det.prod.indBemMovelUsado=Indicador de fornecimento de bem m\u00f3vel usado: 1-Bem M\u00f3vel Usado
+enviNFe.NFe.infNFe.det.prod.indTot=Este campo dever\u00e1 ser preenchido com: 0 \u2013 o valor do item (vProd) n\u00e3o comp\u00f5e o valor total da NF-e (vProd) 1 \u2013 o valor do item (vProd) comp\u00f5e o valor total da NF-e (vProd)
+enviNFe.NFe.infNFe.det.prod.infProdEmb=Informa\u00e7\u00f5es mais detalhadas do produto (usada na NFF)
+enviNFe.NFe.infNFe.det.prod.infProdEmb.qVolEmb=Volume do produto na embalagem
+enviNFe.NFe.infNFe.det.prod.infProdEmb.uEmb=Unidade de Medida da Embalagem
+enviNFe.NFe.infNFe.det.prod.infProdEmb.xEmb=Embalagem do produto
+enviNFe.NFe.infNFe.det.prod.infProdNFF=Informa\u00e7\u00f5es mais detalhadas do produto (usada na NFF)
+enviNFe.NFe.infNFe.det.prod.infProdNFF.cOperNFF=C\u00f3digo da opera\u00e7\u00e3o selecionada na NFF e relacionada ao item
+enviNFe.NFe.infNFe.det.prod.infProdNFF.cProdFisco=C\u00f3digo Fiscal do Produto
+enviNFe.NFe.infNFe.det.prod.med=grupo do detalhamento de Medicamentos e de mat\u00e9rias-primas farmac\u00eauticas
+enviNFe.NFe.infNFe.det.prod.med.cProdANVISA=Utilizar o n\u00famero do registro ANVISA ou preencher com o literal \u201cISENTO\u201d, no caso de medicamento isento de registro na ANVISA.
+enviNFe.NFe.infNFe.det.prod.med.vPMC=Pre\u00e7o M\u00e1ximo ao Consumidor.
+enviNFe.NFe.infNFe.det.prod.med.xMotivoIsencao=Obs.: Para medicamento isento de registro na ANVISA, informar o n\u00famero da decis\u00e3o que o isenta, como por exemplo o n\u00famero da Resolu\u00e7\u00e3o da Diretoria Colegiada da ANVISA (RDC).
+enviNFe.NFe.infNFe.det.prod.nFCI=N\u00famero de controle da FCI - Ficha de Conte\u00fado de Importa\u00e7\u00e3o.
+enviNFe.NFe.infNFe.det.prod.nItemPed=N\u00famero do Item do Pedido de Compra - Identifica\u00e7\u00e3o do n\u00famero do item do pedido de Compra
+enviNFe.NFe.infNFe.det.prod.nRECOPI=N\u00famero do RECOPI
+enviNFe.NFe.infNFe.det.prod.qCom=Quantidade Comercial do produto, alterado para aceitar de 0 a 4 casas decimais e 11 inteiros.
+enviNFe.NFe.infNFe.det.prod.qTrib=Quantidade Tribut\u00e1vel - alterado para aceitar de 0 a 4 casas decimais e 11 inteiros
+enviNFe.NFe.infNFe.det.prod.rastro.dFab=Data de fabrica\u00e7\u00e3o/produ\u00e7\u00e3o. Formato "AAAA-MM-DD".
+enviNFe.NFe.infNFe.det.prod.rastro.dVal=Data de validade. Informar o \u00faltimo dia do m\u00eas caso a validade n\u00e3o especifique o dia. Formato "AAAA-MM-DD".
+enviNFe.NFe.infNFe.det.prod.rastro.nLote=N\u00famero do lote do produto.
+enviNFe.NFe.infNFe.det.prod.rastro.qLote=Quantidade de produto no lote.
+enviNFe.NFe.infNFe.det.prod.tpCredPresIBSZFM=Classifica\u00e7\u00e3o para subapura\u00e7\u00e3o do IBS na ZFM
+enviNFe.NFe.infNFe.det.prod.uCom=Unidade comercial
+enviNFe.NFe.infNFe.det.prod.uTrib=Unidade Tribut\u00e1vel
+enviNFe.NFe.infNFe.det.prod.vDesc=Valor do Desconto
+enviNFe.NFe.infNFe.det.prod.vFrete=Valor Total do Frete
+enviNFe.NFe.infNFe.det.prod.vOutro=Outras despesas acess\u00f3rias
+enviNFe.NFe.infNFe.det.prod.vProd=Valor do Produto (vProd). vProd \u00e9 o valor bruto do item e alimenta todos os totais da nota. Inconsist\u00eancia com quantidade x valor unit\u00e1rio derruba a valida\u00e7\u00e3o de totais. Como corrigir: Confira vProd = qCom x vUnCom, com o arredondamento em 2 casas decimais.
+enviNFe.NFe.infNFe.det.prod.vSeg=Valor Total do Seguro
+enviNFe.NFe.infNFe.det.prod.vUnCom=Valor unit\u00e1rio de comercializa\u00e7\u00e3o - alterado para aceitar 0 a 10 casas decimais e 11 inteiros
+enviNFe.NFe.infNFe.det.prod.vUnTrib=Valor unit\u00e1rio de tributa\u00e7\u00e3o - alterado para aceitar 0 a 10 casas decimais e 11 inteiros
+enviNFe.NFe.infNFe.det.prod.veicProd=Ve\u00edculos novos
+enviNFe.NFe.infNFe.det.prod.veicProd.CMT=CMT-Capacidade M\u00e1xima de Tra\u00e7\u00e3o - em Toneladas 4 casas decimais
+enviNFe.NFe.infNFe.det.prod.veicProd.VIN=Informa-se o ve\u00edculo tem VIN (chassi) remarcado. R-Remarcado N-NormalVIN
+enviNFe.NFe.infNFe.det.prod.veicProd.anoFab=Ano de Fabrica\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.prod.veicProd.anoMod=Ano Modelo de Fabrica\u00e7\u00e3o
+enviNFe.NFe.infNFe.det.prod.veicProd.cCor=Cor do ve\u00edculo (c\u00f3digo de cada montadora)
+enviNFe.NFe.infNFe.det.prod.veicProd.cCorDENATRAN=C\u00f3digo da Cor Segundo as regras de pr\u00e9-cadastro do DENATRAN: 01-AMARELO;02-AZUL;03-BEGE;04-BRANCA;05-CINZA;06-DOURADA;07-GRENA 08-LARANJA;09-MARROM;10-PRATA;11-PRETA;12-ROSA;13-ROXA;14-VERDE;15-VERMELHA;16-FANTASIA
+enviNFe.NFe.infNFe.det.prod.veicProd.cMod=C\u00f3digo Marca Modelo (utilizar tabela RENAVAM)
+enviNFe.NFe.infNFe.det.prod.veicProd.chassi=Chassi do ve\u00edculo - VIN (c\u00f3digo-identifica\u00e7\u00e3o-ve\u00edculo)
+enviNFe.NFe.infNFe.det.prod.veicProd.cilin=Capacidade volunt\u00e1ria do motor expressa em cent\u00edmetros c\u00fabicos (CC). (cilindradas)
+enviNFe.NFe.infNFe.det.prod.veicProd.condVeic=Condi\u00e7\u00e3o do ve\u00edculo (1 - acabado; 2 - inacabado; 3 - semi-acabado)
+enviNFe.NFe.infNFe.det.prod.veicProd.dist=Dist\u00e2ncia entre eixos
+enviNFe.NFe.infNFe.det.prod.veicProd.espVeic=Esp\u00e9cie de ve\u00edculo (utilizar tabela RENAVAM)
+enviNFe.NFe.infNFe.det.prod.veicProd.lota=Quantidade m\u00e1xima de permitida de passageiros sentados, inclusive motorista.
+enviNFe.NFe.infNFe.det.prod.veicProd.nMotor=N\u00famero do motor
+enviNFe.NFe.infNFe.det.prod.veicProd.nSerie=Serial (s\u00e9rie)
+enviNFe.NFe.infNFe.det.prod.veicProd.pesoB=Peso bruto
+enviNFe.NFe.infNFe.det.prod.veicProd.pesoL=Peso l\u00edquido
+enviNFe.NFe.infNFe.det.prod.veicProd.pot=Pot\u00eancia m\u00e1xima do motor do ve\u00edculo em cavalo vapor (CV). (pot\u00eancia-ve\u00edculo)
+enviNFe.NFe.infNFe.det.prod.veicProd.tpComb=Tipo de combust\u00edvel-Tabela RENAVAM: 01-\u00c1lcool; 02-Gasolina; 03-Diesel; 16-\u00c1lcool/Gas.; 17-Gas./\u00c1lcool/GNV; 18-Gasolina/El\u00e9trico
+enviNFe.NFe.infNFe.det.prod.veicProd.tpOp=Tipo da Opera\u00e7\u00e3o (1 - Venda concession\u00e1ria; 2 - Faturamento direto; 3 - Venda direta; 0 - Outros)
+enviNFe.NFe.infNFe.det.prod.veicProd.tpPint=Tipo de pintura
+enviNFe.NFe.infNFe.det.prod.veicProd.tpRest=Restri\u00e7\u00e3o 0 - N\u00e3o h\u00e1; 1 - Aliena\u00e7\u00e3o Fiduci\u00e1ria; 2 - Arrendamento Mercantil; 3 - Reserva de Dom\u00ednio; 4 - Penhor de Ve\u00edculos; 9 - outras.
+enviNFe.NFe.infNFe.det.prod.veicProd.tpVeic=Tipo de ve\u00edculo (utilizar tabela RENAVAM)
+enviNFe.NFe.infNFe.det.prod.veicProd.xCor=Descri\u00e7\u00e3o da cor
+enviNFe.NFe.infNFe.det.prod.xPed=pedido de compra - Informa\u00e7\u00e3o de interesse do emissor para controle do B2B.
+enviNFe.NFe.infNFe.det.prod.xProd=Descri\u00e7\u00e3o do produto ou servi\u00e7o
+enviNFe.NFe.infNFe.det.vItem=Valor total do Item, correspondente \u00e0 sua participa\u00e7\u00e3o no total da nota. A soma dos itens dever\u00e1 corresponder ao total da nota.
+enviNFe.NFe.infNFe.emit=Identifica\u00e7\u00e3o do emitente
+enviNFe.NFe.infNFe.emit.CNAE=CNAE Fiscal
+enviNFe.NFe.infNFe.emit.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.emit.CPF=CPF. O CPF identifica a pessoa f\u00edsica da opera\u00e7\u00e3o. Um CPF com d\u00edgito verificador inv\u00e1lido impede a identifica\u00e7\u00e3o segura do destinat\u00e1rio. Como corrigir: Envie os 11 d\u00edgitos do CPF sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador.
+enviNFe.NFe.infNFe.emit.CRT=C\u00f3digo de Regime Tribut\u00e1rio. Este campo ser\u00e1 obrigatoriamente preenchido com: 1 \u2013 Simples Nacional; 2 \u2013 Simples Nacional \u2013 excesso de sublimite de receita bruta; 3 \u2013 Regime Normal. 4 - Simples Nacional - Microempreendedor individual - MEI
+enviNFe.NFe.infNFe.emit.IE=Inscri\u00e7\u00e3o Estadual (IE). A IE comprova o cadastro estadual do contribuinte na UF da opera\u00e7\u00e3o. A SEFAZ consulta esse cadastro; IE ausente ou em formato inv\u00e1lido para a UF impede a confirma\u00e7\u00e3o. Como corrigir: Informe a IE no formato da UF, sem pontua\u00e7\u00e3o. Para destinat\u00e1rio n\u00e3o contribuinte, use indIEDest=9 e n\u00e3o envie a tag IE; para isento, indIEDest=2 com IE ausente.
+enviNFe.NFe.infNFe.emit.IEST=Inscricao Estadual do Substituto Tribut\u00e1rio
+enviNFe.NFe.infNFe.emit.IM=Inscri\u00e7\u00e3o Municipal
+enviNFe.NFe.infNFe.emit.ISUFEmit=Inscri\u00e7\u00e3o do emitente na Suframa
+enviNFe.NFe.infNFe.emit.enderEmit=Endere\u00e7o do emitente
+enviNFe.NFe.infNFe.emit.enderEmit.CEP=CEP - NT 2011/004
+enviNFe.NFe.infNFe.emit.enderEmit.UF=Sigla da UF
+enviNFe.NFe.infNFe.emit.enderEmit.cMun=C\u00f3digo do munic\u00edpio
+enviNFe.NFe.infNFe.emit.enderEmit.cPais=C\u00f3digo do pa\u00eds
+enviNFe.NFe.infNFe.emit.enderEmit.fone=Preencher com C\u00f3digo DDD + n\u00famero do telefone (v.2.0)
+enviNFe.NFe.infNFe.emit.enderEmit.nro=N\u00famero
+enviNFe.NFe.infNFe.emit.enderEmit.xBairro=Bairro
+enviNFe.NFe.infNFe.emit.enderEmit.xCpl=Complemento
+enviNFe.NFe.infNFe.emit.enderEmit.xLgr=Logradouro
+enviNFe.NFe.infNFe.emit.enderEmit.xMun=Nome do munic\u00edpio
+enviNFe.NFe.infNFe.emit.enderEmit.xPais=Nome do pa\u00eds
+enviNFe.NFe.infNFe.emit.xFant=Nome fantasia
+enviNFe.NFe.infNFe.emit.xNome=Raz\u00e3o Social ou Nome do emitente
+enviNFe.NFe.infNFe.entrega=Identifica\u00e7\u00e3o do Local de Entrega (informar apenas quando for diferente do endere\u00e7o do destinat\u00e1rio)
+enviNFe.NFe.infNFe.entrega.CEP=CEP
+enviNFe.NFe.infNFe.entrega.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.entrega.CPF=CPF. O CPF identifica a pessoa f\u00edsica da opera\u00e7\u00e3o. Um CPF com d\u00edgito verificador inv\u00e1lido impede a identifica\u00e7\u00e3o segura do destinat\u00e1rio. Como corrigir: Envie os 11 d\u00edgitos do CPF sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador.
+enviNFe.NFe.infNFe.entrega.IE=Inscri\u00e7\u00e3o Estadual (IE). A IE comprova o cadastro estadual do contribuinte na UF da opera\u00e7\u00e3o. A SEFAZ consulta esse cadastro; IE ausente ou em formato inv\u00e1lido para a UF impede a confirma\u00e7\u00e3o. Como corrigir: Informe a IE no formato da UF, sem pontua\u00e7\u00e3o. Para destinat\u00e1rio n\u00e3o contribuinte, use indIEDest=9 e n\u00e3o envie a tag IE; para isento, indIEDest=2 com IE ausente.
+enviNFe.NFe.infNFe.entrega.UF=Sigla da UF
+enviNFe.NFe.infNFe.entrega.cMun=C\u00f3digo do munic\u00edpio (utilizar a tabela do IBGE)
+enviNFe.NFe.infNFe.entrega.cPais=C\u00f3digo de Pais
+enviNFe.NFe.infNFe.entrega.email=Informar o e-mail do expedidor/Recebedor. O campo pode ser utilizado para informar o e-mail de recep\u00e7\u00e3o da NF-e indicada pelo expedidor
+enviNFe.NFe.infNFe.entrega.fone=Telefone, preencher com C\u00f3digo DDD + n\u00famero do telefone , nas opera\u00e7\u00f5es com exterior \u00e9 permtido informar o c\u00f3digo do pa\u00eds + c\u00f3digo da localidade + n\u00famero do telefone
+enviNFe.NFe.infNFe.entrega.nro=N\u00famero
+enviNFe.NFe.infNFe.entrega.xBairro=Bairro
+enviNFe.NFe.infNFe.entrega.xCpl=Complemento
+enviNFe.NFe.infNFe.entrega.xLgr=Logradouro
+enviNFe.NFe.infNFe.entrega.xMun=Nome do munic\u00edpio
+enviNFe.NFe.infNFe.entrega.xNome=Raz\u00e3o Social ou Nome do Expedidor/Recebedor
+enviNFe.NFe.infNFe.entrega.xPais=Nome do pa\u00eds
+enviNFe.NFe.infNFe.exporta=Informa\u00e7\u00f5es de exporta\u00e7\u00e3o
+enviNFe.NFe.infNFe.exporta.UFSaidaPais=Sigla da UF de Embarque ou de transposi\u00e7\u00e3o de fronteira
+enviNFe.NFe.infNFe.exporta.xLocDespacho=Descri\u00e7\u00e3o do local de despacho
+enviNFe.NFe.infNFe.exporta.xLocExporta=Local de Embarque ou de transposi\u00e7\u00e3o de fronteira
+enviNFe.NFe.infNFe.ide=identifica\u00e7\u00e3o da NF-e
+enviNFe.NFe.infNFe.ide.NFref=Grupo de infroma\u00e7\u00f5es da NF referenciada
+enviNFe.NFe.infNFe.ide.NFref.refCTe=Utilizar esta TAG para referenciar um CT-e emitido anteriormente, vinculada a NF-e atual
+enviNFe.NFe.infNFe.ide.NFref.refECF=Grupo do Cupom Fiscal vinculado \u00e0 NF-e
+enviNFe.NFe.infNFe.ide.NFref.refECF.mod=C\u00f3digo do modelo do Documento Fiscal Preencher com "2B", quando se tratar de Cupom Fiscal emitido por m\u00e1quina registradora (n\u00e3o ECF), com "2C", quando se tratar de Cupom Fiscal PDV, ou "2D", quando se tratar de Cupom Fiscal (emitido por ECF)
+enviNFe.NFe.infNFe.ide.NFref.refECF.nCOO=Informar o N\u00famero do Contador de Ordem de Opera\u00e7\u00e3o - COO vinculado \u00e0 NF-e
+enviNFe.NFe.infNFe.ide.NFref.refECF.nECF=Informar o n\u00famero de ordem seq\u00fcencial do ECF que emitiu o Cupom Fiscal vinculado \u00e0 NF-e
+enviNFe.NFe.infNFe.ide.NFref.refNF=Dados da NF modelo 1/1A referenciada ou NF modelo 2 referenciada
+enviNFe.NFe.infNFe.ide.NFref.refNF.AAMM=AAMM da emiss\u00e3o
+enviNFe.NFe.infNFe.ide.NFref.refNF.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.ide.NFref.refNF.cUF=C\u00f3digo da UF (cUF). cUF \u00e9 o c\u00f3digo IBGE da UF do emitente e define para qual SEFAZ a nota \u00e9 roteada. Tamb\u00e9m comp\u00f5e os 2 primeiros d\u00edgitos da chave de acesso. Como corrigir: Informe o c\u00f3digo IBGE de 2 d\u00edgitos da UF do emitente (ex.: 35 para SP, 31 para MG).
+enviNFe.NFe.infNFe.ide.NFref.refNF.mod=C\u00f3digo do modelo do Documento Fiscal. Utilizar 01 para NF modelo 1/1A e 02 para NF modelo 02
+enviNFe.NFe.infNFe.ide.NFref.refNF.nNF=N\u00famero do Documento Fiscal
+enviNFe.NFe.infNFe.ide.NFref.refNF.serie=S\u00e9rie do Documento Fiscal, informar zero se inexistente
+enviNFe.NFe.infNFe.ide.NFref.refNFP=Grupo com as informa\u00e7\u00f5es NF de produtor referenciada
+enviNFe.NFe.infNFe.ide.NFref.refNFP.AAMM=AAMM da emiss\u00e3o da NF de produtor
+enviNFe.NFe.infNFe.ide.NFref.refNFP.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.ide.NFref.refNFP.CPF=CPF. O CPF identifica a pessoa f\u00edsica da opera\u00e7\u00e3o. Um CPF com d\u00edgito verificador inv\u00e1lido impede a identifica\u00e7\u00e3o segura do destinat\u00e1rio. Como corrigir: Envie os 11 d\u00edgitos do CPF sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador.
+enviNFe.NFe.infNFe.ide.NFref.refNFP.IE=Inscri\u00e7\u00e3o Estadual (IE). A IE comprova o cadastro estadual do contribuinte na UF da opera\u00e7\u00e3o. A SEFAZ consulta esse cadastro; IE ausente ou em formato inv\u00e1lido para a UF impede a confirma\u00e7\u00e3o. Como corrigir: Informe a IE no formato da UF, sem pontua\u00e7\u00e3o. Para destinat\u00e1rio n\u00e3o contribuinte, use indIEDest=9 e n\u00e3o envie a tag IE; para isento, indIEDest=2 com IE ausente.
+enviNFe.NFe.infNFe.ide.NFref.refNFP.cUF=C\u00f3digo da UF (cUF). cUF \u00e9 o c\u00f3digo IBGE da UF do emitente e define para qual SEFAZ a nota \u00e9 roteada. Tamb\u00e9m comp\u00f5e os 2 primeiros d\u00edgitos da chave de acesso. Como corrigir: Informe o c\u00f3digo IBGE de 2 d\u00edgitos da UF do emitente (ex.: 35 para SP, 31 para MG).
+enviNFe.NFe.infNFe.ide.NFref.refNFP.mod=C\u00f3digo do modelo do Documento Fiscal - utilizar 04 para NF de produtor ou 01 para NF Avulsa
+enviNFe.NFe.infNFe.ide.NFref.refNFP.nNF=N\u00famero do Documento Fiscal - 1 \u2013 999999999
+enviNFe.NFe.infNFe.ide.NFref.refNFP.serie=S\u00e9rie do Documento Fiscal, informar zero se inexistentes\u00e9rie
+enviNFe.NFe.infNFe.ide.NFref.refNFe=Chave de acesso das NF-e referenciadas. Chave de acesso compostas por C\u00f3digo da UF (tabela do IBGE) + AAMM da emiss\u00e3o + CNPJ do Emitente + modelo, s\u00e9rie e n\u00famero da NF-e Referenciada + C\u00f3digo Num\u00e9rico + DV.
+enviNFe.NFe.infNFe.ide.NFref.refNFeSig=Referencia uma NF-e (modelo 55) emitida anteriormente pela sua Chave de Acesso com c\u00f3digo num\u00e9rico zerado, permitindo manter o sigilo da NF-e referenciada.
+enviNFe.NFe.infNFe.ide.cDV=Digito Verificador da Chave de Acesso da NF-e
+enviNFe.NFe.infNFe.ide.cIndOp=C\u00f3digo indicador do local da opera\u00e7\u00e3o de fornecimento
+enviNFe.NFe.infNFe.ide.cMunFG=C\u00f3digo do Munic\u00edpio de Ocorr\u00eancia do Fato Gerador (utilizar a tabela do IBGE)
+enviNFe.NFe.infNFe.ide.cMunFGIBS=Informar o munic\u00edpio de ocorr\u00eancia do fato gerador do fato gerador do IBS / CBS. Campo preenchido somente quando "indPres = 5 (Opera\u00e7\u00e3o presencial, fora do estabelecimento)", e n\u00e3o estiver preenchido o endere\u00e7o do destinat\u00e1rio (grupo: E05) nem o local de entrega (grupo: G01).
+enviNFe.NFe.infNFe.ide.cNF=C\u00f3digo num\u00e9rico que comp\u00f5e a Chave de Acesso. N\u00famero aleat\u00f3rio gerado pelo emitente para cada NF-e.
+enviNFe.NFe.infNFe.ide.cUF=C\u00f3digo da UF (cUF). cUF \u00e9 o c\u00f3digo IBGE da UF do emitente e define para qual SEFAZ a nota \u00e9 roteada. Tamb\u00e9m comp\u00f5e os 2 primeiros d\u00edgitos da chave de acesso. Como corrigir: Informe o c\u00f3digo IBGE de 2 d\u00edgitos da UF do emitente (ex.: 35 para SP, 31 para MG).
+enviNFe.NFe.infNFe.ide.dPrevEntrega=Data da previs\u00e3o de entrega ou disponibiliza\u00e7\u00e3o do bem (AAAA-MM-DD)
+enviNFe.NFe.infNFe.ide.dhCont=Informar a data e hora de entrada em conting\u00eancia conting\u00eancia no formato (AAAA-MM-DDThh:mm:ssTZD) ex.: 2012-09-01T13:00:00-03:00.
+enviNFe.NFe.infNFe.ide.dhEmi=Data/Hora de Emiss\u00e3o (dhEmi). dhEmi registra o instante exato da emiss\u00e3o e comp\u00f5e o trecho AAMM da chave de acesso. Al\u00e9m de obrigat\u00f3rio, um valor incorreto aqui invalida a chave e, com ela, a nota inteira. A SEFAZ tamb\u00e9m recusa notas com emiss\u00e3o muito atrasada ou no futuro em rela\u00e7\u00e3o ao hor\u00e1rio do servidor. Como corrigir: Envie no formato ISO 8601 com fuso, ex.: 2026-08-07T14:30:00-03:00 (o fuso \u00e9 obrigat\u00f3rio e deve refletir a UF do emitente).
+enviNFe.NFe.infNFe.ide.dhSaiEnt=Data e Hora da sa\u00edda ou de entrada da mercadoria / produto (AAAA-MM-DDTHH:mm:ssTZD)
+enviNFe.NFe.infNFe.ide.finNFe=Finalidade da emiss\u00e3o da NF-e: 1 - NFe normal 2 - NFe complementar 3 - NFe de ajuste 4 - Devolu\u00e7\u00e3o/Retorno 5 - Nota de cr\u00e9dito 6 - Nota de d\u00e9bito
+enviNFe.NFe.infNFe.ide.gCompraGov=Grupo de Compras Governamentais
+enviNFe.NFe.infNFe.ide.gCompraGov.pRedutor=Percentual de redu\u00e7\u00e3o de al\u00edquota em compra governamental
+enviNFe.NFe.infNFe.ide.gCompraGov.refDFeAnt=Chave de acesso do documento fiscal anterior. Dever\u00e1 ser informado para tpOperGov 2 e 3 e vedado para os tipos 1 e 4. No caso do tpOperGov 2 aceitar\u00e1 apenas uma chave referenciada, no tipo 3 poder\u00e1 aceitar m\u00faltiplas chaves Obs: a chave de acesso dever\u00e1 ser de um emitente com o mesmo CNPJ base
+enviNFe.NFe.infNFe.ide.gCompraGov.tpEnteGov=Para administra\u00e7\u00e3o p\u00fablica direta e suas autarquias e funda\u00e7\u00f5es: 1=Uni\u00e3o 2=Estados 3=Distrito Federal 4=Munic\u00edpios 5=Cons\u00f3rcio P\u00fablico 6=Comit\u00ea Gestor do IBS
+enviNFe.NFe.infNFe.ide.gCompraGov.tpOperGov=Tipo da opera\u00e7\u00e3o com ente governamental: 1 \u2013 Fornecimento com pagamento posterior; 2 - Recebimento do pagamento com fornecimento j\u00e1 realizado; 3 \u2013 Fornecimento com pagamento j\u00e1 realizado; 4 \u2013 Recebimento do pagamento com fornecimento posterior;
+enviNFe.NFe.infNFe.ide.gPagAntecipado=Informado para abater as parcelas de antecipa\u00e7\u00e3o de pagamento, conforme Art. 10. \u00a7 4\u00ba
+enviNFe.NFe.infNFe.ide.gPagAntecipado.refNFe=Chave de acesso da NF-e de antecipa\u00e7\u00e3o de pagamento
+enviNFe.NFe.infNFe.ide.idDest=Identificador de Local de destino da opera\u00e7\u00e3o (1-Interna;2-Interestadual;3-Exterior)
+enviNFe.NFe.infNFe.ide.indFinal=Indica opera\u00e7\u00e3o com consumidor final (0-N\u00e3o;1-Consumidor Final)
+enviNFe.NFe.infNFe.ide.indIntermed=Indicador de intermediador/marketplace 0=Opera\u00e7\u00e3o sem intermediador (em site ou plataforma pr\u00f3pria) 1=Opera\u00e7\u00e3o em site ou plataforma de terceiros (intermediadores/marketplace)
+enviNFe.NFe.infNFe.ide.indPres=Indicador de presen\u00e7a do comprador no estabelecimento comercial no momento da oepra\u00e7\u00e3o: 0 - N\u00e3o se aplica (ex.: Nota Fiscal complementar ou de ajuste); 1 - Opera\u00e7\u00e3o presencial; 2 - Opera\u00e7\u00e3o n\u00e3o presencial, internet; 3 - Opera\u00e7\u00e3o n\u00e3o presencial, teleatendimento; 4 - Opera\u00e7\u00e3o n\u00e3o presencial com NFC-e e NFe com DANFE Simplificado Tipo 2 (com entrega); 5 - Opera\u00e7\u00e3o presencial, fora do estabelecimento; 9 - Opera\u00e7\u00e3o n\u00e3o presencial, outros.
+enviNFe.NFe.infNFe.ide.mod=C\u00f3digo do modelo do Documento Fiscal. 55 = NF-e; 65 = NFC-e.
+enviNFe.NFe.infNFe.ide.nNF=N\u00famero do Documento Fiscal
+enviNFe.NFe.infNFe.ide.natOp=Descri\u00e7\u00e3o da Natureza da Opera\u00e7\u00e3o
+enviNFe.NFe.infNFe.ide.procEmi=Processo de emiss\u00e3o utilizado com a seguinte codifica\u00e7\u00e3o: 0 - emiss\u00e3o de NF-e com aplicativo do contribuinte; 1 - emiss\u00e3o de NF-e avulsa pelo Fisco; 2 - emiss\u00e3o de NF-e avulsa, pelo contribuinte com seu certificado digital, atrav\u00e9s do site do Fisco; 3 - emiss\u00e3o de NF-e pelo contribuinte com aplicativo fornecido pelo Fisco; 4 - emiss\u00e3o de NF-e por Provedor de Assinatura e Autoriza\u00e7\u00e3o - PAA.
+enviNFe.NFe.infNFe.ide.serie=S\u00e9rie do Documento Fiscal
+enviNFe.NFe.infNFe.ide.tpAmb=Identifica\u00e7\u00e3o do Ambiente: 1 - Produ\u00e7\u00e3o 2 - Homologa\u00e7\u00e3o
+enviNFe.NFe.infNFe.ide.tpEmis=Forma de emiss\u00e3o da NF-e: 1 - Normal; 2 - Conting\u00eancia FS; 3 - Regime Especial NFF (NT 2021.002); 4 - Conting\u00eancia DPEC; 5 - Conting\u00eancia FSDA; 6 - Conting\u00eancia SVC - AN; 7 - Conting\u00eancia SVC - RS; 9 - Conting\u00eancia off-line da NFC-e e da NF-e com DANFE Simplificado Tipo 2.
+enviNFe.NFe.infNFe.ide.tpImp=Formato de impress\u00e3o do DANFE: 0 - Sem DANFE; 1 - DANFE Retrato; 2 - DANFE Paisagem; 3 - DANFE Simplificado; 4 - DANFE NFC-e; 5 - DANFE NFC-e em mensagem eletr\u00f4nica; 6 - DANFE Simplificado Tipo 2 (nas condi\u00e7\u00f5es do Ajuste SINIEF 13/26).
+enviNFe.NFe.infNFe.ide.tpNF=Tipo do Documento Fiscal (0 - entrada; 1 - sa\u00edda)
+enviNFe.NFe.infNFe.ide.tpNFCredito=Tipo de Nota de Cr\u00e9dito
+enviNFe.NFe.infNFe.ide.tpNFDebito=Tipo de Nota de D\u00e9bito
+enviNFe.NFe.infNFe.ide.verProc=vers\u00e3o do aplicativo utilizado no processo de emiss\u00e3o
+enviNFe.NFe.infNFe.ide.xJust=Informar a Justificativa da entrada
+enviNFe.NFe.infNFe.infAdic=Informa\u00e7\u00f5es adicionais da NF-e
+enviNFe.NFe.infNFe.infAdic.infAdFisco=Informa\u00e7\u00f5es adicionais de interesse do Fisco (v2.0)
+enviNFe.NFe.infNFe.infAdic.infCpl=Informa\u00e7\u00f5es complementares de interesse do Contribuinte
+enviNFe.NFe.infNFe.infAdic.obsCont=Campo de uso livre do contribuinte informar o nome do campo no atributo xCampo e o conte\u00fado do campo no xTexto
+enviNFe.NFe.infNFe.infAdic.obsFisco=Campo de uso exclusivo do Fisco informar o nome do campo no atributo xCampo e o conte\u00fado do campo no xTexto
+enviNFe.NFe.infNFe.infAdic.procRef=Grupo de informa\u00e7\u00f5es do processo referenciado
+enviNFe.NFe.infNFe.infAdic.procRef.indProc=Origem do processo, informar com: 0 - SEFAZ; 1 - Justi\u00e7a Federal; 2 - Justi\u00e7a Estadual; 3 - Secex/RFB; 4 - CONFAZ; 9 - Outros.
+enviNFe.NFe.infNFe.infAdic.procRef.nProc=Indentificador do processo ou ato concess\u00f3rio
+enviNFe.NFe.infNFe.infAdic.procRef.tpAto=Tipo do ato concess\u00f3rio Para origem do Processo na SEFAZ (indProc=0), informar o tipo de ato concess\u00f3rio: 08 - Termo de Acordo; 10 - Regime Especial; 12 - Autoriza\u00e7\u00e3o espec\u00edfica; 14 - Ajuste SINIEF; 15 - Conv\u00eanio ICMS.
+enviNFe.NFe.infNFe.infIntermed=Grupo de Informa\u00e7\u00f5es do Intermediador da Transa\u00e7\u00e3o
+enviNFe.NFe.infNFe.infIntermed.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.infIntermed.idCadIntTran=Identificador cadastrado no intermediador
+enviNFe.NFe.infNFe.infPAA=Grupo de Informa\u00e7\u00e3o do Provedor de Assinatura e Autoriza\u00e7\u00e3o
+enviNFe.NFe.infNFe.infPAA.CNPJPAA=CNPJ do Provedor de Assinatura e Autoriza\u00e7\u00e3o
+enviNFe.NFe.infNFe.infPAA.PAASignature=Assinatura RSA do Emitente para DFe gerados por PAA
+enviNFe.NFe.infNFe.infPAA.PAASignature.RSAKeyValue=Chave Publica no padr\u00e3o XML RSA Key
+enviNFe.NFe.infNFe.infPAA.PAASignature.SignatureValue=Assinatura digital padr\u00e3o RSA
+enviNFe.NFe.infNFe.infRespTec=Informa\u00e7\u00f5es do Respons\u00e1vel T\u00e9cnico pela emiss\u00e3o do DF-e
+enviNFe.NFe.infNFe.infRespTec.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.infRespTec.email=Informar o e-mail da pessoa a ser contatada na empresa desenvolvedora do sistema.
+enviNFe.NFe.infNFe.infRespTec.fone=Informar o telefone da pessoa a ser contatada na empresa desenvolvedora do sistema. Preencher com o C\u00f3digo DDD + n\u00famero do telefone.
+enviNFe.NFe.infNFe.infRespTec.hashCSRT=O hashCSRT \u00e9 o resultado da fun\u00e7\u00e3o hash (SHA-1 \u2013 Base64) do CSRT fornecido pelo fisco mais a Chave de Acesso da NFe.
+enviNFe.NFe.infNFe.infRespTec.idCSRT=Identificador do CSRT utilizado para montar o hash do CSRT
+enviNFe.NFe.infNFe.infRespTec.xContato=Informar o nome da pessoa a ser contatada na empresa desenvolvedora do sistema utilizado na emiss\u00e3o do documento fiscal eletr\u00f4nico.
+enviNFe.NFe.infNFe.infSolicNFF=Grupo para informa\u00e7\u00f5es da solicita\u00e7\u00e3o da NFF
+enviNFe.NFe.infNFe.infSolicNFF.xSolic=Solicita\u00e7\u00e3o do pedido de emiss\u00e3o da NFF
+enviNFe.NFe.infNFe.pag=Dados de Pagamento. Obrigat\u00f3rio apenas para (NFC-e) NT 2012/004
+enviNFe.NFe.infNFe.pag.detPag=Grupo de detalhamento da forma de pagamento.
+enviNFe.NFe.infNFe.pag.detPag.CNPJPag=CNPJ transacional do pagamento - Preencher informando o CNPJ do estabelecimento onde o pagamento foi processado/transacionado/recebido quando a emiss\u00e3o do documento fiscal ocorrer em estabelecimento distinto
+enviNFe.NFe.infNFe.pag.detPag.UFPag=UF do CNPJ do estabelecimento onde o pagamento foi processado/transacionado/recebido.
+enviNFe.NFe.infNFe.pag.detPag.card=Grupo de Cart\u00f5es, PIX, Boletos e outros Pagamentos Eletr\u00f4nicos
+enviNFe.NFe.infNFe.pag.detPag.card.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.pag.detPag.card.CNPJReceb=CNPJ do benefici\u00e1rio do pagamento
+enviNFe.NFe.infNFe.pag.detPag.card.cAut=N\u00famero de autoriza\u00e7\u00e3o da opera\u00e7\u00e3o com cart\u00f5es, PIX, boletos e outros pagamentos eletr\u00f4nicos
+enviNFe.NFe.infNFe.pag.detPag.card.idTermPag=Identificador do terminal de pagamento
+enviNFe.NFe.infNFe.pag.detPag.card.tBand=Bandeira da operadora de cart\u00e3o
+enviNFe.NFe.infNFe.pag.detPag.card.tpIntegra=Tipo de Integra\u00e7\u00e3o do processo de pagamento com o sistema de automa\u00e7\u00e3o da empresa: 1 - Pagamento integrado com o sistema de automa\u00e7\u00e3o da empresa (Ex.: equipamento TEF, Com\u00e9rcio Eletr\u00f4nico, POS Integrado); 2 - Pagamento n\u00e3o integrado com o sistema de automa\u00e7\u00e3o da empresa (Ex.: equipamento POS Simples).
+enviNFe.NFe.infNFe.pag.detPag.dPag=Data do Pagamento
+enviNFe.NFe.infNFe.pag.detPag.indPag=Indicador da Forma de Pagamento:0-Pagamento \u00e0 Vista;1-Pagamento \u00e0 Prazo;
+enviNFe.NFe.infNFe.pag.detPag.tPag=Forma de Pagamento:
+enviNFe.NFe.infNFe.pag.detPag.vPag=Valor do Pagamento. Esta tag poder\u00e1 ser omitida quando a tag tPag=90 (Sem Pagamento), caso contr\u00e1rio dever\u00e1 ser preenchida.
+enviNFe.NFe.infNFe.pag.detPag.xPag=Descri\u00e7\u00e3o do Meio de Pagamento
+enviNFe.NFe.infNFe.pag.vTroco=Valor do Troco.
+enviNFe.NFe.infNFe.retirada=Identifica\u00e7\u00e3o do Local de Retirada (informar apenas quando for diferente do endere\u00e7o do remetente)
+enviNFe.NFe.infNFe.retirada.CEP=CEP
+enviNFe.NFe.infNFe.retirada.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.retirada.CPF=CPF. O CPF identifica a pessoa f\u00edsica da opera\u00e7\u00e3o. Um CPF com d\u00edgito verificador inv\u00e1lido impede a identifica\u00e7\u00e3o segura do destinat\u00e1rio. Como corrigir: Envie os 11 d\u00edgitos do CPF sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador.
+enviNFe.NFe.infNFe.retirada.IE=Inscri\u00e7\u00e3o Estadual (IE). A IE comprova o cadastro estadual do contribuinte na UF da opera\u00e7\u00e3o. A SEFAZ consulta esse cadastro; IE ausente ou em formato inv\u00e1lido para a UF impede a confirma\u00e7\u00e3o. Como corrigir: Informe a IE no formato da UF, sem pontua\u00e7\u00e3o. Para destinat\u00e1rio n\u00e3o contribuinte, use indIEDest=9 e n\u00e3o envie a tag IE; para isento, indIEDest=2 com IE ausente.
+enviNFe.NFe.infNFe.retirada.UF=Sigla da UF
+enviNFe.NFe.infNFe.retirada.cMun=C\u00f3digo do munic\u00edpio (utilizar a tabela do IBGE)
+enviNFe.NFe.infNFe.retirada.cPais=C\u00f3digo de Pais
+enviNFe.NFe.infNFe.retirada.email=Informar o e-mail do expedidor/Recebedor. O campo pode ser utilizado para informar o e-mail de recep\u00e7\u00e3o da NF-e indicada pelo expedidor
+enviNFe.NFe.infNFe.retirada.fone=Telefone, preencher com C\u00f3digo DDD + n\u00famero do telefone , nas opera\u00e7\u00f5es com exterior \u00e9 permtido informar o c\u00f3digo do pa\u00eds + c\u00f3digo da localidade + n\u00famero do telefone
+enviNFe.NFe.infNFe.retirada.nro=N\u00famero
+enviNFe.NFe.infNFe.retirada.xBairro=Bairro
+enviNFe.NFe.infNFe.retirada.xCpl=Complemento
+enviNFe.NFe.infNFe.retirada.xLgr=Logradouro
+enviNFe.NFe.infNFe.retirada.xMun=Nome do munic\u00edpio
+enviNFe.NFe.infNFe.retirada.xNome=Raz\u00e3o Social ou Nome do Expedidor/Recebedor
+enviNFe.NFe.infNFe.retirada.xPais=Nome do pa\u00eds
+enviNFe.NFe.infNFe.total=Dados dos totais da NF-e
+enviNFe.NFe.infNFe.total.IBSCBSTot=Valores totais da NF com IBS / CBS
+enviNFe.NFe.infNFe.total.IBSCBSTot.gCBS=Totaliza\u00e7\u00e3o da CBS
+enviNFe.NFe.infNFe.total.IBSCBSTot.gCBS.vCBS=Valor total da CBS
+enviNFe.NFe.infNFe.total.IBSCBSTot.gCBS.vCredPres=Total do Cr\u00e9dito Presumido
+enviNFe.NFe.infNFe.total.IBSCBSTot.gCBS.vCredPresCondSus=Total do Cr\u00e9dito Presumido Condi\u00e7\u00e3o Suspensiva
+enviNFe.NFe.infNFe.total.IBSCBSTot.gCBS.vDevTrib=Total de devolu\u00e7\u00f5es de tributos
+enviNFe.NFe.infNFe.total.IBSCBSTot.gCBS.vDif=Total do Diferimento
+enviNFe.NFe.infNFe.total.IBSCBSTot.gEstornoCred=Totaliza\u00e7\u00e3o do estorno de cr\u00e9dito
+enviNFe.NFe.infNFe.total.IBSCBSTot.gEstornoCred.vCBSEstCred=Valor total da CBS estornada
+enviNFe.NFe.infNFe.total.IBSCBSTot.gEstornoCred.vIBSEstCred=Valor total do IBS estornado
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS=Totaliza\u00e7\u00e3o do IBS
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS.gIBSMun=Totaliza\u00e7\u00e3o do IBS de compet\u00eancia Municipal
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS.gIBSMun.vDevTrib=Total de devolu\u00e7\u00f5es de tributos
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS.gIBSMun.vDif=Total do Diferimento
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS.gIBSMun.vIBSMun=Valor total do IBS Municipal
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS.gIBSUF=Totaliza\u00e7\u00e3o do IBS de compet\u00eancia da UF
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS.gIBSUF.vDevTrib=Total de devolu\u00e7\u00f5es de tributos
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS.gIBSUF.vDif=Total do Diferimento
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS.gIBSUF.vIBSUF=Valor total do IBS Estadual
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS.vCredPres=Total do Cr\u00e9dito Presumido
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS.vCredPresCondSus=Total do Cr\u00e9dito Presumido Condi\u00e7\u00e3o Suspensiva
+enviNFe.NFe.infNFe.total.IBSCBSTot.gIBS.vIBS=Valor total do IBS
+enviNFe.NFe.infNFe.total.IBSCBSTot.gMono=Totais da Monofasia
+enviNFe.NFe.infNFe.total.IBSCBSTot.gMono.vCBSMono=Valor total da CBS monof\u00e1sica
+enviNFe.NFe.infNFe.total.IBSCBSTot.gMono.vCBSMonoRet=Valor da CBS monof\u00e1sica retida anteriormente
+enviNFe.NFe.infNFe.total.IBSCBSTot.gMono.vCBSMonoReten=Valor total da CBS monof\u00e1sica sujeita a reten\u00e7\u00e3o
+enviNFe.NFe.infNFe.total.IBSCBSTot.gMono.vIBSMono=Valor total do IBS monof\u00e1sico
+enviNFe.NFe.infNFe.total.IBSCBSTot.gMono.vIBSMonoRet=Valor do IBS monof\u00e1sico retido anteriormente
+enviNFe.NFe.infNFe.total.IBSCBSTot.gMono.vIBSMonoReten=Valor total do IBS monof\u00e1sico sujeito a reten\u00e7\u00e3o
+enviNFe.NFe.infNFe.total.IBSCBSTot.vBCIBSCBS=Total Base de Calculo
+enviNFe.NFe.infNFe.total.ICMSTot=Totais referentes ao ICMS
+enviNFe.NFe.infNFe.total.ICMSTot.qBCMono=Valor total da quantidade tributada do ICMS monof\u00e1sico pr\u00f3prio
+enviNFe.NFe.infNFe.total.ICMSTot.qBCMonoRet=Valor total da quantidade tributada do ICMS monof\u00e1sico retido anteriormente
+enviNFe.NFe.infNFe.total.ICMSTot.qBCMonoReten=Valor total da quantidade tributada do ICMS monof\u00e1sico sujeito a reten\u00e7\u00e3o
+enviNFe.NFe.infNFe.total.ICMSTot.vBC=BC do ICMS
+enviNFe.NFe.infNFe.total.ICMSTot.vBCST=BC do ICMS ST
+enviNFe.NFe.infNFe.total.ICMSTot.vCOFINS=Valor do COFINS
+enviNFe.NFe.infNFe.total.ICMSTot.vDesc=Valor Total do Desconto
+enviNFe.NFe.infNFe.total.ICMSTot.vFCP=Valor Total do FCP (Fundo de Combate \u00e0 Pobreza).
+enviNFe.NFe.infNFe.total.ICMSTot.vFCPST=Valor Total do FCP (Fundo de Combate \u00e0 Pobreza) retido por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.total.ICMSTot.vFCPSTRet=Valor Total do FCP (Fundo de Combate \u00e0 Pobreza) retido anteriormente por substitui\u00e7\u00e3o tribut\u00e1ria.
+enviNFe.NFe.infNFe.total.ICMSTot.vFCPUFDest=Valor total do ICMS relativo ao Fundo de Combate \u00e0 Pobreza (FCP) para a UF de destino.
+enviNFe.NFe.infNFe.total.ICMSTot.vFrete=Valor Total do Frete
+enviNFe.NFe.infNFe.total.ICMSTot.vICMS=Valor Total do ICMS
+enviNFe.NFe.infNFe.total.ICMSTot.vICMSDeson=Valor Total do ICMS desonerado
+enviNFe.NFe.infNFe.total.ICMSTot.vICMSMono=Valor total do ICMS monof\u00e1sico pr\u00f3prio
+enviNFe.NFe.infNFe.total.ICMSTot.vICMSMonoRet=Valor do ICMS monof\u00e1sico retido anteriormente
+enviNFe.NFe.infNFe.total.ICMSTot.vICMSMonoReten=Valor total do ICMS monof\u00e1sico sujeito a reten\u00e7\u00e3o
+enviNFe.NFe.infNFe.total.ICMSTot.vICMSUFDest=Valor total do ICMS de partilha para a UF do destinat\u00e1rio
+enviNFe.NFe.infNFe.total.ICMSTot.vICMSUFRemet=Valor total do ICMS de partilha para a UF do remetente
+enviNFe.NFe.infNFe.total.ICMSTot.vII=Valor Total do II
+enviNFe.NFe.infNFe.total.ICMSTot.vIPI=Valor Total do IPI
+enviNFe.NFe.infNFe.total.ICMSTot.vIPIDevol=Valor Total do IPI devolvido. Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emiss\u00e3o de nota finNFe=4 (devolu\u00e7\u00e3o) nas opera\u00e7\u00f5es com n\u00e3o contribuintes do IPI. Corresponde ao total da soma dos campos id: UA04.
+enviNFe.NFe.infNFe.total.ICMSTot.vNF=Valor Total da Nota (vNF). vNF \u00e9 o valor total cobrado do destinat\u00e1rio e \u00e9 recalculado pela SEFAZ a partir dos itens e impostos. Diverg\u00eancia aqui significa que o total da nota n\u00e3o pode ser conferido - \u00e9 uma das rejei\u00e7\u00f5es mais comuns. Como corrigir: Recalcule vNF = vProd - vDesc + vFrete + vSeg + vOutro + vST + vIPI (mais as demais parcelas aplic\u00e1veis) e confira se ICMSTot bate com a soma item a item.
+enviNFe.NFe.infNFe.total.ICMSTot.vOutro=Outras Despesas acess\u00f3rias
+enviNFe.NFe.infNFe.total.ICMSTot.vPIS=Valor do PIS
+enviNFe.NFe.infNFe.total.ICMSTot.vProd=Valor do Produto (vProd). vProd \u00e9 o valor bruto do item e alimenta todos os totais da nota. Inconsist\u00eancia com quantidade x valor unit\u00e1rio derruba a valida\u00e7\u00e3o de totais. Como corrigir: Confira vProd = qCom x vUnCom, com o arredondamento em 2 casas decimais.
+enviNFe.NFe.infNFe.total.ICMSTot.vST=Valor Total do ICMS ST
+enviNFe.NFe.infNFe.total.ICMSTot.vSeg=Valor Total do Seguro
+enviNFe.NFe.infNFe.total.ICMSTot.vTotTrib=Valor estimado total de impostos federais, estaduais e municipais
+enviNFe.NFe.infNFe.total.ISSQNtot=Totais referentes ao ISSQN
+enviNFe.NFe.infNFe.total.ISSQNtot.cRegTrib=C\u00f3digo do regime especial de tributa\u00e7\u00e3o
+enviNFe.NFe.infNFe.total.ISSQNtot.dCompet=Data da presta\u00e7\u00e3o do servi\u00e7o (AAAA-MM-DD)
+enviNFe.NFe.infNFe.total.ISSQNtot.vBC=Base de C\u00e1lculo do ISS
+enviNFe.NFe.infNFe.total.ISSQNtot.vCOFINS=Valor do COFINS sobre servi\u00e7os
+enviNFe.NFe.infNFe.total.ISSQNtot.vDeducao=Valor dedu\u00e7\u00e3o para redu\u00e7\u00e3o da base de c\u00e1lculo
+enviNFe.NFe.infNFe.total.ISSQNtot.vDescCond=Valor desconto condicionado
+enviNFe.NFe.infNFe.total.ISSQNtot.vDescIncond=Valor desconto incondicionado
+enviNFe.NFe.infNFe.total.ISSQNtot.vISS=Valor Total do ISS
+enviNFe.NFe.infNFe.total.ISSQNtot.vISSRet=Valor Total Reten\u00e7\u00e3o ISS
+enviNFe.NFe.infNFe.total.ISSQNtot.vOutro=Valor outras reten\u00e7\u00f5es
+enviNFe.NFe.infNFe.total.ISSQNtot.vPIS=Valor do PIS sobre servi\u00e7os
+enviNFe.NFe.infNFe.total.ISSQNtot.vServ=Valor Total dos Servi\u00e7os sob n\u00e3o-incid\u00eancia ou n\u00e3o tributados pelo ICMS
+enviNFe.NFe.infNFe.total.ISTot=Valores totais da NF com Imposto Seletivo
+enviNFe.NFe.infNFe.total.ISTot.vIS=Valor Total do Imposto Seletivo
+enviNFe.NFe.infNFe.total.retTrib=Reten\u00e7\u00e3o de Tributos Federais
+enviNFe.NFe.infNFe.total.retTrib.vBCIRRF=Base de C\u00e1lculo do IRRF
+enviNFe.NFe.infNFe.total.retTrib.vBCRetPrev=Base de C\u00e1lculo da Reten\u00e7\u00e3o da Previd\u00eancica Social
+enviNFe.NFe.infNFe.total.retTrib.vIRRF=Valor Retido de IRRF
+enviNFe.NFe.infNFe.total.retTrib.vRetCOFINS=Valor Retido de COFINS
+enviNFe.NFe.infNFe.total.retTrib.vRetCSLL=Valor Retido de CSLL
+enviNFe.NFe.infNFe.total.retTrib.vRetPIS=Valor Retido de PIS
+enviNFe.NFe.infNFe.total.retTrib.vRetPrev=Valor da Reten\u00e7\u00e3o da Previd\u00eancica Social
+enviNFe.NFe.infNFe.total.vNFTot=Valor Total da NF considerando os impostos por fora IBS, CBS e IS
+enviNFe.NFe.infNFe.transp=Dados dos transportes da NF-e
+enviNFe.NFe.infNFe.transp.balsa=Identifica\u00e7\u00e3o da balsa (v2.0)
+enviNFe.NFe.infNFe.transp.modFrete=Modalidade do frete 0- Contrata\u00e7\u00e3o do Frete por conta do Remetente (CIF); 1- Contrata\u00e7\u00e3o do Frete por conta do destinat\u00e1rio/remetente (FOB); 2- Contrata\u00e7\u00e3o do Frete por conta de terceiros; 3- Transporte pr\u00f3prio por conta do remetente; 4- Transporte pr\u00f3prio por conta do destinat\u00e1rio; 9- Sem Ocorr\u00eancia de transporte.
+enviNFe.NFe.infNFe.transp.reboque=Dados do reboque/Dolly (v2.0)
+enviNFe.NFe.infNFe.transp.reboque.RNTC=Registro Nacional de Transportador de Carga (ANTT)
+enviNFe.NFe.infNFe.transp.reboque.UF=Sigla da UF
+enviNFe.NFe.infNFe.transp.reboque.placa=Placa do ve\u00edculo (NT2011/004)
+enviNFe.NFe.infNFe.transp.retTransp=Dados da reten\u00e7\u00e3o ICMS do Transporte
+enviNFe.NFe.infNFe.transp.retTransp.CFOP=CFOP. O CFOP classifica fiscalmente a opera\u00e7\u00e3o (venda, devolu\u00e7\u00e3o, remessa, dentro ou fora do estado, para o exterior). \u00c9 o que diz \u00e0 SEFAZ o que essa nota representa; um CFOP incompat\u00edvel com o tipo de opera\u00e7\u00e3o (tpNF) ou com as UFs envolvidas derruba a nota. Como corrigir: Informe um CFOP de 4 d\u00edgitos coerente com tpNF (0=entrada / 1=sa\u00edda) e com as UFs de emitente e destinat\u00e1rio: 1xxx/5xxx dentro do estado, 2xxx/6xxx interestadual, 3xxx/7xxx exterior.
+enviNFe.NFe.infNFe.transp.retTransp.cMunFG=C\u00f3digo do Munic\u00edpio de Ocorr\u00eancia do Fato Gerador (utilizar a tabela do IBGE)
+enviNFe.NFe.infNFe.transp.retTransp.pICMSRet=Al\u00edquota da Reten\u00e7\u00e3o
+enviNFe.NFe.infNFe.transp.retTransp.vBCRet=BC da Reten\u00e7\u00e3o do ICMS
+enviNFe.NFe.infNFe.transp.retTransp.vICMSRet=Valor do ICMS Retido
+enviNFe.NFe.infNFe.transp.retTransp.vServ=Valor do Servi\u00e7o
+enviNFe.NFe.infNFe.transp.transporta=Dados do transportador
+enviNFe.NFe.infNFe.transp.transporta.CNPJ=CNPJ. O CNPJ identifica de forma \u00fanica a pessoa jur\u00eddica envolvida na opera\u00e7\u00e3o. A Receita valida o d\u00edgito verificador e o cadastro; sem um CNPJ \u00edntegro n\u00e3o \u00e9 poss\u00edvel identificar com seguran\u00e7a quem emitiu ou recebeu a nota. Como corrigir: Envie os 14 d\u00edgitos do CNPJ sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador. Para destinat\u00e1rio pessoa f\u00edsica, use <CPF> em vez de <CNPJ>.
+enviNFe.NFe.infNFe.transp.transporta.CPF=CPF. O CPF identifica a pessoa f\u00edsica da opera\u00e7\u00e3o. Um CPF com d\u00edgito verificador inv\u00e1lido impede a identifica\u00e7\u00e3o segura do destinat\u00e1rio. Como corrigir: Envie os 11 d\u00edgitos do CPF sem pontua\u00e7\u00e3o e confira o d\u00edgito verificador.
+enviNFe.NFe.infNFe.transp.transporta.IE=Inscri\u00e7\u00e3o Estadual (IE). A IE comprova o cadastro estadual do contribuinte na UF da opera\u00e7\u00e3o. A SEFAZ consulta esse cadastro; IE ausente ou em formato inv\u00e1lido para a UF impede a confirma\u00e7\u00e3o. Como corrigir: Informe a IE no formato da UF, sem pontua\u00e7\u00e3o. Para destinat\u00e1rio n\u00e3o contribuinte, use indIEDest=9 e n\u00e3o envie a tag IE; para isento, indIEDest=2 com IE ausente.
+enviNFe.NFe.infNFe.transp.transporta.UF=Sigla da UF
+enviNFe.NFe.infNFe.transp.transporta.xEnder=Endere\u00e7o completo
+enviNFe.NFe.infNFe.transp.transporta.xMun=Nome do mun\u00edcipio
+enviNFe.NFe.infNFe.transp.transporta.xNome=Raz\u00e3o Social ou nome do transportador
+enviNFe.NFe.infNFe.transp.vagao=Identifica\u00e7\u00e3o do vag\u00e3o (v2.0)
+enviNFe.NFe.infNFe.transp.veicTransp=Dados do ve\u00edculo
+enviNFe.NFe.infNFe.transp.veicTransp.RNTC=Registro Nacional de Transportador de Carga (ANTT)
+enviNFe.NFe.infNFe.transp.veicTransp.UF=Sigla da UF
+enviNFe.NFe.infNFe.transp.veicTransp.placa=Placa do ve\u00edculo (NT2011/004)
+enviNFe.NFe.infNFe.transp.vol=Dados dos volumes
+enviNFe.NFe.infNFe.transp.vol.esp=Esp\u00e9cie dos volumes transportados
+enviNFe.NFe.infNFe.transp.vol.lacres.nLacre=N\u00famero dos Lacres
+enviNFe.NFe.infNFe.transp.vol.marca=Marca dos volumes transportados
+enviNFe.NFe.infNFe.transp.vol.nVol=Numera\u00e7\u00e3o dos volumes transportados
+enviNFe.NFe.infNFe.transp.vol.pesoB=Peso bruto (em kg)
+enviNFe.NFe.infNFe.transp.vol.pesoL=Peso l\u00edquido (em kg)
+enviNFe.NFe.infNFe.transp.vol.qVol=Quantidade de volumes transportados
+enviNFe.NFe.infNFeSupl=Informa\u00e7\u00f5es suplementares Nota Fiscal
+enviNFe.NFe.infNFeSupl.qrCode=Texto com o QR-Code impresso no DANFE NFC-e
+enviNFe.NFe.infNFeSupl.urlChave=Informar a URL da "Consulta por chave de acesso da NFC-e". A mesma URL que deve estar informada no DANFE NFC-e para consulta por chave de acesso.
+enviNFe.indSinc=Indicador de processamento s\u00edncrono. 0=N\u00c3O; 1=SIM=S\u00edncrono

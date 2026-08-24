@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+  <infNFe versao="4.00" Id="NFe35260112345678000199550010000001231000001238">
+    <ide>
+      <cUF>35</cUF>
+      <mod>55</mod>
+      <serie>1</serie>
+      <nNF>123</nNF>
+      <dhEmi>2026-08-07T10:00:00-03:00</dhEmi>
+    </ide>
+    <emit>
+      <CNPJ>12345678000100</CNPJ>
+      <IE>123456789</IE>
+    </emit>
+    <dest>
+      <CNPJ>98765432000199</CNPJ>
+    </dest>
+    <det nItem="1">
+      <prod>
+        <cProd>001</cProd>
+        <NCM>12345678</NCM>
+        <CFOP>5102</CFOP>
+        <vProd>100.00</vProd>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMS00>
+            <CST>00</CST>
+            <vBC></vBC>
+            <pICMS>18.00</pICMS>
+            <vICMS>18.00</vICMS>
+          </ICMS00>
+        </ICMS>
+      </imposto>
+    </det>
+    <total>
+      <ICMSTot>
+        <vProd>100.00</vProd>
+        <vICMS>18.00</vICMS>
+        <vNF>150.00</vNF>
+      </ICMSTot>
+    </total>
+  </infNFe>
+</NFe>
