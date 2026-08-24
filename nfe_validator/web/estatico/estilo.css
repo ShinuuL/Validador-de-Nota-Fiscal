@@ -1,0 +1,370 @@
+/*
+ * Estilo da UI do validador.
+ *
+ * RNF-UI01: responsivo de 375px a 1440px+, sem framework CSS.
+ * RNF-UI02: contraste conferido para os estados de erro/aviso/sucesso, foco
+ *           visível em tudo que recebe teclado, e cor NUNCA é o único sinal
+ *           (sempre acompanha ícone + texto).
+ */
+
+:root {
+  --fundo: #f6f7f9;
+  --superficie: #ffffff;
+  --borda: #d6dae0;
+  --texto: #1a1d21;
+  --texto-fraco: #5b636d;
+
+  /* Contraste >= 4.5:1 sobre a superfície branca. */
+  --erro: #b3261e;
+  --erro-fundo: #fdecea;
+  --erro-borda: #f3b7b2;
+
+  --aviso: #8a5300;
+  --aviso-fundo: #fff6e5;
+  --aviso-borda: #f0d08a;
+
+  --ok: #1b6b3a;
+  --ok-fundo: #e8f5ec;
+  --ok-borda: #a8d5b8;
+
+  --acento: #1c4f9c;
+  --raio: 10px;
+  --sombra: 0 1px 2px rgba(16, 24, 40, .06), 0 1px 3px rgba(16, 24, 40, .1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #16181c;
+    --superficie: #1e2126;
+    --borda: #343a42;
+    --texto: #e9ecef;
+    --texto-fraco: #a4acb6;
+
+    --erro: #ff9a92;
+    --erro-fundo: #3a1d1a;
+    --erro-borda: #6e2f28;
+
+    --aviso: #f2c46b;
+    --aviso-fundo: #35290f;
+    --aviso-borda: #6b5320;
+
+    --ok: #7fd2a0;
+    --ok-fundo: #14301f;
+    --ok-borda: #2c5c3c;
+
+    --acento: #8fb8ff;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 1rem 3rem;
+  background: var(--fundo);
+  color: var(--texto);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+main { max-width: 900px; margin: 0 auto; }
+
+.topo {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0 1.25rem;
+}
+.topo h1 { margin: 0; font-size: 1.5rem; letter-spacing: -.01em; }
+.subtitulo { margin: .35rem 0 0; color: var(--texto-fraco); }
+
+.oculto-visual {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------------- área de drop ---------------- */
+
+.area-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+  min-height: 220px;
+  padding: 2rem 1rem;
+  background: var(--superficie);
+  border: 2px dashed var(--borda);
+  border-radius: var(--raio);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color .15s, background .15s, transform .15s;
+}
+.area-drop:hover { border-color: var(--acento); }
+
+/* RNF-UI02: foco de teclado tem que ser tão visível quanto o hover. */
+.area-drop:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 3px;
+  border-color: var(--acento);
+}
+
+/* RF-UI01: destaque durante o dragover. */
+.area-drop.arrastando {
+  border-color: var(--acento);
+  border-style: solid;
+  background: color-mix(in srgb, var(--acento) 8%, var(--superficie));
+  transform: scale(1.008);
+}
+
+.icone-drop { width: 40px; height: 40px; color: var(--acento); }
+.area-drop-titulo { margin: .5rem 0 0; font-size: 1.1rem; font-weight: 600; }
+.area-drop-dica { margin: 0; color: var(--texto-fraco); font-size: .9rem; }
+
+.alternativa { text-align: center; margin: 1rem 0 0; }
+
+/* ---------------- botões ---------------- */
+
+button { font: inherit; border-radius: 8px; cursor: pointer; }
+
+.primario {
+  padding: .55rem 1.1rem;
+  background: var(--acento);
+  color: #fff;
+  border: 1px solid var(--acento);
+  font-weight: 600;
+}
+.primario:hover { filter: brightness(1.08); }
+
+.secundario {
+  padding: .5rem 1rem;
+  background: var(--superficie);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+}
+.secundario:hover { border-color: var(--acento); }
+
+.link {
+  background: none;
+  border: none;
+  padding: .25rem;
+  color: var(--acento);
+  text-decoration: underline;
+}
+
+button:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+
+.acoes { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .75rem; }
+
+/* ---------------- colar texto ---------------- */
+
+.painel-texto {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+}
+.painel-texto label { display: block; font-weight: 600; margin-bottom: .4rem; }
+.painel-texto textarea {
+  width: 100%;
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  padding: .6rem;
+  color: var(--texto);
+  background: var(--fundo);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  resize: vertical;
+}
+.painel-texto textarea:focus-visible { outline: 2px solid var(--acento); }
+
+/* ---------------- arquivo escolhido ---------------- */
+
+.arquivo-escolhido {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  padding: .8rem 1rem;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+}
+.arquivo-escolhido .rotulo { color: var(--texto-fraco); }
+.arquivo-escolhido .nome { font-weight: 600; word-break: break-all; }
+.arquivo-escolhido .tamanho { color: var(--texto-fraco); font-size: .9rem; }
+.arquivo-escolhido .primario { margin-left: auto; }
+
+.aviso-cliente {
+  margin-top: 1rem;
+  padding: .8rem 1rem;
+  background: var(--erro-fundo);
+  border: 1px solid var(--erro-borda);
+  border-left: 4px solid var(--erro);
+  border-radius: 8px;
+  color: var(--erro);
+}
+
+/* ---------------- carregando ---------------- */
+
+.painel-carregando {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  padding: 3rem 1rem;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  text-align: center;
+}
+.girador {
+  width: 34px; height: 34px;
+  border: 3px solid var(--borda);
+  border-top-color: var(--acento);
+  border-radius: 50%;
+  animation: girar .8s linear infinite;
+}
+@keyframes girar { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .girador { animation-duration: 2.4s; }
+  .area-drop { transition: none; }
+}
+.carregando-detalhe { color: var(--texto-fraco); font-size: .9rem; margin: 0; }
+
+/* ---------------- falha de comunicação ---------------- */
+
+.painel-falha {
+  padding: 1.5rem;
+  background: var(--erro-fundo);
+  border: 1px solid var(--erro-borda);
+  border-radius: var(--raio);
+}
+.painel-falha h2 { margin: 0 0 .4rem; font-size: 1.15rem; color: var(--erro); }
+
+/* ---------------- resultado ---------------- */
+
+.faixa-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--raio);
+  border: 1px solid var(--borda);
+  box-shadow: var(--sombra);
+}
+.faixa-status-principal { display: flex; align-items: center; gap: .9rem; }
+.faixa-status.valida  { background: var(--ok-fundo);   border-color: var(--ok-borda); }
+.faixa-status.invalida{ background: var(--erro-fundo); border-color: var(--erro-borda); }
+
+.status-icone {
+  display: grid; place-items: center;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  font-size: 1.4rem; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+}
+.faixa-status.valida   .status-icone { background: var(--ok); }
+.faixa-status.invalida .status-icone { background: var(--erro); }
+
+.status-texto { margin: 0; font-size: 1.2rem; font-weight: 700; }
+.faixa-status.valida   .status-texto { color: var(--ok); }
+.faixa-status.invalida .status-texto { color: var(--erro); }
+.status-resumo { margin: .1rem 0 0; color: var(--texto-fraco); font-size: .92rem; }
+.faixa-status .secundario { margin-left: auto; }
+
+.metadados {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: .75rem 1.25rem;
+  margin: 1rem 0 0;
+  padding: 1rem 1.25rem;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+}
+.metadados dt { color: var(--texto-fraco); font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+.metadados dd { margin: .15rem 0 0; font-weight: 600; word-break: break-all; }
+
+.acoes-resultado { display: flex; align-items: center; gap: .75rem; margin-top: 1rem; }
+.aviso-copia { color: var(--ok); font-size: .9rem; }
+
+.titulo-lista { font-size: 1.05rem; margin: 1.75rem 0 .6rem; }
+.titulo-lista.erro  { color: var(--erro); }
+.titulo-lista.aviso { color: var(--aviso); }
+
+.lista-itens { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; }
+
+.item {
+  padding: .95rem 1.1rem;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-left: 4px solid var(--borda);
+  border-radius: var(--raio);
+}
+.item.erro  { border-left-color: var(--erro); }
+.item.aviso { border-left-color: var(--aviso); background: var(--aviso-fundo); }
+
+/* RN-UI07: a explicação de negócio é o elemento dominante; campo e xpath são
+   secundários. Se algum dia alguém inverter isso, quebra a regra. */
+.item-motivo { margin: 0; font-size: 1rem; font-weight: 600; }
+.item-campo  { margin: .3rem 0 0; color: var(--texto-fraco); font-size: .88rem; }
+.item-codigo {
+  display: inline-block;
+  margin-right: .5rem;
+  padding: .05rem .4rem;
+  font: 600 .72rem/1.5 ui-monospace, Menlo, Consolas, monospace;
+  color: var(--texto-fraco);
+  background: var(--fundo);
+  border: 1px solid var(--borda);
+  border-radius: 5px;
+}
+
+.item-partes { margin: .55rem 0 0; display: grid; gap: .3rem; }
+.item-parte { margin: 0; font-size: .93rem; }
+.item-parte strong { color: var(--texto-fraco); font-weight: 600; }
+
+.item details { margin-top: .6rem; }
+.item summary {
+  cursor: pointer;
+  color: var(--acento);
+  font-size: .88rem;
+  width: fit-content;
+}
+.item summary:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+.item-tecnico {
+  margin: .5rem 0 0;
+  padding: .6rem .75rem;
+  background: var(--fundo);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  font: 12px/1.6 ui-monospace, Menlo, Consolas, monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.sem-problemas {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: var(--ok-fundo);
+  border: 1px solid var(--ok-borda);
+  border-radius: var(--raio);
+  color: var(--ok);
+}
+
+.rodape {
+  max-width: 900px;
+  margin: 2.5rem auto 0;
+  color: var(--texto-fraco);
+  font-size: .85rem;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .topo { padding-top: 1.25rem; }
+  .topo h1 { font-size: 1.25rem; }
+  .area-drop { min-height: 170px; }
+  .faixa-status .secundario,
+  .arquivo-escolhido .primario { margin-left: 0; width: 100%; }
+}

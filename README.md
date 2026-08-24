@@ -36,6 +36,9 @@ nfe_validator/
   layout.py               -> LEITOR do XSD: descrições oficiais, obrigatoriedade por variante, CST -> grupo
   coletor_erp.py          -> coleta XMLs que o ERP deixou no disco (out/*.out.txt, .xml) e revalida em lote
   gerador_dd.py           -> gera o dicionário .dd que o ERP sabe ler e nunca teve
+  web/
+    servidor.py             -> POST /api/validar + serve a UI (http.server da stdlib)
+    estatico/               -> index.html, estilo.css, app.js (sem biblioteca externa)
   localizacao.py          -> xpath técnico -> localização legível ("Item 3 > grupo ICMS00 > linha 28")
   catalogo_erros.py       -> explicação de negócio por campo + composição da mensagem em 4 camadas
   validador.py             -> orquestrador (junta tudo, deduplica, ordena e resume)
@@ -59,6 +62,7 @@ tests/
   test_integracao_erp.py     -> suíte dos achados vindos das notas reais do ERP
   test_gerador_dd.py         -> suíte do contrato do .dd com o leitor Java do ERP
   test_cli.py                -> suíte do CLI: códigos de saída e formato do CSV
+  test_web.py                -> suíte da UI: endpoint, servidor e contrato do front
 enviNFe_v4.00.dd             -> ARTEFATO DE ENTREGA: dicionário de campos para o ERP
   demo_xsd_error_translation.py -> demonstração isolada da tradução de erro de XSD
   fixtures/nfe_exemplo_invalida.xml -> XML de exemplo com erros propositais
@@ -93,6 +97,41 @@ joga tudo numa coluna só, e sem BOM os acentos aparecem quebrados. No modo
 `--lote` a coluna `arquivo` diz de qual XML veio cada linha.
 
 Códigos de saída: **0** nota válida, **1** nota com erro, **2** erro de uso.
+
+## Interface de arrastar-e-soltar
+
+```bash
+nfe-validator-web              # abre o navegador em http://127.0.0.1:8765
+nfe-validator-web --porta 9000 --sem-navegador
+```
+
+Ou sem instalar: `python -m nfe_validator.web.servidor`.
+
+Arraste o XML na área central, clique para escolher pelo seletor do sistema, ou
+cole o conteúdo como texto — os três caminhos chamam o **mesmo** backend. O
+resultado mostra o status em destaque, os metadados da nota e um cartão por
+erro com a explicação de negócio em primeiro plano e os detalhes técnicos
+(`xpath`, `linha`, `mensagem_tecnica`) recolhidos.
+
+Implementa `spec-ui-drag-and-drop.md`. Pontos que valem registro:
+
+* **Escuta só em `127.0.0.1` por padrão.** Um XML de NF-e carrega CNPJ, valores
+  e dados de cliente; expor isso na rede por acidente é pior que ter de digitar
+  `--host`. Se você mudar o host, o servidor avisa no terminal.
+* **Nenhuma biblioteca no front** (RNF-UI03): drag-and-drop é a API nativa do
+  HTML5, e o CSS é próprio. Nada é baixado de CDN.
+* **Zero dependência nova no back.** A spec sugeria FastAPI/Flask como
+  *exemplo*; usamos a `http.server` da stdlib, o que mantém a única dependência
+  do projeto em `lxml`. `processar_validacao()` é agnóstica de framework —
+  montar em FastAPI depois é escrever a rota e chamá-la.
+* **O front não valida nada** (Seção 2 da spec). A única checagem no cliente é
+  extensão `.xml`, tamanho e texto não vazio. Um teste verifica isso lendo o
+  próprio `app.js`, porque é o desvio mais provável de acontecer.
+* **Nada persiste** (RN-UI11): sem `localStorage`, sem cookie, e
+  `Cache-Control: no-store` em toda resposta.
+* Este servidor **não é endurecido para produção** — a própria documentação da
+  `http.server` avisa. Para uma ferramenta local rodando na máquina de quem usa,
+  é adequado; para expor a um time, ponha atrás de um servidor de verdade.
 
 Rodar sem a validação de schema (só as regras de negócio e a RN18):
 ```bash
@@ -498,6 +537,7 @@ vazia" — premissa que o `cBenef` desmentiu —, perguntamos ao XSD.
 - [x] Localização legível do erro (`localizacao.py`): item, grupo tributário e linha, em vez de xpath cru
 - [x] Deduplicação e ordenação dos erros + bloco `resumo` com as contagens e a lista de campos não preenchidos
 - [x] RF09 — exportação em CSV (`--csv`), com separador e BOM que o Excel em português entende
+- [x] UI de arrastar-e-soltar (`spec-ui-drag-and-drop.md`) — endpoint, página, acessibilidade por teclado, sem dependência nova
 - [x] Empacotamento (`pyproject.toml`) com os XSDs dentro do pacote, verificado por instalação real
 - [x] Relatório legível no CLI (`--so-nao-preenchidos`, `--json`, `--csv`, `--sem-xsd`)
 - [x] `layout.py` — leitor do XSD oficial: descrição de 97,9% dos campos, obrigatoriedade por variante, mapa CST -> grupo, com rastreabilidade (arquivo + linha) exigida pela RN05
@@ -518,7 +558,6 @@ vazia" — premissa que o `cBenef` desmentiu —, perguntamos ao XSD.
 - [ ] Ampliar `catalogo_erros.py` com mais campos específicos (hoje cobre os campos mais críticos de ICMS/IPI/PIS/COFINS, identificação e totais — o fallback genérico cobre o restante, mas com menos precisão)
 - [ ] Obrigatoriedade condicional que o XSD **não** contém e exige o MOC/Notas Técnicas: aritmética de totais, CST x CRT (regime do emitente), CFOP x UF, validade do NCM contra a tabela real, e CST de IBS/CBS (o `TCST` em `DFeTiposBasicos_v1.00.xsd` é só `pattern="\d{3}"`, sem enumeração — qualquer lista aqui seria invenção, RN05)
 - [ ] Validar assinatura digital e demais grupos (transporte, cobrança, etc.), se entrarem no escopo
-- [ ] Interface com upload por arrastar-e-soltar (drag-and-drop) — frente planejada, especificada em `spec-ui-drag-and-drop.md` na raiz do projeto
 
 ## Observação importante sobre o XSD
 

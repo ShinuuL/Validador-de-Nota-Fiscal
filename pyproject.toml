@@ -13,11 +13,12 @@ dependencies = ["lxml>=5.0"]
 [project.scripts]
 nfe-validator = "nfe_validator.__main__:main"
 nfe-validator-dd = "nfe_validator.gerador_dd:main"
+nfe-validator-web = "nfe_validator.web.servidor:main"
 
 [tool.setuptools]
 # Sem descoberta automática: `tests` e a raiz do projeto não são pacotes, e
 # `find` acabaria empacotando coisa errada.
-packages = ["nfe_validator", "nfe_validator.regras"]
+packages = ["nfe_validator", "nfe_validator.regras", "nfe_validator.web"]
 
 [tool.setuptools.package-data]
 # Os .xsd são PARTE DA ENTREGA, não artefato de build.
@@ -28,7 +29,16 @@ packages = ["nfe_validator", "nfe_validator.regras"]
 # descrições oficiais de campo. É uma falha plausível e invisível, então o
 # glob abaixo é recursivo de propósito, para pegar qualquer versão/tipo novo
 # que apareça em schemas/v{versao}/{tipo}/ sem precisar editar este arquivo.
-nfe_validator = ["schemas/**/*.xsd", "schemas/**/*.md"]
+nfe_validator = [
+    "schemas/**/*.xsd",
+    "schemas/**/*.md",
+    "schemas/**/*.txt",
+    # A UI é servida do disco pelo próprio pacote: sem estes arquivos, o
+    # servidor sobe e devolve ESTATICO-AUSENTE em toda requisição.
+    "web/estatico/*.html",
+    "web/estatico/*.css",
+    "web/estatico/*.js",
+]
 
 [tool.setuptools.exclude-package-data]
 nfe_validator = ["**/__pycache__/*"]

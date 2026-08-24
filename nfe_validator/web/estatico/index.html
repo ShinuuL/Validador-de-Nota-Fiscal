@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validador de NF-e / NFC-e</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<header class="topo">
+  <h1>Validador de NF-e / NFC-e</h1>
+  <p class="subtitulo">
+    Descubra <strong>por que a SEFAZ rejeitaria</strong> a nota, campo por campo.
+  </p>
+</header>
+
+<main>
+
+  <!-- ================= ENTRADA ================= -->
+  <section id="painel-entrada" aria-labelledby="titulo-entrada">
+    <h2 id="titulo-entrada" class="oculto-visual">Enviar documento</h2>
+
+    <!-- RF-UI01/RF-UI02, RNF-UI02: div com role=button para ser alcançável e
+         acionável por teclado (Enter/Espaço), não só por mouse. -->
+    <div id="area-drop"
+         class="area-drop"
+         role="button"
+         tabindex="0"
+         aria-describedby="dica-drop">
+      <svg class="icone-drop" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 16V4m0 0L8 8m4-4 4 4" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <p class="area-drop-titulo">Arraste seu XML aqui</p>
+      <p id="dica-drop" class="area-drop-dica">
+        ou clique para selecionar um arquivo (.xml, até 5 MB)
+      </p>
+    </div>
+
+    <input type="file" id="seletor-arquivo" accept=".xml,text/xml,application/xml" hidden>
+
+    <p class="alternativa">
+      <button type="button" id="btn-alternar-texto" class="link">
+        colar XML como texto
+      </button>
+    </p>
+
+    <!-- RN-UI03/RF-UI03 -->
+    <div id="painel-texto" class="painel-texto" hidden>
+      <label for="area-texto">Cole aqui o conteúdo do XML</label>
+      <textarea id="area-texto" rows="10" spellcheck="false"
+                placeholder="&lt;NFe xmlns=&quot;http://www.portalfiscal.inf.br/nfe&quot;&gt;..."></textarea>
+      <div class="acoes">
+        <button type="button" id="btn-validar-texto" class="primario">
+          Validar texto colado
+        </button>
+        <button type="button" id="btn-cancelar-texto" class="secundario">
+          Cancelar
+        </button>
+      </div>
+    </div>
+
+    <!-- RF-UI04: nome e tamanho antes de confirmar -->
+    <div id="arquivo-escolhido" class="arquivo-escolhido" hidden>
+      <span class="rotulo">Arquivo:</span>
+      <span id="arquivo-nome" class="nome"></span>
+      <span id="arquivo-tamanho" class="tamanho"></span>
+      <button type="button" id="btn-validar-arquivo" class="primario">Validar</button>
+      <button type="button" id="btn-descartar-arquivo" class="secundario">Trocar</button>
+    </div>
+
+    <!-- RN-UI04: recusa no cliente (extensão/tamanho/vazio) -->
+    <p id="aviso-cliente" class="aviso-cliente" role="alert" hidden></p>
+  </section>
+
+  <!-- ================= CARREGANDO (RN-UI05/RF-UI05) ================= -->
+  <section id="painel-carregando" class="painel-carregando" hidden
+           aria-live="polite" aria-busy="true">
+    <div class="girador" aria-hidden="true"></div>
+    <p>Validando <span id="carregando-nome"></span>…</p>
+    <p class="carregando-detalhe">
+      Conferindo schema oficial e as regras de negócio.
+    </p>
+  </section>
+
+  <!-- ================= FALHA DE COMUNICAÇÃO (RF-UI11) ================= -->
+  <section id="painel-falha" class="painel-falha" hidden role="alert">
+    <h2>Não foi possível falar com o validador</h2>
+    <p id="falha-mensagem"></p>
+    <div class="acoes">
+      <button type="button" id="btn-tentar-novamente" class="primario">
+        Tentar novamente
+      </button>
+      <button type="button" id="btn-voltar-falha" class="secundario">
+        Escolher outro documento
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= RESULTADO ================= -->
+  <section id="painel-resultado" hidden aria-live="polite">
+
+    <!-- RN-UI06/RF-UI06: status em destaque, sem precisar rolar -->
+    <div id="faixa-status" class="faixa-status">
+      <div class="faixa-status-principal">
+        <span id="status-icone" class="status-icone" aria-hidden="true"></span>
+        <div>
+          <p id="status-texto" class="status-texto"></p>
+          <p id="status-resumo" class="status-resumo"></p>
+        </div>
+      </div>
+      <button type="button" id="btn-validar-outro" class="secundario">
+        Validar outro documento
+      </button>
+    </div>
+
+    <dl id="metadados" class="metadados"></dl>
+
+    <div class="acoes-resultado">
+      <button type="button" id="btn-copiar-json" class="secundario">
+        Copiar JSON do resultado
+      </button>
+      <span id="aviso-copia" class="aviso-copia" role="status"></span>
+    </div>
+
+    <!-- RF-UI07 -->
+    <section id="bloco-erros" hidden>
+      <h2 id="titulo-erros" class="titulo-lista erro"></h2>
+      <ul id="lista-erros" class="lista-itens"></ul>
+    </section>
+
+    <!-- RF-UI08 / RN-UI08 -->
+    <section id="bloco-avisos" hidden>
+      <h2 id="titulo-avisos" class="titulo-lista aviso"></h2>
+      <ul id="lista-avisos" class="lista-itens"></ul>
+    </section>
+
+    <p id="sem-problemas" class="sem-problemas" hidden>
+      Nenhum erro ou aviso encontrado. O documento passou em todas as
+      verificações aplicadas.
+    </p>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <p>
+    Nada é enviado para fora desta máquina e nada fica salvo: o XML é validado
+    localmente e descartado ao recarregar a página.
+  </p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
