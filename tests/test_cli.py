@@ -10,6 +10,7 @@ Rodar com:
     python -m unittest discover -s tests -p "test_*.py" -v
 """
 
+import codecs
 import csv
 import io
 import subprocess
@@ -25,6 +26,19 @@ def _rodar(*argumentos: str, entrada: str | None = None) -> subprocess.Completed
     return subprocess.run(
         [sys.executable, "-m", "nfe_validator", *argumentos],
         cwd=RAIZ, input=entrada, capture_output=True, text=True, encoding="utf-8",
+    )
+
+
+def _rodar_bruto(*argumentos: str) -> subprocess.CompletedProcess:
+    """Igual a `_rodar`, mas devolve os BYTES da saída, sem decodificar.
+
+    `_rodar` decodifica como UTF-8, então um dia em que o CLI voltasse a
+    escrever em cp1252 o teste morreria com UnicodeDecodeError na thread
+    leitora e `stdout` chegaria como `None` - erro confuso, longe da causa.
+    Quem quer afirmar coisas sobre a codificação precisa ver o byte."""
+    return subprocess.run(
+        [sys.executable, "-m", "nfe_validator", *argumentos],
+        cwd=RAIZ, capture_output=True,
     )
 
 
@@ -145,6 +159,40 @@ class TesteOutrosModos(unittest.TestCase):
     def test_sem_xsd_avisa_que_o_relatorio_esta_incompleto(self):
         r = _rodar(str(FIXTURE), "--sem-xsd")
         self.assertIn("XSD", r.stdout)
+
+
+class TesteCodificacaoDaSaida(unittest.TestCase):
+    """A saída redirecionada tem que ser UTF-8 em qualquer plataforma.
+
+    No Windows, stdout redirecionado (pipe, `> arquivo`) usa a codificação do
+    locale - cp1252. Como todo o relatório é em português, o texto saía com
+    acento quebrado, e um caractere fora do cp1252 derrubava o comando com
+    UnicodeEncodeError no meio da impressão. Só o modo CSV reconfigurava."""
+
+    def test_relatorio_redirecionado_sai_em_utf8(self):
+        bruto = _rodar_bruto(str(FIXTURE)).stdout
+        try:
+            texto = bruto.decode("utf-8")
+        except UnicodeDecodeError as erro:
+            self.fail(f"stdout não é UTF-8 válido: {erro}")
+        # Sem acento no meio, o teste passaria mesmo com a saída em ASCII puro
+        # e não provaria nada.
+        self.assertIn("Situação", texto)
+
+    def test_json_redirecionado_sai_em_utf8(self):
+        bruto = _rodar_bruto(str(FIXTURE), "--json").stdout
+        try:
+            bruto.decode("utf-8")
+        except UnicodeDecodeError as erro:
+            self.fail(f"--json não é UTF-8 válido: {erro}")
+
+    def test_csv_mantem_o_bom_que_o_excel_precisa(self):
+        """O UTF-8 global de `main()` não pode ter comido o BOM do CSV."""
+        bruto = _rodar_bruto(str(FIXTURE), "--csv").stdout
+        self.assertTrue(
+            bruto.startswith(codecs.BOM_UTF8),
+            "CSV sem BOM: o Excel em português mostra os acentos quebrados",
+        )
 
 
 if __name__ == "__main__":
