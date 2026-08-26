@@ -1,0 +1,92 @@
+VALIDADOR DE NF-e / NFC-e
+=========================
+
+Este arquivo acompanha o nfe-validator.exe quando ele e enviado para alguem
+usar. E escrito para quem NAO programa: nao precisa de Python, nao precisa de
+linha de comando, nao precisa instalar nada.
+
+
+COMO USAR
+---------
+
+1. Extraia o ZIP para uma pasta do seu computador.
+
+   Nao rode o programa de dentro do ZIP. Clique com o botao direito no arquivo
+   .zip -> "Extrair tudo".
+
+2. Da dois cliques em  nfe-validator.exe
+
+3. Na primeira vez o Windows costuma avisar:
+
+     "O Windows protegeu seu PC"
+
+   Isso NAO significa virus. Aparece porque o programa nao tem assinatura
+   digital paga. Para continuar:
+
+     clique em "Mais informacoes"  ->  "Executar assim mesmo"
+
+4. Vai abrir uma JANELA PRETA e, alguns segundos depois, o navegador.
+
+   A janela preta e o proprio validador. NAO FECHE ela enquanto estiver
+   usando - se fechar, a pagina no navegador para de funcionar.
+
+5. Arraste o arquivo XML para a area indicada na pagina, ou clique nela para
+   escolher o arquivo.
+
+6. Terminou? Feche a janela preta.
+
+
+O QUE ELE VALIDA
+----------------
+
+A nota (NF-e modelo 55 e NFC-e modelo 65) e tambem os documentos que vem
+depois dela:
+
+  - cancelamento, carta de correcao, manifestacao do destinatario
+  - consulta de situacao da nota
+  - inutilizacao de faixa de numeracao
+  - consulta cadastro de contribuinte
+  - retornos de lote
+  - distribuicao de DF-e (notas em que a empresa e destinataria)
+
+Nao precisa dizer qual e: o validador reconhece pelo proprio arquivo.
+
+
+PERGUNTAS COMUNS
+----------------
+
+"Ele manda meu XML para a internet?"
+
+  Nao. Tudo roda na sua maquina. O endereco 127.0.0.1 que aparece no navegador
+  e a propria maquina - nada sai dela. Isso e proposital: o XML tem CNPJ,
+  valores e dados de cliente.
+
+"Abriu a pagina e nao fez nada."
+
+  Correto. Ele espera voce arrastar um arquivo. Nao valida nada sozinho.
+
+"O antivirus bloqueou."
+
+  Acontece com programas gerados dessa forma. Fale com o TI e peca para
+  liberar o arquivo. Nao baixe o programa de outro lugar.
+
+"Diz que a porta esta ocupada."
+
+  O validador ja esta aberto em outra janela. Use a janela que ja existe.
+
+"Fechei a janela preta sem querer."
+
+  Da dois cliques no nfe-validator.exe de novo.
+
+
+PARA QUEM VAI USAR NO ERP OU EM SCRIPT
+--------------------------------------
+
+O mesmo .exe funciona por linha de comando. Codigo de saida 0 = valido,
+1 = reprovado, 2 = erro de uso.
+
+  nfe-validator.exe nota.xml
+  nfe-validator.exe nota.xml --json
+  nfe-validator.exe nota.xml --csv        (abre no Excel em portugues)
+  nfe-validator.exe pasta --lote
+  nfe-validator.exe --help

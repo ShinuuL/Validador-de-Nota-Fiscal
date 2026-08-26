@@ -142,6 +142,35 @@ def main(argumentos: list[str] | None = None) -> None:
     # e-mail não é lugar de expor isso na rede por um erro de digitação. Quem
     # precisa escutar fora da máquina usa `nfe-validator-web --host`, onde a
     # escolha é explícita e vem com aviso.
+    # Sem isso, NADA do que segue aparece quando a saída é redirecionada: o
+    # stdout de um processo cujo destino não é console é bufferizado em bloco, e
+    # `serve_forever()` bloqueia para sempre logo abaixo - o buffer só seria
+    # despejado no encerramento. Vale para o aviso daqui e para o endereço que
+    # o `servir()` imprime, que é justamente o que alguém quer ver ao rodar o
+    # .exe com a saída em arquivo (serviço, agendador, log).
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+    except (AttributeError, ValueError, OSError):
+        pass
+
+    # Aviso antes de servir, e não depois: `serve_forever()` bloqueia, então
+    # qualquer coisa impressa depois só apareceria no encerramento.
+    #
+    # O `servir()` já imprime o endereço e "Ctrl+C para encerrar", que é
+    # linguagem de quem vive no terminal. Quem recebeu este .exe por e-mail vê
+    # uma janela preta e não tem motivo para saber que fechá-la derruba o
+    # validador no meio do uso - a página no navegador simplesmente para de
+    # responder, e o erro que aparece é "o validador não respondeu".
+    print()
+    print("=" * 62)
+    print("  NAO FECHE ESTA JANELA enquanto estiver usando o validador.")
+    print("  Ela e o proprio validador: a pagina no navegador para de")
+    print("  funcionar se ela for fechada.")
+    print()
+    print("  Terminou? Feche esta janela para encerrar.")
+    print("=" * 62)
+    print()
+
     try:
         servir(host="127.0.0.1", porta=porta, abrir_navegador=True)
     except OSError as erro:
