@@ -20,6 +20,12 @@ htmlcov/
 *.swp
 .claude/settings.local.json
 
+# Pacotes de Liberação (PL) baixados do portal da SEFAZ, descompactados na
+# raiz para conferência. São a FONTE de onde os .xsd saem, não a entrega: o que
+# vale é o que foi copiado para nfe_validator/schemas/. Ficam de fora para a
+# raiz não acumular 400 KB de XSD duplicado por pacote conferido.
+/PL_*/
+
 # ATENÇÃO: os .xsd oficiais em schemas/ NÃO entram aqui.
 # A RN05 exige que o sistema valide contra os arquivos reais da SEFAZ, e o
 # validador degrada para o aviso XSD-INDISPONIVEL sem eles. Eles são parte da

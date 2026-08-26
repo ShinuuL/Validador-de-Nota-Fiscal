@@ -1,16 +1,27 @@
-Coloque aqui os XSDs oficiais de NFC-e (modelo 65) da versao 4.00.
+XSDs oficiais de NFC-e (modelo 65), versao 4.00 - INSTALADOS.
 
-Esta pasta esta VAZIA de proposito: a SEFAZ nao publica um leiaute separado
-para NFC-e, e este projeto ainda nao tem o pacote proprio instalado. Enquanto
-estiver assim, uma NFC-e recebe o aviso XSD-INDISPONIVEL e roda apenas as
-regras de negocio (RN08..RN19), sem validacao estrutural.
+Copia byte-a-byte dos arquivos de ../nfe/, com UMA unica alteracao: o NOME do
+arquivo de entrada.
 
-O ponto de entrada esperado e "nfce_v4.00.xsd" (ver ARQUIVOS_ENTRADA em
-nfe_validator/schema.py). A RN05 exige o arquivo oficial da SEFAZ/ENCAT: nao
-recrie o schema a mao.
+  nfe_v4.00.xsd  ->  nfce_v4.00.xsd
 
-Alternativa ja implementada, desligada por padrao: layout.carregar_modelo com
-permitir_leiaute_equivalente=True faz a NFC-e usar o leiaute de NF-e da MESMA
-versao apenas para TEXTO EXPLICATIVO de campo - nunca para validar. O default
-e False porque, se a SEFAZ publicar um leiaute de NFC-e divergente, o
-emprestimo passaria a explicar campos com o documento errado, em silencio.
+Esse arquivo so declara <xs:element name="NFe" type="TNFe"> mais um xs:include
+relativo; o nome do arquivo nao aparece dentro dele. O conteudo de nenhum XSD
+foi tocado (RN05). Todos os arquivos tem que ficar nesta mesma pasta, porque os
+xs:include sao relativos.
+
+POR QUE COPIAR DE ../nfe/ E NAO DE UM PACOTE BAIXADO
+A SEFAZ nao publica leiaute separado para NFC-e: o mesmo leiauteNFe_v4.00.xsd
+cobre modelo 55 e 65, e a diferenca e operacional (ide/mod, indPres, regras de
+destinatario), nao de schema. E o conjunto de ../nfe/ e o mais NOVO que o
+projeto tem - mais novo que os pacotes PL_010b_NT2025_002_v1.30 e
+PL_010c_NT2022_002v1.30 baixados do portal. Ver a analise no README.md da pasta
+schemas/.
+
+Historico: esta pasta recebeu primeiro o PL_010b (2026-08-25) e no dia seguinte
+foi promovida para o conjunto de ../nfe/, ao se descobrir que os pacotes
+baixados eram mais antigos.
+
+O emprestimo de leiaute (layout.carregar_modelo com
+permitir_leiaute_equivalente=True) se desliga sozinho quando existe .xsd aqui -
+ja e o caso, entao ele nao esta mais em uso.

@@ -52,8 +52,10 @@ ARQUIVOS_ENTRADA = {
 #
 # Com estes arquivos instalados, validamos o envelope INTEIRO — inclusive o
 # protNFe — em vez de extrair a <NFe> e ignorar o resto.
+# A raiz <NFe> nua fica de FORA deste mapa de proposito: o nome do XSD de
+# entrada dela varia por tipo de documento (nfe_ x nfce_), entao quem resolve e
+# ARQUIVOS_ENTRADA. Fixa-la aqui apontaria a NFC-e para "nfe_v4.00.xsd".
 ENTRADA_POR_RAIZ = {
-    "NFe": "nfe_v{versao}.xsd",
     "enviNFe": "enviNFe_v{versao}.xsd",
     "nfeProc": "procNFe_v{versao}.xsd",
     "retEnviNFe": "retEnviNFe_v{versao}.xsd",
