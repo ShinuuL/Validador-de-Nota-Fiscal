@@ -281,11 +281,22 @@ async function enviar(conteudo, rotulo) {
     renderizar(dados);
   } catch (erro) {
     if (erro.name === "AbortError") {
-      mostrarFalha(`A validação passou de ${TEMPO_LIMITE / 1000} segundos e foi `
-                 + "interrompida. Se o XML é muito grande, tente pela linha de comando.");
+      // Duas causas levam ao mesmo tempo esgotado, e culpar só o tamanho do XML
+      // manda quem caiu na outra procurar no lugar errado: um XML enorme
+      // realmente demora, mas a janela do validador ter sido fechada (ou uma
+      // instância velha ter ficado presa na porta) dá exatamente este sintoma -
+      // a página fica em "Validando…" até o tempo limite.
+      mostrarFalha(`A validação passou de ${TEMPO_LIMITE / 1000} segundos sem `
+                 + "resposta. Confirme que a janela do validador continua aberta; "
+                 + "se ela foi fechada, abra o validador de novo. Se o XML é muito "
+                 + "grande, vale tentar pela linha de comando.");
     } else {
-      mostrarFalha("O validador não respondeu. Confirme que o servidor está no ar "
-                 + "(o terminal onde você rodou 'nfe-validator-web' deve estar aberto).");
+      // "o terminal onde você rodou 'nfe-validator-web'" não quer dizer nada
+      // para quem recebeu o .exe e nunca abriu um terminal. O que essa pessoa
+      // vê é a janela preta que abriu junto.
+      mostrarFalha("O validador não respondeu. A janela do validador precisa "
+                 + "continuar aberta enquanto você usa esta página — se ela foi "
+                 + "fechada, abra o validador de novo.");
     }
   } finally {
     clearTimeout(relogio);
