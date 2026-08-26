@@ -119,6 +119,7 @@ dependências ao lado:
 | `v4.00/inutnfe/` | `ProcInutNFe` | inutilização de faixa de numeração |
 | `v2.00/conscad/` | `ConsCad`, `retConsCad` | consulta cadastro de contribuinte |
 | `v4.00/nfe/`, `v4.00/nfce/` | `retConsReciNFe` | retorno do recibo do lote |
+| `v1.01/distdfe/` | `distDFeInt`, `retDistDFeInt`, `resNFe`, `resEvento` | distribuição de DF-e (notas em que a empresa é destinatária) |
 
 O `retConsReciNFe_v4.00.xsd` **não** ganhou pasta própria: ele inclui o
 `leiauteNFe` completo, então foi para a pasta da nota, ao lado de `enviNFe` e
@@ -128,6 +129,32 @@ própria, levaria consigo o leiaute mais antigo do `010d`.
 O `tiposBasico_v4.00.xsd` da pasta `Evento/` do pacote ficou de fora: o
 `leiauteEvento` inclui o `v1.03`, não o `v4.00`, então lá ele não é alcançado
 por nenhum ponto de entrada.
+
+### O pacote de distribuição de DF-e (`PL_NFeDistDFe_104`)
+
+Instalado em `v1.01/distdfe/`. É por essa via que o ERP recebe as notas em que a
+empresa é **destinatária**, e é o que mais enche a pasta do ERP — o retorno vem
+com resumos (`resNFe`, `resEvento`) em vez do documento inteiro.
+
+**O pacote vem incompleto.** Ele não traz o `xmldsig-core-schema_v1.01.xsd`,
+mas `resNFe_v1.01.xsd` e `resEvento_v1.01.xsd` o incluem — e o `resNFe`
+realmente precisa dele, para o tipo `ds:DigestValueType` do campo `digVal`. Sem
+ele o schema **não compila**:
+
+```
+element decl. 'digVal', attribute 'type': The QName value
+'{http://www.w3.org/2000/09/xmldsig#}DigestValueType' does not resolve
+to a(n) type definition., line 65
+```
+
+Foi suprido com a cópia que o projeto já tinha. Isso é seguro e conferível: as
+oito cópias de `xmldsig-core-schema_v1.01.xsd` presentes no projeto e nos
+pacotes baixados têm **o mesmo md5** e 3.747 bytes — é o schema do W3C, com
+data de 2013, e não muda entre pacotes da SEFAZ.
+
+O `resEvento` compilava mesmo sem o arquivo porque não referencia nenhum tipo
+do `ds:` — o `xs:include` perdido passava como aviso. Não confie nisso: um
+`xs:include` que não resolve é um schema pela metade.
 
 ### Por que `tiposBasico` e `xmldsig` aparecem duplicados
 

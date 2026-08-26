@@ -25,7 +25,7 @@ from typing import Optional
 from lxml import etree
 
 from . import servicos
-from .catalogo_erros import montar_explicacao
+from .catalogo_erros import ContextoDocumento, montar_explicacao
 from .localizacao import caminho_legivel, localizar
 
 # Os XSDs moram DENTRO do pacote (não ao lado dele) para viajarem no
@@ -390,6 +390,17 @@ def validar_contra_xsd(xml_doc: etree._ElementTree, tipo_documento: str, versao:
         schema = carregar_schema(tipo_documento, versao)
         xml_doc = _desembrulhar_envelope(xml_doc)
 
+    # Contexto do documento, montado uma vez: leva as mensagens ao leiaute
+    # certo (um evento não tem `cOrgao` no leiauteNFe) e faz o texto genérico
+    # dizer "A SEFAZ rejeita o evento" em vez de "a nota".
+    servico = servicos.SERVICOS.get(raiz)
+    contexto_documento = ContextoDocumento(
+        tipo=servico.tipo if servico else tipo_documento,
+        versao=versao,
+        raiz=raiz,
+        substantivo=servico.substantivo if servico else "a nota",
+    )
+
     erros: list[dict] = []
 
     if schema.validate(xml_doc):
@@ -424,6 +435,7 @@ def validar_contra_xsd(xml_doc: etree._ElementTree, tipo_documento: str, versao:
             localizacao=loc,
             valor=analise["valor"],
             esperado=analise["esperado"],
+            documento=contexto_documento,
         )
 
         erros.append({

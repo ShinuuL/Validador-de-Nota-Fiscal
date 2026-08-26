@@ -155,27 +155,19 @@ def coletar(origem: str | Path, recursivo: bool = True) -> Iterator[XmlColetado]
                 yield from extrair_xmls_do_log(texto, str(alvo))
 
 
-# Raízes de DFe que este validador NÃO cobre. A pasta do ERP guarda tudo junto,
-# e chamar de "nota inválida" um arquivo que não é nota seria ruído, não achado.
+# Raízes de DFe que este validador NÃO cobre — hoje, nenhuma.
 #
-# Esta lista era bem maior. Eventos, inutilização e retorno de consulta de
-# situação saíram dela quando o roteamento por família passou a existir (ver
-# `servicos`): eram pulados porque o validador não sabia validá-los, não porque
-# não interessassem — um cancelamento rejeitado é exatamente o tipo de coisa que
-# se quer achar numa varredura da pasta do ERP.
+# Esta lista já teve nove entradas. Todas saíram, e por motivos diferentes:
+# eventos, inutilização e retorno de consulta de situação eram pulados porque o
+# validador não sabia validá-los (ver `servicos`), não porque não
+# interessassem; os resumos e o retorno do distribuiçãoDFe saíram quando o
+# pacote PL_NFeDistDFe_104 foi instalado.
 #
-# O que sobrou tem um motivo comum: não há XSD instalado para essas raízes. Os
-# resumos e o retorno do distribuiçãoDFe vêm no pacote do DistDFeInt, e o
-# status do serviço no de ConsStatServ — nenhum dos dois foi baixado. Instalar
-# esses pacotes e registrar as raízes em `servicos` é o que tira cada linha
-# daqui; até então, dizer "fora de escopo" é mais honesto que validar contra o
+# Ficou vazia de propósito, e não foi removida: quando aparecer uma raiz de DF-e
+# sem XSD instalado, o lugar dela é aqui. Contá-la à parte é mais honesto que
+# reprovar o arquivo por uma falta nossa — e muito melhor que validar contra o
 # schema errado (RN15).
-RAIZES_FORA_DE_ESCOPO = {
-    "resNFe": "resumo de NF-e do distribuiçãoDFe",
-    "resEvento": "resumo de evento do distribuiçãoDFe",
-    "retDistDFeInt": "retorno do distribuiçãoDFe",
-    "retConsStatServ": "retorno de status do serviço",
-}
+RAIZES_FORA_DE_ESCOPO: dict[str, str] = {}
 
 
 def _raiz_de(conteudo: str) -> Optional[str]:

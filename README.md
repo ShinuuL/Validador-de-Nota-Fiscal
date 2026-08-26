@@ -411,6 +411,8 @@ nunca se propôs a ser.
 | `Inutilizacao` | `ProcInutNFe` | 4.00 | `v4.00/inutnfe/` |
 | `ConsultaCadastro` | `ConsCad`, `retConsCad` | 2.00 | `v2.00/conscad/` |
 | `RetornoLote` / `RetornoRecibo` | `retEnviNFe`, `retConsReciNFe` | 4.00 | `v4.00/nfe/` |
+| `DistribuicaoDFe` | `distDFeInt`, `retDistDFeInt` | 1.01 | `v1.01/distdfe/` |
+| `ResumoNFe` / `ResumoEvento` | `resNFe`, `resEvento` | 1.01 | `v1.01/distdfe/` |
 
 ```
 $ python -m nfe_validator cancelamento.xml
@@ -437,6 +439,28 @@ Consequência disso: **sem o XSD instalado, um documento de serviço não pode s
 declarado válido.** Na nota, `aplicar_xsd=False` ainda deixa as regras de
 negócio rodando e elas sustentam um veredito; aqui não sobraria conferência
 nenhuma, e dizer "válido" seria afirmar algo que não foi verificado.
+
+### A mensagem fala do documento que você abriu
+
+Duas coisas dependiam do tipo de documento e eram, por padrão, sobre a nota:
+
+- **A descrição oficial do campo** vinha sempre do `leiauteNFe`. Um erro em
+  `cOrgao` de um evento caía no texto genérico, porque o campo não existe no
+  leiaute da nota. Agora o `layout` é consultado no leiaute da família, e a
+  mensagem cita a documentação da SEFAZ literalmente:
+
+  > O layout oficial define `cOrgao` como: *"Código do órgão de recepção do
+  > Evento. Utilizar a Tabela do IBGE extendida, utilizar 90 para identificar o
+  > Ambiente Nacional"*. Sem essa informação a SEFAZ não consegue processar o
+  > evento.
+
+- **O texto genérico dizia "A SEFAZ rejeita a nota"** mesmo num cancelamento.
+  Cada família tem seu substantivo (`servicos.py`), já com o artigo colado —
+  "o evento", "a consulta", "o resumo" —, então a frase sai com o gênero certo
+  sem precisar de concordância no código.
+
+Isso também vale para a lista de valores aceitos num erro de enumeração: os
+rótulos oficiais agora vêm do leiaute da família certa.
 
 ### Duas coisas que o XSD do evento *não* confere
 
@@ -581,10 +605,11 @@ vazia" — premissa que o `cBenef` desmentiu —, perguntamos ao XSD.
 > juntos, e o modo `--lote` valida cada um contra o schema da sua própria
 > família — inclusive eventos e inutilizações (ver *Documentos de serviço*).
 >
-> Continuam *fora de escopo*, e são contados à parte em vez de reprovados,
-> apenas as raízes sem XSD instalado: `resNFe`, `resEvento`, `retDistDFeInt`
-> (pacote do distribuiçãoDFe) e `retConsStatServ`. Reprová-las seria culpar o
-> arquivo por uma falta nossa; validá-las contra outro schema seria pior (RN15).
+> A lista de raízes *fora de escopo* está **vazia**: as últimas — os resumos e o
+> retorno do distribuiçãoDFe — saíram quando o pacote `PL_NFeDistDFe_104` foi
+> instalado. A lista continua existindo porque é o lugar certo para uma raiz de
+> DF-e que apareça sem XSD: contá-la à parte é mais honesto que culpar o arquivo
+> por uma falta nossa, e muito melhor que validar contra o schema errado (RN15).
 
 > **Pacotes de leiaute.** O ERP usa `nfe_schemas/PL_010B_NT2025_002_v130`
 > (24 arquivos, com IBS/CBS da NT 2025.002) e tem os XSDs de envelope
@@ -621,9 +646,7 @@ vazia" — premissa que o `cBenef` desmentiu —, perguntamos ao XSD.
 
 - [ ] Aplicar o `enviNFe_v4.00.dd` no projeto do ERP (entrega para o outro dev — lá este projeto é somente leitura)
 - [ ] Gerar `.dd` para as outras raízes que o ERP valida (`consSitNFe`, `consReciNFe`, `inutNFe`) — o gerador já aceita a raiz como parâmetro, e agora os XSDs dessas raízes estão instalados
-- [ ] Instalar os pacotes que faltam para fechar o `--lote`: distribuiçãoDFe (`retDistDFeInt`, `resNFe`, `resEvento`) e status do serviço (`retConsStatServ`) — são as últimas raízes classificadas como *fora de escopo*
-- [ ] Descrições oficiais de campo para os documentos de serviço: `layout.py` só carrega o `leiauteNFe`, então um erro em `cOrgao` de evento cai no texto genérico ("exigido pelo layout da NF-e/NFC-e") em vez da documentação do `leiauteEvento`
-- [ ] Ajustar a consequência das mensagens por tipo de documento: `catalogo_erros.py` diz "A SEFAZ rejeita a nota" mesmo quando o documento é um evento
+- [ ] Instalar o pacote de **status do serviço** (`retConsStatServ`) — última raiz de DF-e conhecida sem XSD instalado
 - [ ] RF08 — validação em lote: `--lote` e `--csv` já cobrem pasta e log do ERP; falta paralelismo para volumes grandes
 - [ ] Ampliar `catalogo_erros.py` com mais campos específicos (hoje cobre os campos mais críticos de ICMS/IPI/PIS/COFINS, identificação e totais — o fallback genérico cobre o restante, mas com menos precisão)
 - [ ] Obrigatoriedade condicional que o XSD **não** contém e exige o MOC/Notas Técnicas: aritmética de totais, CST x CRT (regime do emitente), CFOP x UF, validade do NCM contra a tabela real, e CST de IBS/CBS (o `TCST` em `DFeTiposBasicos_v1.00.xsd` é só `pattern="\d{3}"`, sem enumeração — qualquer lista aqui seria invenção, RN05)

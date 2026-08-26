@@ -785,7 +785,8 @@ _TRAVA = threading.Lock()
 
 
 def carregar_modelo(tipo_documento: str = "NFe", versao: str = "4.00",
-                    permitir_leiaute_equivalente: bool = False) -> Optional[ModeloLeiaute]:
+                    permitir_leiaute_equivalente: bool = False,
+                    raiz: Optional[str] = None) -> Optional[ModeloLeiaute]:
     """Carrega (e cacheia) o modelo de leiaute. Devolve None se nao der.
 
     NUNCA levanta: este modulo e camada de enriquecimento, nao pode ser uma
@@ -794,8 +795,14 @@ def carregar_modelo(tipo_documento: str = "NFe", versao: str = "4.00",
     `permitir_leiaute_equivalente` deixa a NFC-e usar o leiaute da NF-e da
     MESMA versao, porque a SEFAZ nao publica um leiaute separado para mod 65.
     Vale so para TEXTO EXPLICATIVO: `schema.carregar_schema` continua exigindo
-    o XSD proprio e continua levantando SchemaIndisponivel (RN05/RN15)."""
-    chave = (tipo_documento, versao, permitir_leiaute_equivalente)
+    o XSD proprio e continua levantando SchemaIndisponivel (RN05/RN15).
+
+    `raiz` e a tag raiz do documento, e e obrigatoria para os documentos de
+    servico: e ela que diz qual arquivo de entrada usar. Sem ela,
+    `caminho_schema("Evento", "1.00")` devolve a PASTA v1.00/evento/ - nao ha
+    entrada por tipo para essas familias -, e o modelo saia vazio, jogando todo
+    erro de evento no texto generico."""
+    chave = (tipo_documento, versao, permitir_leiaute_equivalente, raiz)
     if chave in _MODELOS:
         return _MODELOS[chave]
 
@@ -807,10 +814,10 @@ def carregar_modelo(tipo_documento: str = "NFe", versao: str = "4.00",
 
         modelo: Optional[ModeloLeiaute] = None
         try:
-            entrada = caminho_schema(tipo_documento, versao)
+            entrada = caminho_schema(tipo_documento, versao, raiz)
             emprestado_de = None
 
-            if (not entrada.exists() and permitir_leiaute_equivalente
+            if (not entrada.is_file() and permitir_leiaute_equivalente
                     and tipo_documento != "NFe"):
                 # So empresta se a pasta propria nao tem NENHUM xsd: se a SEFAZ
                 # publicar um leiaute de NFC-e divergente, o emprestimo desliga
@@ -818,10 +825,13 @@ def carregar_modelo(tipo_documento: str = "NFe", versao: str = "4.00",
                 propria = entrada.parent
                 if not propria.exists() or not any(propria.glob("*.xsd")):
                     alternativa = caminho_schema("NFe", versao)   # mesma versao (RN15)
-                    if alternativa.exists():
+                    if alternativa.is_file():
                         entrada, emprestado_de = alternativa, "NFe"
 
-            if entrada.exists():
+            # is_file() e nao exists(): sem `raiz`, uma familia de servico
+            # resolve para o CAMINHO DA PASTA, que existe. Parsear a pasta
+            # levantaria - e o except cacharia None em silencio.
+            if entrada.is_file():
                 modelo = _construir_modelo(tipo_documento, versao, entrada, emprestado_de)
         except (SchemaIndisponivel, OSError, etree.LxmlError):
             modelo = None
@@ -844,23 +854,27 @@ def disponivel(tipo_documento: str = "NFe", versao: str = "4.00",
 
 def descricao_do_campo(tag: str, contexto: Optional[str] = None, *,
                        tipo_documento: str = "NFe", versao: str = "4.00",
-                       permitir_leiaute_equivalente: bool = False) -> Optional[Descricao]:
-    modelo = carregar_modelo(tipo_documento, versao, permitir_leiaute_equivalente)
+                       permitir_leiaute_equivalente: bool = False,
+                       raiz: Optional[str] = None) -> Optional[Descricao]:
+    modelo = carregar_modelo(tipo_documento, versao, permitir_leiaute_equivalente, raiz)
     return modelo.descricao_do_campo(tag, contexto) if modelo else None
 
 
 def enumeracao_de(tag: str, contexto: Optional[str] = None, *,
                   tipo_documento: str = "NFe", versao: str = "4.00",
-                  permitir_leiaute_equivalente: bool = False) -> tuple[ValorEnumerado, ...]:
-    modelo = carregar_modelo(tipo_documento, versao, permitir_leiaute_equivalente)
+                  permitir_leiaute_equivalente: bool = False,
+                  raiz: Optional[str] = None) -> tuple[ValorEnumerado, ...]:
+    modelo = carregar_modelo(tipo_documento, versao, permitir_leiaute_equivalente, raiz)
     return modelo.enumeracao_de(tag, contexto) if modelo else ()
 
 
 def legenda_de_valores(tag: str, contexto: Optional[str] = None, limite: int = 10, *,
-                       tipo_documento: str = "NFe", versao: str = "4.00") -> str:
+                       tipo_documento: str = "NFe", versao: str = "4.00",
+                       raiz: Optional[str] = None) -> str:
     """Lista os valores aceitos com o rotulo oficial, pronta para entrar no
     campo `esperado` de um erro de enumeracao."""
-    valores = enumeracao_de(tag, contexto, tipo_documento=tipo_documento, versao=versao)
+    valores = enumeracao_de(tag, contexto, tipo_documento=tipo_documento,
+                            versao=versao, raiz=raiz)
     if not valores:
         return ""
     mostrados = [str(v) for v in valores[:limite]]

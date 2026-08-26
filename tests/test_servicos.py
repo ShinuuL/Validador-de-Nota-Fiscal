@@ -38,6 +38,8 @@ class TesteRoteamentoPorRaiz(unittest.TestCase):
         ("inutilizacao_valida.xml", "Inutilizacao", "4.00"),
         ("retorno_lote_valido.xml", "RetornoLote", "4.00"),
         ("retorno_recibo_valido.xml", "RetornoRecibo", "4.00"),
+        ("resumo_nfe_valido.xml", "ResumoNFe", "1.01"),
+        ("distribuicao_dfe_valida.xml", "DistribuicaoDFe", "1.01"),
     ]
 
     def test_reconhece_familia_e_versao(self):
@@ -124,6 +126,10 @@ class TesteChaveReferenciada(unittest.TestCase):
         self.assertIsNone(_validar("inutilizacao_valida.xml")["chaveAcesso"])
         self.assertIsNone(_validar("consulta_cadastro_valida.xml")["chaveAcesso"])
 
+    def test_resumo_de_nota_de_terceiro_expoe_a_chave(self):
+        """O resumo do distribuiçãoDFe é sobre uma nota, e traz a chave dela."""
+        self.assertEqual(_validar("resumo_nfe_valido.xml")["chaveAcesso"], self.CHAVE)
+
     def test_lote_com_varias_notas_nao_escolhe_uma(self):
         """Com mais de uma chave, `None` é honesto e a primeira seria mentira.
 
@@ -194,6 +200,46 @@ class TesteSemXsd(unittest.TestCase):
         self.assertIn("9.99", r["avisos"][0]["motivo_rejeicao"])
 
 
+class TesteMensagemFalaDoDocumentoCerto(unittest.TestCase):
+    """Duas coisas que estavam erradas para tudo que não é nota."""
+
+    def setUp(self):
+        self.evento = _validar("evento_cancelamento_invalido.xml")
+        self.erro = next(e for e in self.evento["erros"] if e["campo"] == "cOrgao")
+
+    def test_descricao_vem_do_leiaute_da_familia(self):
+        """`cOrgao` não existe no leiauteNFe - a descrição tem que sair do
+        leiauteEvento, ou o erro cai no texto genérico.
+
+        A frase é citada entre aspas de propósito: quem lê precisa saber que é
+        texto da SEFAZ, não nosso (RN07).
+        """
+        por_que = self.erro["detalhe"]["porQueRejeita"]
+        self.assertIn("órgão de recepção do Evento", por_que)
+        self.assertEqual(self.erro["detalhe"]["fonte"], "xsd")
+
+    def test_nao_diz_que_a_sefaz_rejeita_a_nota(self):
+        """O documento é um evento; chamá-lo de "nota" confunde quem lê."""
+        for erro in self.evento["erros"]:
+            texto = erro["motivo_rejeicao"]
+            self.assertIn("o evento", texto)
+            self.assertNotIn("rejeita a nota", texto)
+            self.assertNotIn("processar a nota", texto)
+
+    def test_cada_familia_usa_o_proprio_substantivo(self):
+        # tpNF só aceita 0 e 1: força um erro de enumeração no resumo.
+        conteudo = (FIXTURES / "resumo_nfe_valido.xml").read_text(encoding="utf-8")
+        r = validar(conteudo.replace("<tpNF>1</tpNF>", "<tpNF>9</tpNF>"))
+        self.assertIn("processar o resumo", r["erros"][0]["motivo_rejeicao"])
+
+    def test_a_nota_continua_dizendo_nota(self):
+        """A correção não pode ter regredido o caminho principal."""
+        conteudo = (FIXTURES / "nfe_exemplo_invalida.xml").read_text(encoding="utf-8")
+        textos = " ".join(e["motivo_rejeicao"] for e in validar(conteudo)["erros"])
+        self.assertIn("a nota", textos)
+        self.assertNotIn("o evento", textos)
+
+
 class TesteRegistroDeServicos(unittest.TestCase):
     """O registro e os XSDs instalados têm que continuar batendo."""
 
@@ -205,6 +251,8 @@ class TesteRegistroDeServicos(unittest.TestCase):
         "ProcInutNFe": "4.00",
         "ConsCad": "2.00", "retConsCad": "2.00",
         "retEnviNFe": "4.00", "retConsReciNFe": "4.00",
+        "distDFeInt": "1.01", "retDistDFeInt": "1.01",
+        "resNFe": "1.01", "resEvento": "1.01",
     }
 
     def test_toda_raiz_do_registro_tem_xsd_instalado(self):

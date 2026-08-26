@@ -267,16 +267,18 @@ class TesteRevalidacaoEmLote(unittest.TestCase):
         self.assertEqual(resumo["foraDeEscopo"], 0)
         self.assertEqual(resumo["invalidos"], 1)
 
-    def test_resumo_do_distdfe_segue_fora_de_escopo(self):
-        """O que sobrou na lista tem um motivo só: não há XSD instalado.
+    def test_resumo_do_distdfe_tambem_e_validado(self):
+        """Última raiz a sair de RAIZES_FORA_DE_ESCOPO, que hoje está vazia.
 
-        O pacote do distribuiçãoDFe não foi baixado, então dizer "fora de
-        escopo" é mais honesto que validar contra o schema errado (RN15).
+        O resumo do distribuiçãoDFe era pulado porque o pacote
+        PL_NFeDistDFe_104 não estava instalado. Este `<resNFe>` só tem um
+        `<chNFe/>` vazio, faltando CNPJ, xNome, vNF e todo o resto - tem que
+        ser REPROVADO, não pulado.
         """
         self._escrever("resumo.xml", f'<resNFe {NS} versao="1.01"><chNFe/></resNFe>')
         resumo = resumir(revalidar(self.pasta))
-        self.assertEqual(resumo["foraDeEscopo"], 1)
-        self.assertEqual(resumo["invalidos"], 0)
+        self.assertEqual(resumo["foraDeEscopo"], 0)
+        self.assertEqual(resumo["invalidos"], 1)
 
     def test_valida_nota_e_agrega_por_codigo(self):
         self._escrever("nota.xml", _nfe_interna())

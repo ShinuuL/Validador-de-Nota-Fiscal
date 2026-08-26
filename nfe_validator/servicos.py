@@ -14,14 +14,14 @@ mensagem que culpa o arquivo por não ser algo que ele nunca se propôs a ser.
 
 Por que um registro e não `if` espalhado
 ----------------------------------------
-As onze raízes se distinguem por três coisas, e só três: a pasta de schema, o
+As quinze raízes se distinguem por três coisas, e só três: a pasta de schema, o
 arquivo de entrada e o nome que o relatório mostra. Nada de lógica por família.
 Um registro declarativo mantém isso conferível de bater o olho e faz a próxima
 raiz ser uma linha, não um `elif`.
 
 Onde a versão é lida
 --------------------
-No atributo `versao` da própria raiz — e isso vale para as onze, conferido nos
+No atributo `versao` da própria raiz — e isso vale para as quinze, conferido nos
 XSDs: todas declaram `<xs:attribute name="versao" use="required">` no tipo da
 raiz. É mais simples que na nota, onde a versão mora em `<infNFe versao=...>`
 (RN02). A RN14 continua valendo: a versão lida escolhe a pasta, e uma versão
@@ -45,11 +45,17 @@ class Servico(NamedTuple):
     `entrada` é o XSD que declara a raiz global — `{versao}` é substituído pela
     versão lida do XML, nunca fixado no código, senão a RN14 quebraria na
     próxima versão de layout.
+
+    `substantivo` é como as mensagens de erro chamam o documento no meio de uma
+    frase. Existe porque o texto genérico dizia "A SEFAZ rejeita a nota" mesmo
+    num cancelamento. Vem com o artigo colado ("o evento", "a consulta") para a
+    frase sair com o gênero certo sem precisar de concordância no código.
     """
     tipo: str
     rotulo: str
     entrada: str
     descricao: str
+    substantivo: str
 
 
 # Raiz do documento -> família. As chaves são o nome da tag raiz SEM namespace,
@@ -72,24 +78,29 @@ SERVICOS: dict[str, Servico] = {
     "envEvento": Servico(
         "Evento", "Evento", "envEvento_v{versao}.xsd",
         "lote de eventos que o ERP transmite à SEFAZ",
+        "o lote de eventos",
     ),
     "retEnvEvento": Servico(
         "Evento", "Evento", "retEnvEvento_v{versao}.xsd",
         "retorno da SEFAZ para um lote de eventos",
+        "o retorno do evento",
     ),
     "procEventoNFe": Servico(
         "Evento", "Evento", "procEventoNFe_v{versao}.xsd",
         "evento já registrado (evento + retorno), que é o arquivo a guardar",
+        "o evento",
     ),
 
     # Consulta da situação de uma nota (v4.00).
     "consSitNFe": Servico(
         "ConsSitNFe", "ConsultaSituacao", "consSitNFe_v{versao}.xsd",
         "pedido de consulta da situação de uma nota",
+        "a consulta",
     ),
     "retConsSitNFe": Servico(
         "ConsSitNFe", "ConsultaSituacao", "retConsSitNFe_v{versao}.xsd",
         "resposta da consulta de situação, com a nota e seus eventos",
+        "a resposta da consulta",
     ),
 
     # Inutilização de faixa de numeração (v4.00). Só a forma "processada"
@@ -98,6 +109,7 @@ SERVICOS: dict[str, Servico] = {
     "ProcInutNFe": Servico(
         "InutNFe", "Inutilizacao", "procInutNFe_v{versao}.xsd",
         "inutilização de faixa de numeração já homologada pela SEFAZ",
+        "a inutilização",
     ),
 
     # Consulta cadastro de contribuinte (v2.00). Versão de layout própria, e
@@ -105,10 +117,12 @@ SERVICOS: dict[str, Servico] = {
     "ConsCad": Servico(
         "ConsCad", "ConsultaCadastro", "consCad_v{versao}.xsd",
         "pedido de consulta ao cadastro de contribuinte",
+        "a consulta",
     ),
     "retConsCad": Servico(
         "ConsCad", "ConsultaCadastro", "retConsCad_v{versao}.xsd",
         "resposta da consulta ao cadastro de contribuinte",
+        "a resposta da consulta",
     ),
 
     # Retornos do lote (v4.00). O `tipo` aqui é "NFe" porque o XSD destes dois
@@ -120,10 +134,37 @@ SERVICOS: dict[str, Servico] = {
     "retEnviNFe": Servico(
         "NFe", "RetornoLote", "retEnviNFe_v{versao}.xsd",
         "retorno do envio do lote, com o recibo ou os protocolos",
+        "o retorno do lote",
     ),
     "retConsReciNFe": Servico(
         "NFe", "RetornoRecibo", "retConsReciNFe_v{versao}.xsd",
         "retorno da consulta do recibo do lote, com os protocolos das notas",
+        "o retorno do lote",
+    ),
+
+    # Distribuição de DF-e (v1.01). É por aqui que o ERP recebe as notas em que
+    # a empresa é DESTINATÁRIA, e é o que mais enche a pasta do ERP: o retorno
+    # vem com resumos (`resNFe`, `resEvento`) em vez do documento inteiro.
+    # Pacote próprio (PL_NFeDistDFe_104), versão de layout própria.
+    "distDFeInt": Servico(
+        "DistDFe", "DistribuicaoDFe", "distDFeInt_v{versao}.xsd",
+        "pedido de distribuição de DF-e de interesse da empresa",
+        "o pedido de distribuição",
+    ),
+    "retDistDFeInt": Servico(
+        "DistDFe", "DistribuicaoDFe", "retDistDFeInt_v{versao}.xsd",
+        "retorno da distribuição, com o lote de documentos e resumos",
+        "o retorno da distribuição",
+    ),
+    "resNFe": Servico(
+        "DistDFe", "ResumoNFe", "resNFe_v{versao}.xsd",
+        "resumo de uma nota em que a empresa é destinatária",
+        "o resumo",
+    ),
+    "resEvento": Servico(
+        "DistDFe", "ResumoEvento", "resEvento_v{versao}.xsd",
+        "resumo de um evento registrado em nota de terceiro",
+        "o resumo do evento",
     ),
 }
 
