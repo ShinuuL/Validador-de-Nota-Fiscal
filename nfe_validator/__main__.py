@@ -26,6 +26,11 @@ AJUDA = (
     "  --lote                 trata o caminho como pasta/log do ERP e revalida tudo\n"
     "                         (aceita os despejos de XML em out/monitor-nfe-*.out.txt\n"
     "                          e arquivos .xml soltos, inclusive envelopes nfeProc)\n"
+    "\n"
+    "Valida NF-e e NFC-e (nota nua, enviNFe, nfeProc) e tambem os documentos de\n"
+    "servico: eventos (cancelamento, CC-e, manifestacao), consulta de situacao,\n"
+    "inutilizacao de numeracao, consulta cadastro e retornos de lote. A familia e\n"
+    "reconhecida pela raiz do XML - nao ha opcao para escolher.\n"
 )
 
 OPCOES_VALIDAS = {"--json", "--csv", "--so-nao-preenchidos", "--sem-xsd", "--lote"}
@@ -159,7 +164,10 @@ def _escrever_csv(linhas: list[dict]) -> None:
 
     Usa `;` como separador e BOM UTF-8 porque o destino real é o Excel em
     português: com `,` ele joga tudo numa coluna só, e sem BOM os acentos
-    aparecem quebrados."""
+    aparecem quebrados.
+
+    Reconfigura por cima do UTF-8 que `main()` já pôs: aqui o que muda é o BOM
+    (`utf-8-sig`) e o `newline=""`, que o `csv` exige para não duplicar o ."""
     sys.stdout.reconfigure(encoding="utf-8-sig", newline="")
     escritor = csv.DictWriter(
         sys.stdout, fieldnames=list(COLUNAS_CSV),
@@ -240,7 +248,29 @@ def _rodar_lote(origem: str, como_json: bool, aplicar_xsd: bool,
     sys.exit(0 if resumo["invalidos"] == 0 else 1)
 
 
+def _forcar_utf8_na_saida() -> None:
+    """Garante UTF-8 no stdout/stderr antes de qualquer `print`.
+
+    No Windows, quando a saída é redirecionada (pipe, `> arquivo`), o Python
+    usa a codificação do locale - cp1252 aqui. Todo o relatório é em português:
+    o texto sai com acento quebrado e, num caractere fora do cp1252, o comando
+    ainda quebra com UnicodeEncodeError no meio da impressão. O caminho do CSV
+    já reconfigurava por conta própria (ele precisa do BOM); os outros modos -
+    relatório humano, `--json`, `--help` - não reconfiguravam nada.
+
+    `errors="replace"` é a rede de segurança: um caractere impossível vira `?`
+    em vez de derrubar o comando com o relatório pela metade."""
+    for fluxo in (sys.stdout, sys.stderr):
+        try:
+            fluxo.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError, OSError):
+            # stdout trocado por algo que não é TextIOWrapper (teste, captura
+            # de saída, embedding). Não é motivo para o comando falhar.
+            pass
+
+
 def main() -> None:
+    _forcar_utf8_na_saida()
     argumentos = sys.argv[1:]
 
     # `--help` pedido de propósito vai para o stdout e sai com 0; falta de

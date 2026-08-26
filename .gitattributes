@@ -1,0 +1,10 @@
+# Os .xsd sao os arquivos OFICIAIS da SEFAZ, byte-a-byte. A RN05 exige validar
+# contra o arquivo real publicado, e o conjunto em schemas/v4.00/nfe/ e
+# identico byte-a-byte ao pacote PL_010e_v1.02 - propriedade que da para
+# conferir com `cmp` e que so vale enquanto ninguem mexer nos bytes.
+#
+# Os arquivos da SEFAZ vem com CRLF. Com core.autocrlf=true (o padrao no
+# Windows), o git normalizaria para LF ao gravar e reescreveria na saida,
+# trocando 352.527 bytes por 344.810 - o `cmp` passaria a falhar e a origem do
+# arquivo deixaria de ser verificavel. `-text` desliga qualquer conversao.
+*.xsd -text

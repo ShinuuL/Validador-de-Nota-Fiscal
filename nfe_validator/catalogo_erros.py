@@ -28,7 +28,7 @@ nunca sobra erro "cru" para o usuário.
 """
 
 from dataclasses import dataclass
-from typing import Optional
+from typing import NamedTuple, Optional
 
 from .localizacao import Localizacao
 
@@ -407,7 +407,8 @@ def explicacao_generica(tipo_violacao: str, campo: str, valor: str = "", esperad
 
 
 def _descricao_oficial(tag: str, contexto: Optional[str],
-                       localizacao: Optional[Localizacao]):
+                       localizacao: Optional[Localizacao],
+                       documento: Optional["ContextoDocumento"] = None):
     """Busca a descrição oficial do campo no XSD, tolerando XSD ausente.
 
     Tenta o contexto mais específico primeiro (o grupo imediato, ex. ICMS00),
@@ -423,15 +424,21 @@ def _descricao_oficial(tag: str, contexto: Optional[str],
         candidatos.append(contexto)
     candidatos.append(None)
 
+    alvo = {}
+    if documento is not None and documento.tipo and documento.versao:
+        alvo = {"tipo_documento": documento.tipo, "versao": documento.versao,
+                "raiz": documento.raiz}
+
     for candidato in candidatos:
-        descricao = layout.descricao_do_campo(tag, candidato)
+        descricao = layout.descricao_do_campo(tag, candidato, **alvo)
         if descricao is not None:
             return descricao
     return None
 
 
 def _esperado_enriquecido(tipo_violacao: str, tag: str, contexto: Optional[str],
-                          esperado: str) -> str:
+                          esperado: str,
+                          documento: Optional["ContextoDocumento"] = None) -> str:
     """Para erro de enumeração, troca a lista crua do libxml2 pela lista com o
     rótulo oficial de cada código ("0=Margem Valor Agregado (%); ...").
 
@@ -440,8 +447,34 @@ def _esperado_enriquecido(tipo_violacao: str, tag: str, contexto: Optional[str],
         return esperado
     from . import layout
 
-    legenda = layout.legenda_de_valores(tag, contexto)
+    alvo = {}
+    if documento is not None and documento.tipo and documento.versao:
+        alvo = {"tipo_documento": documento.tipo, "versao": documento.versao,
+                "raiz": documento.raiz}
+    legenda = layout.legenda_de_valores(tag, contexto, **alvo)
     return legenda or esperado
+
+
+class ContextoDocumento(NamedTuple):
+    """Qual documento está sendo validado, para a mensagem falar dele.
+
+    Duas coisas dependiam disso e estavam erradas para tudo que não é nota:
+
+    1. A descrição oficial de campo vinha sempre do `leiauteNFe`. Um erro em
+       `cOrgao` de um evento caía no texto genérico, porque o campo não existe
+       no leiaute da nota. `tipo`/`versao`/`raiz` levam o `layout` ao leiaute
+       certo (RN14).
+    2. O texto genérico dizia "A SEFAZ rejeita a nota" mesmo num cancelamento.
+       `substantivo` já vem com o artigo ("o evento", "a consulta"), então a
+       frase sai com o gênero certo sem concordância no código.
+
+    `None` em qualquer campo mantém o comportamento de antes - é o que faz
+    todos os chamadores existentes continuarem valendo.
+    """
+    tipo: Optional[str] = None
+    versao: Optional[str] = None
+    raiz: Optional[str] = None
+    substantivo: str = "a nota"
 
 
 def montar_explicacao(
@@ -452,6 +485,7 @@ def montar_explicacao(
     esperado: str = "",
     grupo_pai: Optional[str] = None,
     gatilho: str = "",
+    documento: Optional[ContextoDocumento] = None,
 ) -> dict:
     """Compõe as quatro camadas em um erro pronto para o relatório.
 
@@ -469,12 +503,13 @@ def montar_explicacao(
     mensagens: "Logradouro" é um ótimo nome de campo e uma péssima
     justificativa fiscal; "Cfop" não serve nem para uma coisa nem para outra
     como explicação, mas serve como rótulo."""
+    documento = documento or ContextoDocumento()
     contexto = grupo_pai or (localizacao.grupo_tributario if localizacao else None)
     explicacao = explicar_campo(tag, contexto)
 
     # Consulta ao leiaute oficial. Nunca levanta: se o XSD não estiver
     # instalado, `oficial` é None e caímos no texto genérico de antes.
-    oficial = _descricao_oficial(tag, contexto, localizacao)
+    oficial = _descricao_oficial(tag, contexto, localizacao, documento)
 
     onde = localizacao.descrever() if localizacao else None
     o_que = diagnosticar(tipo_violacao, valor, gatilho)
@@ -486,12 +521,16 @@ def montar_explicacao(
         fonte = "catalogo"
     else:
         nome_amigavel = tag
+        # "layout oficial" e não "layout da NF-e/NFC-e": a frase é usada também
+        # por eventos e consultas, que têm leiaute próprio. Quem é o documento
+        # aparece no fim da frase, com o artigo certo.
         por_que = (
-            f"'{tag}' é exigido pelo layout da NF-e/NFC-e neste ponto do XML; sem essa "
-            "informação a SEFAZ não consegue processar o documento."
+            f"'{tag}' é exigido pelo layout oficial neste ponto do XML; sem essa "
+            f"informação a SEFAZ não consegue processar {documento.substantivo}."
         )
         consequencia = (
-            "A SEFAZ rejeita a nota na validação de schema, antes de qualquer análise fiscal."
+            f"A SEFAZ rejeita {documento.substantivo} na validação de schema, "
+            "antes de qualquer análise fiscal."
         )
         fonte = "generico"
 
@@ -506,14 +545,17 @@ def montar_explicacao(
                 # essa frase é da SEFAZ, não nossa (RN07).
                 por_que = (
                     f'O layout oficial define \'{tag}\' como: "{oficial.texto}". '
-                    "Sem essa informação a SEFAZ não consegue processar o documento."
+                    f"Sem essa informação a SEFAZ não consegue processar "
+                    f"{documento.substantivo}."
                 )
                 fonte = "xsd"
 
     como = (
         explicacao.como_corrigir
         if explicacao and explicacao.como_corrigir
-        else orientar(tipo_violacao, tag, _esperado_enriquecido(tipo_violacao, tag, contexto, esperado))
+        else orientar(tipo_violacao, tag,
+                      _esperado_enriquecido(tipo_violacao, tag, contexto,
+                                            esperado, documento))
     )
 
     prefixo = f"{onde}: " if onde else ""

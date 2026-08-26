@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.01">
+  <chNFe>35240112345678000199550010000000011234567890</chNFe>
+  <CNPJ>12345678000199</CNPJ>
+  <xNome>FORNECEDOR EXEMPLO LTDA</xNome>
+  <IE>123456789012</IE>
+  <dhEmi>2026-08-26T09:00:00-03:00</dhEmi>
+  <tpNF>1</tpNF>
+  <vNF>1250.00</vNF>
+  <digVal>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</digVal>
+  <dhRecbto>2026-08-26T09:05:00-03:00</dhRecbto>
+  <nProt>135240000000005</nProt>
+  <cSitNFe>1</cSitNFe>
+</resNFe>

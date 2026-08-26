@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<procEventoNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.00">
+  <evento versao="1.00">
+    <infEvento Id="ID1101113524011234567800019955001000000001123456789001">
+      <cOrgao>35</cOrgao>
+      <tpAmb>2</tpAmb>
+      <CNPJ>12345678000199</CNPJ>
+      <chNFe>35240112345678000199550010000000011234567890</chNFe>
+      <dhEvento>2026-08-26T10:15:00-03:00</dhEvento>
+      <tpEvento>110111</tpEvento>
+      <nSeqEvento>1</nSeqEvento>
+      <verEvento>1.00</verEvento>
+      <detEvento versao="1.00">
+        <descEvento>Cancelamento</descEvento>
+        <nProt>135240000000001</nProt>
+        <xJust>Erro de digitacao no valor total da nota fiscal emitida</xJust>
+      </detEvento>
+    </infEvento>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+        <Reference URI="#ID1101113524011234567800019955001000000001123456789001">
+          <Transforms>
+            <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+            <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+          </Transforms>
+          <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+          <DigestValue>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVo=</SignatureValue>
+      <KeyInfo>
+        <X509Data>
+          <X509Certificate>QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVo=</X509Certificate>
+        </X509Data>
+      </KeyInfo>
+    </Signature>
+  </evento>
+  <retEvento versao="1.00">
+    <infEvento>
+      <tpAmb>2</tpAmb>
+      <verAplic>SP_EVENTOS_1.0</verAplic>
+      <cOrgao>35</cOrgao>
+      <cStat>135</cStat>
+      <xMotivo>Evento registrado e vinculado a NF-e</xMotivo>
+      <chNFe>35240112345678000199550010000000011234567890</chNFe>
+      <tpEvento>110111</tpEvento>
+      <xEvento>Cancelamento registrado</xEvento>
+      <nSeqEvento>1</nSeqEvento>
+      <CNPJDest>98765432000188</CNPJDest>
+      <dhRegEvento>2026-08-26T10:16:00-03:00</dhRegEvento>
+      <nProt>135240000000002</nProt>
+    </infEvento>
+  </retEvento>
+</procEventoNFe>

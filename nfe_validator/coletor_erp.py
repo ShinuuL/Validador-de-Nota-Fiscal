@@ -155,21 +155,19 @@ def coletar(origem: str | Path, recursivo: bool = True) -> Iterator[XmlColetado]
                 yield from extrair_xmls_do_log(texto, str(alvo))
 
 
-# Raízes de DFe que este validador NÃO cobre. A pasta do ERP guarda tudo
-# junto: notas, eventos (ciência, cancelamento, carta de correção) e resumos
-# do distribuiçãoDFe. Chamar um evento de "nota inválida" seria ruído, não
-# achado — a spec cobre NF-e e NFC-e (RN01), e é isso que reportamos.
-RAIZES_FORA_DE_ESCOPO = {
-    "procEventoNFe": "evento de NF-e (ciência, cancelamento, carta de correção)",
-    "envEvento": "lote de eventos de NF-e",
-    "retEnvEvento": "retorno de lote de eventos",
-    "resNFe": "resumo de NF-e do distribuiçãoDFe",
-    "resEvento": "resumo de evento do distribuiçãoDFe",
-    "retDistDFeInt": "retorno do distribuiçãoDFe",
-    "procInutNFe": "inutilização de numeração",
-    "retConsSitNFe": "retorno de consulta de situação",
-    "retConsStatServ": "retorno de status do serviço",
-}
+# Raízes de DFe que este validador NÃO cobre — hoje, nenhuma.
+#
+# Esta lista já teve nove entradas. Todas saíram, e por motivos diferentes:
+# eventos, inutilização e retorno de consulta de situação eram pulados porque o
+# validador não sabia validá-los (ver `servicos`), não porque não
+# interessassem; os resumos e o retorno do distribuiçãoDFe saíram quando o
+# pacote PL_NFeDistDFe_104 foi instalado.
+#
+# Ficou vazia de propósito, e não foi removida: quando aparecer uma raiz de DF-e
+# sem XSD instalado, o lugar dela é aqui. Contá-la à parte é mais honesto que
+# reprovar o arquivo por uma falta nossa — e muito melhor que validar contra o
+# schema errado (RN15).
+RAIZES_FORA_DE_ESCOPO: dict[str, str] = {}
 
 
 def _raiz_de(conteudo: str) -> Optional[str]:
