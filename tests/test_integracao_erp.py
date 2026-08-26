@@ -249,16 +249,33 @@ class TesteRevalidacaoEmLote(unittest.TestCase):
     def _escrever(self, nome: str, conteudo: str):
         (self.pasta / nome).write_text(conteudo, encoding="utf-8")
 
-    def test_classifica_evento_como_fora_de_escopo(self):
-        """A pasta do ERP mistura notas, eventos e resumos. Chamar um evento de
-        'nota inválida' seria ruído: a spec cobre NF-e e NFC-e (RN01)."""
+    def test_evento_e_validado_e_nao_mais_pulado(self):
+        """A pasta do ERP mistura notas, eventos e resumos.
+
+        O evento era classificado como "fora de escopo" - não por não
+        interessar, mas porque o validador não sabia validá-lo. Com o
+        roteamento por família (ver `servicos`), ele passa pelo XSD do evento.
+        Este `<procEventoNFe>` é um esqueleto: `<evento/>` vazio e sem
+        `<retEvento>`, então tem que ser REPROVADO, não pulado - um
+        cancelamento malformado é exatamente o que uma varredura procura.
+        """
         self._escrever(
             "evento.xml",
             f'<procEventoNFe {NS} versao="1.00"><evento/></procEventoNFe>',
         )
+        resumo = resumir(revalidar(self.pasta))
+        self.assertEqual(resumo["foraDeEscopo"], 0)
+        self.assertEqual(resumo["invalidos"], 1)
+
+    def test_resumo_do_distdfe_segue_fora_de_escopo(self):
+        """O que sobrou na lista tem um motivo só: não há XSD instalado.
+
+        O pacote do distribuiçãoDFe não foi baixado, então dizer "fora de
+        escopo" é mais honesto que validar contra o schema errado (RN15).
+        """
         self._escrever("resumo.xml", f'<resNFe {NS} versao="1.01"><chNFe/></resNFe>')
         resumo = resumir(revalidar(self.pasta))
-        self.assertEqual(resumo["foraDeEscopo"], 2)
+        self.assertEqual(resumo["foraDeEscopo"], 1)
         self.assertEqual(resumo["invalidos"], 0)
 
     def test_valida_nota_e_agrega_por_codigo(self):

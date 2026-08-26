@@ -24,6 +24,7 @@ from typing import Optional
 
 from lxml import etree
 
+from . import servicos
 from .catalogo_erros import montar_explicacao
 from .localizacao import caminho_legivel, localizar
 
@@ -55,10 +56,17 @@ ARQUIVOS_ENTRADA = {
 # A raiz <NFe> nua fica de FORA deste mapa de proposito: o nome do XSD de
 # entrada dela varia por tipo de documento (nfe_ x nfce_), entao quem resolve e
 # ARQUIVOS_ENTRADA. Fixa-la aqui apontaria a NFC-e para "nfe_v4.00.xsd".
+# Só as raízes que CONTÊM uma nota: `identificar_documento` acha o <infNFe>
+# lá dentro, e as regras de negócio da nota se aplicam ao que está no envelope.
+#
+# `retEnviNFe` e `retConsReciNFe` saíram daqui para o registro em `servicos`.
+# Apesar do nome, não trazem nota nenhuma - <infRec> e <protNFe>, sem <infNFe>
+# -, então `identificar_documento` falhava neles e este mapa nunca era
+# alcançado por `validar()`. Os XSDs continuam na pasta da nota, porque incluem
+# o `leiauteNFe` completo; o que mudou é quem faz o roteamento.
 ENTRADA_POR_RAIZ = {
     "enviNFe": "enviNFe_v{versao}.xsd",
     "nfeProc": "procNFe_v{versao}.xsd",
-    "retEnviNFe": "retEnviNFe_v{versao}.xsd",
 }
 
 # Tipos do XSD que representam número - usados para escolher entre
@@ -80,6 +88,15 @@ def caminho_schema(tipo_documento: str, versao: str,
     `raiz`: nome da tag raiz do documento a validar. Quando informada e
     conhecida, escolhe o XSD de entrada daquele envelope; senão cai no XSD da
     <NFe> nua, que é o comportamento anterior."""
+    # Documento de serviço (evento, consulta, inutilização): a família dita a
+    # pasta e o arquivo de entrada, e ela vem do registro em `servicos`. Os
+    # eventos moram em v1.00/evento/ e a consulta cadastro em v2.00/conscad/,
+    # então a pasta NÃO pode sair de `tipo_documento` como na nota.
+    servico = servicos.SERVICOS.get(raiz) if raiz else None
+    if servico is not None:
+        pasta = SCHEMAS_DIR / f"v{versao}" / servico.tipo.lower()
+        return pasta / servico.entrada.format(versao=versao)
+
     pasta = SCHEMAS_DIR / f"v{versao}" / tipo_documento.lower()
     modelo = ""
     if raiz and raiz in ENTRADA_POR_RAIZ:
@@ -356,10 +373,18 @@ def validar_contra_xsd(xml_doc: etree._ElementTree, tipo_documento: str, versao:
     alternativas de um <choice>, e isso inflava o relatório."""
     raiz = str(xml_doc.getroot().tag).split("}")[-1]
 
+    # Documento de serviço: não há nota dentro para desembrulhar, e cair no
+    # XSD da nota daria uma enxurrada de erros sobre a raiz errada. Se o XSD da
+    # família não estiver instalado, `carregar_schema` levanta
+    # SchemaIndisponivel e quem chama transforma isso no aviso XSD-INDISPONIVEL
+    # (RN15: falhar explicitamente, nunca validar contra o schema errado).
+    if raiz in servicos.SERVICOS:
+        schema = carregar_schema(tipo_documento, versao, raiz)
+
     # Com o XSD do envelope instalado, validamos o documento como ele é. Sem
     # ele, extraímos a <NFe> — valida menos, mas não reprova a nota por causa
     # de uma raiz que o nosso schema não conhece.
-    if raiz in ENTRADA_POR_RAIZ and caminho_schema(tipo_documento, versao, raiz).exists():
+    elif raiz in ENTRADA_POR_RAIZ and caminho_schema(tipo_documento, versao, raiz).exists():
         schema = carregar_schema(tipo_documento, versao, raiz)
     else:
         schema = carregar_schema(tipo_documento, versao)

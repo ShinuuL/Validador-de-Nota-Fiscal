@@ -24,11 +24,13 @@ Novidades da v2 (relatório de erros)
 """
 
 from collections import Counter, defaultdict
+from typing import Optional
 
 from .localizacao import localizar
 
 from . import parser
 from . import schema
+from . import servicos
 from .regras import (chave_acesso, documento_fiscal, totais, datas,
                      campos_obrigatorios, obrigatorios_condicionais)
 
@@ -212,6 +214,112 @@ def _montar_resumo(erros: list[dict], avisos: list[dict]) -> dict:
     }
 
 
+def _chave_referenciada(arvore) -> Optional[str]:
+    """A chave da nota de que o documento fala, quando fala de uma só.
+
+    Um cancelamento, uma CC-e, uma consulta de situação: todos apontam para uma
+    nota por <chNFe>, e essa chave é o que o pessoal do fiscal usa para achar o
+    documento no sistema. Sem isso o cabeçalho do relatório mostrava
+    "Chave: (ausente)" num arquivo que traz a chave bem à vista.
+
+    Devolve `None` quando há mais de uma chave distinta - o retorno de um lote
+    traz um <protNFe> por nota, e escolher a primeira faria o cabeçalho apontar
+    para uma nota específica como se o documento fosse sobre ela. `None` é
+    honesto; um palpite não seria.
+    """
+    chaves = {
+        (elemento.text or "").strip()
+        for elemento in arvore.iter()
+        if servicos.tag_sem_namespace(elemento.tag) == "chNFe"
+    }
+    chaves.discard("")
+    return chaves.pop() if len(chaves) == 1 else None
+
+
+def _validar_servico(arvore, achado: tuple, aplicar_xsd: bool,
+                     resultado: dict) -> dict:
+    """Valida um evento ou consulta: só estrutura, e é o certo aqui.
+
+    As regras de negócio RN08..RN12 e RN18/RN19 leem uma NOTA - chave de
+    acesso, CNPJ do emitente, soma dos itens, data de emissão, campos
+    obrigatórios de `infNFe`. Um `<procEventoNFe>` não tem nada disso, então
+    rodá-las produziria uma lista de erros sobre campos que o documento não
+    deveria ter. O XSD do evento, por outro lado, é rigoroso: cobre `tpEvento`,
+    `nSeqEvento`, o formato da chave referenciada, a assinatura e o conteúdo de
+    `detEvento`, que é o que a SEFAZ confere.
+
+    O contrato de saída é o mesmo da nota (RN16/RN17) - `tipoDocumento` traz a
+    família, e a UI não precisa de caso especial.
+    """
+    servico, raiz, versao = achado
+    resultado["tipoDocumento"] = servico.rotulo
+    resultado["versaoLayout"] = versao or None
+    resultado["chaveAcesso"] = _chave_referenciada(arvore)
+
+    # A versão é atributo obrigatório da raiz nos nove XSDs de serviço. Sem
+    # ela não há como escolher a pasta, e chutar a versão da família violaria a
+    # RN15 - validaria contra um layout que o arquivo não declarou.
+    if not versao:
+        resultado["erros"].append(_normalizar({
+            "codigo": "IDENTIFICACAO-FALHOU",
+            "campo": "versao",
+            "xpath": f"/{raiz}/@versao",
+            "linha": arvore.getroot().sourceline,
+            "mensagem_tecnica": f"<{raiz}> sem o atributo 'versao'",
+            "motivo_rejeicao": (
+                f"O arquivo foi reconhecido como {servico.descricao}, mas a raiz "
+                f"<{raiz}> está sem o atributo obrigatório 'versao'. Esse atributo "
+                "é o que diz contra qual versão do layout validar (RN02), e o "
+                "validador não adivinha: validar contra a versão errada aprovaria "
+                "uma estrutura que a SEFAZ rejeita. Como corrigir: acrescente "
+                f"versao na tag <{raiz}>, com a versão que o seu emissor gera."
+            ),
+            "origem": "regra-negocio",
+            "subOrigem": "identificacao",
+        }))
+        resultado["erros"] = _ordenar(resultado["erros"])
+        resultado["resumo"] = _montar_resumo(resultado["erros"], resultado["avisos"])
+        resultado["resumo"]["xsdAplicado"] = False
+        return resultado
+
+    xsd_aplicado = False
+    if aplicar_xsd:
+        try:
+            resultado["erros"].extend(
+                schema.validar_contra_xsd(arvore, servico.tipo, versao)
+            )
+            xsd_aplicado = True
+        except schema.SchemaIndisponivel as exc:
+            resultado["avisos"].append(_normalizar({
+                "codigo": "XSD-INDISPONIVEL",
+                "campo": None,
+                "xpath": None,
+                "linha": None,
+                "mensagem_tecnica": str(exc),
+                "motivo_rejeicao": (
+                    f"O arquivo é {servico.descricao}, na versão {versao}, mas o "
+                    f"schema oficial dessa versão não está instalado neste "
+                    "ambiente. Num evento ou consulta a validação é inteiramente "
+                    "estrutural - as regras de negócio da nota (chave de acesso, "
+                    "totais, datas) não se aplicam -, então sem o XSD não sobra "
+                    "conferência nenhuma: este relatório não diz nada sobre o "
+                    "arquivo. Ver schemas/README.md."
+                ),
+                "origem": "regra-negocio",
+                "subOrigem": "configuracao",
+                "severidade": "aviso",
+            }))
+
+    resultado["erros"] = _ordenar(_deduplicar([_normalizar(e) for e in resultado["erros"]]))
+    # Sem XSD não houve conferência alguma, então "válido" seria mentira - ao
+    # contrário da nota, onde as regras de negócio ainda rodam e sustentam o
+    # veredito.
+    resultado["valido"] = xsd_aplicado and not resultado["erros"]
+    resultado["resumo"] = _montar_resumo(resultado["erros"], resultado["avisos"])
+    resultado["resumo"]["xsdAplicado"] = xsd_aplicado
+    return resultado
+
+
 def validar(conteudo_xml: str, aplicar_xsd: bool = True,
             aplicar_campos_obrigatorios: bool = True,
             aplicar_condicionais: bool = True) -> dict:
@@ -241,6 +349,13 @@ def validar(conteudo_xml: str, aplicar_xsd: bool = True,
         }))
         resultado["resumo"] = _montar_resumo(resultado["erros"], resultado["avisos"])
         return resultado
+
+    # 2b) Documento de serviço (evento, consulta, inutilização)? Tem que ser
+    # perguntado ANTES de `identificar_documento`, que exige <infNFe> e culparia
+    # o arquivo por não ser uma nota. Ver `servicos` para o porquê do registro.
+    servico = servicos.identificar(arvore)
+    if servico is not None:
+        return _validar_servico(arvore, servico, aplicar_xsd, resultado)
 
     # 2) RN01/RN02 - identifica tipo de documento e versão do layout.
     try:

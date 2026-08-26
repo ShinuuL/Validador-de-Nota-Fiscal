@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProcInutNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
+  <inutNFe versao="4.00">
+    <infInut Id="ID35261234567800019955001000000010000000020">
+      <tpAmb>2</tpAmb>
+      <xServ>INUTILIZAR</xServ>
+      <cUF>35</cUF>
+      <ano>26</ano>
+      <CNPJ>12345678000199</CNPJ>
+      <mod>55</mod>
+      <serie>1</serie>
+      <nNFIni>10</nNFIni>
+      <nNFFin>20</nNFFin>
+      <xJust>Falha no sistema emissor deixou a faixa de numeracao sem uso</xJust>
+    </infInut>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+        <Reference URI="#ID35261234567800019955001000000010000000020">
+          <Transforms>
+            <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+            <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+          </Transforms>
+          <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+          <DigestValue>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVo=</SignatureValue>
+      <KeyInfo>
+        <X509Data>
+          <X509Certificate>QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVo=</X509Certificate>
+        </X509Data>
+      </KeyInfo>
+    </Signature>
+  </inutNFe>
+  <retInutNFe versao="4.00">
+    <infInut>
+      <tpAmb>2</tpAmb>
+      <verAplic>SP_NFE_PL009</verAplic>
+      <cStat>102</cStat>
+      <xMotivo>Inutilizacao de numero homologado</xMotivo>
+      <cUF>35</cUF>
+      <ano>26</ano>
+      <CNPJ>12345678000199</CNPJ>
+      <mod>55</mod>
+      <serie>1</serie>
+      <nNFIni>10</nNFIni>
+      <nNFFin>20</nNFFin>
+      <dhRecbto>2026-08-26T10:20:00-03:00</dhRecbto>
+      <nProt>135260000000003</nProt>
+    </infInut>
+  </retInutNFe>
+</ProcInutNFe>

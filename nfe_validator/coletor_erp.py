@@ -155,19 +155,25 @@ def coletar(origem: str | Path, recursivo: bool = True) -> Iterator[XmlColetado]
                 yield from extrair_xmls_do_log(texto, str(alvo))
 
 
-# Raízes de DFe que este validador NÃO cobre. A pasta do ERP guarda tudo
-# junto: notas, eventos (ciência, cancelamento, carta de correção) e resumos
-# do distribuiçãoDFe. Chamar um evento de "nota inválida" seria ruído, não
-# achado — a spec cobre NF-e e NFC-e (RN01), e é isso que reportamos.
+# Raízes de DFe que este validador NÃO cobre. A pasta do ERP guarda tudo junto,
+# e chamar de "nota inválida" um arquivo que não é nota seria ruído, não achado.
+#
+# Esta lista era bem maior. Eventos, inutilização e retorno de consulta de
+# situação saíram dela quando o roteamento por família passou a existir (ver
+# `servicos`): eram pulados porque o validador não sabia validá-los, não porque
+# não interessassem — um cancelamento rejeitado é exatamente o tipo de coisa que
+# se quer achar numa varredura da pasta do ERP.
+#
+# O que sobrou tem um motivo comum: não há XSD instalado para essas raízes. Os
+# resumos e o retorno do distribuiçãoDFe vêm no pacote do DistDFeInt, e o
+# status do serviço no de ConsStatServ — nenhum dos dois foi baixado. Instalar
+# esses pacotes e registrar as raízes em `servicos` é o que tira cada linha
+# daqui; até então, dizer "fora de escopo" é mais honesto que validar contra o
+# schema errado (RN15).
 RAIZES_FORA_DE_ESCOPO = {
-    "procEventoNFe": "evento de NF-e (ciência, cancelamento, carta de correção)",
-    "envEvento": "lote de eventos de NF-e",
-    "retEnvEvento": "retorno de lote de eventos",
     "resNFe": "resumo de NF-e do distribuiçãoDFe",
     "resEvento": "resumo de evento do distribuiçãoDFe",
     "retDistDFeInt": "retorno do distribuiçãoDFe",
-    "procInutNFe": "inutilização de numeração",
-    "retConsSitNFe": "retorno de consulta de situação",
     "retConsStatServ": "retorno de status do serviço",
 }
 
