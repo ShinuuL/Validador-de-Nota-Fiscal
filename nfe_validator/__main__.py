@@ -26,6 +26,11 @@ AJUDA = (
     "  --lote                 trata o caminho como pasta/log do ERP e revalida tudo\n"
     "                         (aceita os despejos de XML em out/monitor-nfe-*.out.txt\n"
     "                          e arquivos .xml soltos, inclusive envelopes nfeProc)\n"
+    "\n"
+    "Valida NF-e e NFC-e (nota nua, enviNFe, nfeProc) e tambem os documentos de\n"
+    "servico: eventos (cancelamento, CC-e, manifestacao), consulta de situacao,\n"
+    "inutilizacao de numeracao, consulta cadastro e retornos de lote. A familia e\n"
+    "reconhecida pela raiz do XML - nao ha opcao para escolher.\n"
 )
 
 OPCOES_VALIDAS = {"--json", "--csv", "--so-nao-preenchidos", "--sem-xsd", "--lote"}

@@ -105,23 +105,43 @@ leiaute, com 7 horas de diferença: o `010e` é a mais nova. O único elemento q
 o `010d` tem e o `010e` não é o `pISEspec`, renomeado para `adRemIS` (alíquota
 *ad rem* do Imposto Seletivo). Não é conteúdo perdido.
 
-### O que o `PL_010d` traz que o projeto não tem
+### O pacote de serviços do `PL_010d`, instalado
 
 O `010d` é o pacote de **serviços**, e é aí que ele não se sobrepõe ao `010e`.
-São 17 XSDs de eventos e consultas, todos compilando sem erro, cada um com sua
-raiz global — nenhuma delas suportada hoje:
+Os 17 XSDs de eventos e consultas foram instalados, uma pasta por família —
+porque os `xs:include` são relativos e cada ponto de entrada precisa achar as
+dependências ao lado:
 
-| Serviço | Arquivos | Raízes |
+| Pasta | Raízes | Serviço |
 | --- | --- | --- |
-| Eventos (cancelamento, CC-e, manifestação) | `envEvento_v1.00`, `retEnvEvento_v1.00`, `procEventoNFe_v1.00`, `leiauteEvento_v1.00` | `envEvento`, `retEnvEvento`, `procEventoNFe` |
-| Consulta situação da nota | `consSitNFe_v4.00`, `retConsSitNFe_v4.00`, `leiauteConsSitNFe_v4.00` | `consSitNFe`, `retConsSitNFe` |
-| Inutilização de numeração | `leiauteInutNFe_v4.00`, `procInutNFe_v4.00` | `ProcInutNFe` |
-| Consulta cadastro de contribuinte | `consCad_v2.00`, `retConsCad_v2.00`, `leiauteConsultaCadastro_v2.00` | `ConsCad`, `retConsCad` |
-| Retorno do recibo do lote | `retConsReciNFe_v4.00` | `retConsReciNFe` |
+| `v1.00/evento/` | `envEvento`, `retEnvEvento`, `procEventoNFe` | cancelamento, CC-e, manifestação |
+| `v4.00/conssitnfe/` | `consSitNFe`, `retConsSitNFe` | consulta da situação da nota |
+| `v4.00/inutnfe/` | `ProcInutNFe` | inutilização de faixa de numeração |
+| `v2.00/conscad/` | `ConsCad`, `retConsCad` | consulta cadastro de contribuinte |
+| `v4.00/nfe/`, `v4.00/nfce/` | `retConsReciNFe` | retorno do recibo do lote |
 
-Suportá-los seria estender `ENTRADA_POR_RAIZ` (ver abaixo) com essas raízes e
-criar as pastas correspondentes — trabalho de recurso novo, não de atualização
-de schema. Nada disso foi instalado.
+O `retConsReciNFe_v4.00.xsd` **não** ganhou pasta própria: ele inclui o
+`leiauteNFe` completo, então foi para a pasta da nota, ao lado de `enviNFe` e
+`procNFe`. Assim usa o leiaute do `PL_010e`, que é o mais novo — com pasta
+própria, levaria consigo o leiaute mais antigo do `010d`.
+
+O `tiposBasico_v4.00.xsd` da pasta `Evento/` do pacote ficou de fora: o
+`leiauteEvento` inclui o `v1.03`, não o `v4.00`, então lá ele não é alcançado
+por nenhum ponto de entrada.
+
+### Por que `tiposBasico` e `xmldsig` aparecem duplicados
+
+Não é desperdício evitável: **a própria SEFAZ publica cópias divergentes com o
+mesmo nome de arquivo.**
+
+| Arquivo | Em `Evento/` | Em outra pasta |
+| --- | --- | --- |
+| `tiposBasico_v1.03.xsd` | 33.686 B | 34.557 B (`CadConsultaCadastro/`) |
+| `tiposBasico_v4.00.xsd` | 22.556 B | 22.532 B (`NFe/`) |
+
+Uma pasta compartilhada obrigaria a escolher uma das versões, e estaria errada
+para a outra família. Cada cópia instalada foi conferida com `cmp` contra a
+pasta de origem certa.
 
 ### Verificar
 
@@ -129,6 +149,10 @@ de schema. Nada disso foi instalado.
 python -c "from nfe_validator import layout; print(layout.disponivel('NFCe','4.00'))"
 python -m unittest discover -s tests -p "test_*.py"
 ```
+
+Os XSDs de serviço são conferidos por `tests/test_servicos.py`, que compila os
+dez pontos de entrada e valida uma fixture por família — um `xs:include`
+quebrado ou uma pasta com o `tiposBasico` errado aparece ali.
 
 Se instalou o pacote com `pip install .`, **reinstale** — os XSDs são
 `package-data` e o ambiente instalado tem a própria cópia.

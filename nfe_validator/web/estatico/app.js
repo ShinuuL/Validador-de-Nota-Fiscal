@@ -431,6 +431,22 @@ function montarLista(itens, bloco, titulo, lista, rotulo, tipo) {
   el(bloco).hidden = false;
 }
 
+// Concordância de gênero do "inválido/inválida". Antes era "inválida" fixo,
+// que combinava com NFe e NFCe porque se lê "nota". Com eventos e consultas no
+// jogo, o texto passou a sair como "Evento inválida".
+//
+// A lista é curta e fechada - são as famílias de `servicos.py` -, então um mapa
+// explícito é mais honesto que adivinhar pela terminação: "Evento" termina em
+// "o" e é masculino, mas "ConsultaSituacao" também termina em "o" e é feminino
+// (lê-se "consulta").
+const TIPOS_FEMININOS = new Set([
+  "NFe", "NFCe", "ConsultaSituacao", "ConsultaCadastro", "Inutilizacao",
+]);
+
+function flexionarInvalido(tipo) {
+  return TIPOS_FEMININOS.has(tipo) ? "inválida" : "inválido";
+}
+
 function renderizar(resultado) {
   ultimoResultado = resultado;
 
@@ -456,16 +472,24 @@ function renderizar(resultado) {
     faixa.classList.add("invalida");
     el("status-icone").textContent = "✕";
     if (identificacao) {
+      // Um IDENTIFICACAO-FALHOU com tipoDocumento preenchido não é "não sei o
+      // que é isso": o documento FOI reconhecido (evento, consulta...) e o que
+      // falhou foi um detalhe dele, como a versão de layout ausente. Dizer
+      // "não parece ser uma NF-e" ali manda o usuário conferir a coisa errada.
+      const reconhecido = identificacao.codigo !== "XML-MALFORMADO"
+        && Boolean(resultado.tipoDocumento);
       el("status-texto").textContent =
         identificacao.codigo === "XML-MALFORMADO"
           ? "Este arquivo não é um XML válido"
-          : "Este arquivo não parece ser uma NF-e ou NFC-e";
+          : reconhecido
+            ? `${resultado.tipoDocumento}: não foi possível identificar o layout`
+            : "Este arquivo não parece ser uma NF-e ou NFC-e";
       el("status-resumo").textContent = identificacao.mensagem
         || identificacao.motivo_rejeicao || "";
     } else {
       const tipo = resultado.tipoDocumento || "documento";
       const layout = resultado.versaoLayout ? `, layout ${resultado.versaoLayout}` : "";
-      el("status-texto").textContent = `${tipo} inválida${layout}`;
+      el("status-texto").textContent = `${tipo} ${flexionarInvalido(tipo)}${layout}`;
       el("status-resumo").textContent =
         `${erros.length} ${erros.length === 1 ? "problema impede" : "problemas impedem"}`
         + " o envio à SEFAZ.";

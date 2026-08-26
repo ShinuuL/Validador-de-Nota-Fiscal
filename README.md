@@ -32,6 +32,7 @@ nfe_validator/
   __init__.py          -> expõe validar()
   __main__.py           -> CLI (python -m nfe_validator arquivo.xml)
   parser.py              -> boa formação + identificação de tipo/versão + extração de campos
+  servicos.py            -> registro dos documentos de serviço (eventos, consultas, inutilização)
   schema.py               -> validação contra XSD oficial + classificação da mensagem do libxml2
   layout.py               -> LEITOR do XSD: descrições oficiais, obrigatoriedade por variante, CST -> grupo
   coletor_erp.py          -> coleta XMLs que o ERP deixou no disco (out/*.out.txt, .xml) e revalida em lote
@@ -387,6 +388,68 @@ Um detalhe que a documentação oficial revelou e uma tabela de memória erraria
 variantes de ICMS normal. Exigir `orig` ali geraria falso positivo em toda nota
 de optante do Simples Nacional.
 
+## Documentos de serviço (eventos, consultas, inutilização)
+
+Nem todo XML que o ERP guarda é uma nota. Depois da autorização vem o
+cancelamento, a carta de correção, a manifestação do destinatário, a
+inutilização de faixa de numeração e os retornos de lote. Tudo isso é XML no
+layout nacional, tudo isso a SEFAZ rejeita por erro estrutural — e nada disso
+tem `<infNFe>`.
+
+Antes, um cancelamento chegava ao `validar()` e morria com *"Não foi encontrado
+o elemento `<infNFe>`. Verifique se o arquivo é realmente uma NF-e/NFC-e no
+layout nacional"* — uma mensagem que culpa o arquivo por não ser algo que ele
+nunca se propôs a ser.
+
+`servicos.py` reconhece a família pela **raiz** do documento, antes de exigir
+`<infNFe>`, e lê a versão do atributo `versao` da própria raiz:
+
+| Família (`tipoDocumento`) | Raízes | Versão | Pasta |
+| --- | --- | --- | --- |
+| `Evento` | `envEvento`, `retEnvEvento`, `procEventoNFe` | 1.00 | `v1.00/evento/` |
+| `ConsultaSituacao` | `consSitNFe`, `retConsSitNFe` | 4.00 | `v4.00/conssitnfe/` |
+| `Inutilizacao` | `ProcInutNFe` | 4.00 | `v4.00/inutnfe/` |
+| `ConsultaCadastro` | `ConsCad`, `retConsCad` | 2.00 | `v2.00/conscad/` |
+| `RetornoLote` / `RetornoRecibo` | `retEnviNFe`, `retConsReciNFe` | 4.00 | `v4.00/nfe/` |
+
+```
+$ python -m nfe_validator cancelamento.xml
+  Documento : Evento  |  Layout: 1.00
+  Chave     : 35240112345678000199550010000000011234567890
+  Situação  : REJEITADA  |  2 erro(s), 0 aviso(s)
+```
+
+A chave no cabeçalho é a da nota **referenciada** — é por ela que o pessoal do
+fiscal acha o documento no sistema. Quando o arquivo fala de mais de uma nota
+(um retorno de lote traz um `<protNFe>` por nota), fica ausente: escolher a
+primeira faria o relatório parecer ser sobre aquela.
+
+### Aqui a validação é só estrutural, e isso é o certo
+
+As regras RN08–RN12 e RN18/RN19 leem uma **nota**: chave de acesso, CNPJ do
+emitente, soma dos itens, data de emissão, campos obrigatórios de `infNFe`. Um
+`<procEventoNFe>` não tem nada disso, então rodá-las produziria uma lista de
+erros sobre campos que o documento não deveria ter. O XSD do evento, por outro
+lado, é rigoroso justamente no que a SEFAZ confere: `cOrgao`, `tpEvento`,
+`nSeqEvento`, o formato da chave referenciada, a assinatura.
+
+Consequência disso: **sem o XSD instalado, um documento de serviço não pode ser
+declarado válido.** Na nota, `aplicar_xsd=False` ainda deixa as regras de
+negócio rodando e elas sustentam um veredito; aqui não sobraria conferência
+nenhuma, e dizer "válido" seria afirmar algo que não foi verificado.
+
+### Duas coisas que o XSD do evento *não* confere
+
+Vale saber para não confiar demais num "válido":
+
+- **O conteúdo de `detEvento` não é validado.** O XSD o declara como
+  `<xs:any processContents="skip">`, então `xJust`, `nProt` e `descEvento`
+  passam com qualquer valor — inclusive uma justificativa de cancelamento com
+  menos de 15 caracteres, que a SEFAZ rejeita.
+- **`tpEvento` é só `[0-9]{6}`.** Não há enumeração no schema, então `119999`
+  passa. Enumerar os tipos válidos aqui seria invenção nossa, o que a RN05
+  proíbe — a lista vem do MOC, não do XSD.
+
 ## Integração com o ERP (server-weld)
 
 ### Como o ERP entrega o XML antes de enviar à Receita
@@ -451,12 +514,13 @@ de ~600 bytes que só declaram a raiz global e incluem o mesmo
 `protNFe` agora é detectado — antes esse ramo inteiro era invisível, porque
 extraíamos a `<NFe>` e descartávamos o resto.
 
-> **Sobre migrar o leiaute:** comparei definição por definição. O nosso
-> `leiauteNFe_v4.00.xsd` tem **527** definições contra **520** do
-> `PL_010B_NT2025_002_v130`, com 7 exclusivas nossas (`CNPJPAA`, `ISUFEmit`,
-> `PAASignature`, `RSAKeyValue`, `SignatureValue`, `cIndOp`, `infPAA`) e
-> **nenhuma** que só o PL tenha. Trocar o leiaute seria downgrade, então
-> mantivemos o nosso e pegamos só o que faltava.
+> **Sobre migrar o leiaute:** o instalado é byte-a-byte idêntico ao pacote
+> `PL_010e_v1.02` (10/07/2026), o mais novo dos quatro PLs conferidos — trocar
+> por qualquer um dos outros seria downgrade. Os 7 elementos que o
+> `PL_010B_NT2025_002_v130` não tinha (`CNPJPAA`, `ISUFEmit`, `PAASignature`,
+> `RSAKeyValue`, `SignatureValue`, `cIndOp`, `infPAA`) chegaram a levantar
+> suspeita de serem extraoficiais; são oficiais, entram no `PL_010d`/`PL_010e`.
+> A comparação completa dos pacotes está em `nfe_validator/schemas/README.md`.
 
 ### O dicionário `.dd` para o ERP
 
@@ -514,9 +578,13 @@ O `layout.py` ganhou duas consultas por causa disso: `aceita_vazio(tag)` e
 vazia" — premissa que o `cBenef` desmentiu —, perguntamos ao XSD.
 
 > **Nota de escopo.** A pasta `nfe_baixadas/` guarda notas, eventos e resumos
-> juntos. O modo `--lote` classifica `procEventoNFe`, `resNFe` e afins como
-> *fora de escopo* em vez de reprová-los: a spec cobre NF-e e NFC-e (RN01), e
-> chamar um evento de "nota inválida" seria ruído, não achado.
+> juntos, e o modo `--lote` valida cada um contra o schema da sua própria
+> família — inclusive eventos e inutilizações (ver *Documentos de serviço*).
+>
+> Continuam *fora de escopo*, e são contados à parte em vez de reprovados,
+> apenas as raízes sem XSD instalado: `resNFe`, `resEvento`, `retDistDFeInt`
+> (pacote do distribuiçãoDFe) e `retConsStatServ`. Reprová-las seria culpar o
+> arquivo por uma falta nossa; validá-las contra outro schema seria pior (RN15).
 
 > **Pacotes de leiaute.** O ERP usa `nfe_schemas/PL_010B_NT2025_002_v130`
 > (24 arquivos, com IBS/CBS da NT 2025.002) e tem os XSDs de envelope
@@ -552,8 +620,10 @@ vazia" — premissa que o `cBenef` desmentiu —, perguntamos ao XSD.
 ## O que falta para ir além do MVP
 
 - [ ] Aplicar o `enviNFe_v4.00.dd` no projeto do ERP (entrega para o outro dev — lá este projeto é somente leitura)
-- [ ] Gerar `.dd` para as outras raízes que o ERP valida (`consSitNFe`, `consReciNFe`, `inutNFe`) — o gerador já aceita a raiz como parâmetro
-- [ ] Instalar os XSDs de **NFC-e** — a pasta `schemas/v4.00/nfce/` existe mas está **vazia**, então uma NFC-e (mod 65) hoje só recebe o aviso `XSD-INDISPONIVEL` e roda apenas as regras de negócio. (Os XSDs de **NF-e** já estão instalados em `schemas/v4.00/nfe/` e a validação estrutural funciona.)
+- [ ] Gerar `.dd` para as outras raízes que o ERP valida (`consSitNFe`, `consReciNFe`, `inutNFe`) — o gerador já aceita a raiz como parâmetro, e agora os XSDs dessas raízes estão instalados
+- [ ] Instalar os pacotes que faltam para fechar o `--lote`: distribuiçãoDFe (`retDistDFeInt`, `resNFe`, `resEvento`) e status do serviço (`retConsStatServ`) — são as últimas raízes classificadas como *fora de escopo*
+- [ ] Descrições oficiais de campo para os documentos de serviço: `layout.py` só carrega o `leiauteNFe`, então um erro em `cOrgao` de evento cai no texto genérico ("exigido pelo layout da NF-e/NFC-e") em vez da documentação do `leiauteEvento`
+- [ ] Ajustar a consequência das mensagens por tipo de documento: `catalogo_erros.py` diz "A SEFAZ rejeita a nota" mesmo quando o documento é um evento
 - [ ] RF08 — validação em lote: `--lote` e `--csv` já cobrem pasta e log do ERP; falta paralelismo para volumes grandes
 - [ ] Ampliar `catalogo_erros.py` com mais campos específicos (hoje cobre os campos mais críticos de ICMS/IPI/PIS/COFINS, identificação e totais — o fallback genérico cobre o restante, mas com menos precisão)
 - [ ] Obrigatoriedade condicional que o XSD **não** contém e exige o MOC/Notas Técnicas: aritmética de totais, CST x CRT (regime do emitente), CFOP x UF, validade do NCM contra a tabela real, e CST de IBS/CBS (o `TCST` em `DFeTiposBasicos_v1.00.xsd` é só `pattern="\d{3}"`, sem enumeração — qualquer lista aqui seria invenção, RN05)
