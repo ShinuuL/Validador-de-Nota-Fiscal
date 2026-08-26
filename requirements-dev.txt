@@ -1,0 +1,5 @@
+# Dependencias de DESENVOLVIMENTO. Nao entram no pacote nem no .exe.
+-r requirements.txt
+
+# Só para gerar o executável distribuível (`nfe-validator.spec`).
+pyinstaller>=6.0

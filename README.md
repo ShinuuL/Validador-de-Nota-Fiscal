@@ -31,6 +31,7 @@ pyproject.toml         -> empacotamento (pip install .), declara os XSDs como pa
 nfe_validator/
   __init__.py          -> expõe validar()
   __main__.py           -> CLI (python -m nfe_validator arquivo.xml)
+  desktop.py             -> ponto de entrada do .exe: sem argumento abre a UI, com argumento é CLI
   parser.py              -> boa formação + identificação de tipo/versão + extração de campos
   servicos.py            -> registro dos documentos de serviço (eventos, consultas, inutilização)
   schema.py               -> validação contra XSD oficial + classificação da mensagem do libxml2
@@ -161,6 +162,74 @@ Ver a demonstração isolada de tradução de erro (o exemplo "vBC do ICMS vazio
 ```bash
 python3 tests/demo_xsd_error_translation.py
 ```
+
+## Executável distribuível (.exe)
+
+Para quem não vai instalar Python. Um arquivo só, ~12 MB, nada para instalar na
+máquina de destino.
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m PyInstaller --clean --noconfirm nfe-validator.spec
+```
+
+Sai em `dist/nfe-validator.exe`.
+
+### O mesmo .exe é a UI e o CLI
+
+O despacho é pelo que veio na linha de comando ([desktop.py](nfe_validator/desktop.py)):
+
+| Chamada | O que faz |
+| --- | --- |
+| duplo clique, ou `nfe-validator.exe` | abre a interface no navegador |
+| `nfe-validator.exe nota.xml` | relatório legível, código de saída 0/1 |
+| `nfe-validator.exe nota.xml --json` | saída estruturada |
+| `nfe-validator.exe pasta --lote` | revalida a pasta inteira |
+| `nfe-validator.exe --ui --porta 9000` | interface em outra porta |
+
+O `console=True` no `.spec` **não é preferência**: o mesmo binário é o CLI, e
+sem console o `--json`/`--csv` não teria para onde escrever e o código de saída
+ficaria invisível para quem chama do ERP.
+
+O `host` fica fixo em `127.0.0.1` no .exe, sem opção para mudar. Os XMLs
+carregam CNPJ, valores e dados de cliente, e um executável que circula por
+e-mail não é lugar de expor isso na rede por um erro de digitação. Quem precisa
+escutar fora da máquina usa `nfe-validator-web --host`, onde a escolha é
+explícita e vem com aviso.
+
+### O que o `.spec` existe para impedir
+
+Os `.xsd` e os arquivos da UI são lidos do disco em tempo de execução
+(`Path(__file__).parent / "schemas"`), e o PyInstaller **não descobre isso
+analisando imports**. Se ficarem de fora, o .exe **sobe e funciona** — só que
+degrada em silêncio para o aviso `XSD-INDISPONIVEL` em toda nota, ou serve a UI
+com `ESTATICO-AUSENTE`. Falha plausível e invisível.
+
+O `.spec` coleta os schemas por varredura, não por lista fixa: eles seguem a
+RN14 (`schemas/v{versao}/{tipo}/`), então uma versão nova de layout é uma pasta
+nova, e uma lista escrita à mão sairia de sincronia sem avisar.
+
+Depois de compilar, confira que os dados entraram:
+
+```bash
+./dist/nfe-validator.exe tests/fixtures/nfe_exemplo_invalida.xml --json | grep xsdAplicado
+```
+
+`"xsdAplicado": true` e nenhum aviso `XSD-INDISPONIVEL` é a prova de que os XSDs
+estão dentro do binário.
+
+### Uma armadilha do Windows na detecção de porta
+
+Abrir o validador duas vezes é o caso comum, não a exceção. Mas **não dá para
+descobrir "porta ocupada" deixando o bind falhar**: o `allow_reuse_address` que
+o `HTTPServer` liga por padrão faz o `SO_REUSEADDR` aceitar um segundo bind na
+*mesma* porta já em LISTEN, sem erro nenhum. O resultado é pior que uma exceção
+— dois servidores disputando as conexões, em silêncio, cada um atendendo parte
+das requisições.
+
+`quem_esta_na_porta()` faz dois testes: um `connect` de TCP para saber se há
+alguém, e o `/api/saude` para separar "já tem um validador aberto" (abre a
+janela existente) de "tem outro programa nessa porta" (recusa e sugere outra).
 
 ## Formato de saída
 
