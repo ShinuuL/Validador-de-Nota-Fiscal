@@ -69,10 +69,17 @@ exe = EXE(
     debug=False,
     strip=False,
     upx=False,
-    # console=True é obrigatório, não preferência: o mesmo .exe é o CLI, e sem
-    # console o `--json`/`--csv` não teria para onde escrever e o código de
-    # saída ficaria invisível para quem chama do ERP.
-    console=True,
+    # console=False: o público majoritário do .exe é quem dá duplo clique e
+    # quer a janela do navegador, não uma tela preta. O preço é que, sem
+    # console, o Windows deixa `sys.stdout`/`sys.stderr` valendo None - por
+    # isso `desktop.main()` chama `_garantir_saidas()` antes do primeiro
+    # print, senão o programa morre de AttributeError sem abrir nada.
+    #
+    # O uso de CLI continua existindo, mas passa a exigir redirecionamento
+    # explícito para ver a saída (`nfe-validator.exe nota.xml --json > s.json`);
+    # sem redirecionar, o texto vai para o dispositivo nulo. O código de saída
+    # continua correto para quem chama do ERP.
+    console=False,
     onefile=True,
     disable_windowed_traceback=False,
 )

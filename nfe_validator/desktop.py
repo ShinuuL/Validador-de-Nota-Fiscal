@@ -20,6 +20,7 @@ que um mude o outro por acidente.
 Este módulo é usado SOMENTE pelo executável. Nada no pacote importa ele.
 """
 
+import os
 import sys
 
 # Imports ABSOLUTOS, não relativos: o PyInstaller executa este arquivo como
@@ -97,7 +98,27 @@ lote e distribuicao de DF-e. A familia e reconhecida pela raiz do XML.
 """
 
 
+def _garantir_saidas() -> None:
+    """Dá a `sys.stdout`/`sys.stderr` um destino quando não existe nenhum.
+
+    O .exe é compilado sem console (`console=False` no .spec), e nesse modo o
+    PyInstaller deixa `sys.stdout` e `sys.stderr` valendo None. Como este
+    módulo imprime desde a primeira linha (ajuda, aviso da janela, endereço do
+    servidor), o `print()` estouraria com AttributeError antes de qualquer
+    coisa útil acontecer - o usuário veria o programa "não abrir", sem mensagem.
+
+    Redirecionar para o dispositivo nulo mantém o programa vivo e o
+    comportamento intacto para quem redireciona a saída para um arquivo
+    (`nfe-validator.exe nota.xml --json > saida.json`): aí o stdout existe e
+    nada aqui é trocado.
+    """
+    for nome in ("stdout", "stderr"):
+        if getattr(sys, nome, None) is None:
+            setattr(sys, nome, open(os.devnull, "w", encoding="utf-8"))
+
+
 def main(argumentos: list[str] | None = None) -> None:
+    _garantir_saidas()
     argumentos = list(sys.argv[1:] if argumentos is None else argumentos)
 
     if _e_pedido_de_ajuda(argumentos):

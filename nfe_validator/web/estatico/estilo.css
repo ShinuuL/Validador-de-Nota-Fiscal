@@ -76,6 +76,10 @@ main { max-width: 900px; margin: 0 auto; }
 .topo h1 { margin: 0; font-size: 1.5rem; letter-spacing: -.01em; }
 .subtitulo { margin: .35rem 0 0; color: var(--texto-fraco); }
 
+/* [hidden] precisa vencer os display:flex/grid dos paineis; sem isto o
+   painel de carregando (e o girador) fica visivel para sempre. */
+[hidden] { display: none !important; }
+
 .oculto-visual {
   position: absolute; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden;
