@@ -1,3 +1,3 @@
-from .validador import validar
+from .nucleo.validador import validar
 
 __all__ = ["validar"]

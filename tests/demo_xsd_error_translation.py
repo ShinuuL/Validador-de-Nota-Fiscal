@@ -11,8 +11,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from lxml import etree
-from nfe_validator.schema import _classificar_e_extrair, _extrair_grupo_pai
-from nfe_validator.catalogo_erros import explicar_campo, explicacao_generica
+from nfe_validator.nucleo.schema import _classificar_e_extrair, _extrair_grupo_pai
+from nfe_validator.nucleo.catalogo_erros import explicar_campo, explicacao_generica
 
 XSD_TESTE = """<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">

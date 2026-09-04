@@ -11,12 +11,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from nfe_validator.regras.chave_acesso import calcular_dv_modulo11, validar_chave_acesso
-from nfe_validator.regras.documento_fiscal import cnpj_valido, cpf_valido, validar_documentos
-from nfe_validator.regras.totais import validar_totais
-from nfe_validator.regras.datas import validar_data
-from nfe_validator.parser import parsear_xml, identificar_documento, XmlMalformado
-from nfe_validator.validador import validar
+from nfe_validator.nucleo.regras.chave_acesso import calcular_dv_modulo11, validar_chave_acesso
+from nfe_validator.nucleo.regras.documento_fiscal import cnpj_valido, cpf_valido, validar_documentos
+from nfe_validator.nucleo.regras.totais import validar_totais
+from nfe_validator.nucleo.regras.datas import validar_data
+from nfe_validator.nucleo.parser import parsear_xml, identificar_documento, XmlMalformado
+from nfe_validator.nucleo.validador import validar
 
 
 class TesteChaveAcesso(unittest.TestCase):

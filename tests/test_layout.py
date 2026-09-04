@@ -22,8 +22,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from lxml import etree
 
-from nfe_validator import layout
-from nfe_validator.layout import (
+from nfe_validator.nucleo import layout
+from nfe_validator.nucleo.layout import (
     LIMITE_TEXTO_SUBSTANTIVO,
     _analisar_conteudo,
     _e_choice_de_variantes,
@@ -63,7 +63,7 @@ def _esquema_da_variante(nome: str):
         return _ESQUEMAS_DE_VARIANTE[nome]
 
     import copy as _copy
-    from nfe_validator.schema import caminho_schema
+    from nfe_validator.nucleo.schema import caminho_schema
 
     leiaute = caminho_schema("NFe", "4.00").parent / "leiauteNFe_v4.00.xsd"
     arvore = etree.parse(str(leiaute))

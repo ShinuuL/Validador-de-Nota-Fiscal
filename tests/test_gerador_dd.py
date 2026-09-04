@@ -26,8 +26,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from nfe_validator import layout
-from nfe_validator.gerador_dd import (
+from nfe_validator.nucleo import layout
+from nfe_validator.ferramentas.gerador_dd import (
     RAIZES,
     _escapar_valor,
     escrever_dd,

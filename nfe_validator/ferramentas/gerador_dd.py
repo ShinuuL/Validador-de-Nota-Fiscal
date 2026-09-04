@@ -40,10 +40,10 @@ import unicodedata
 from pathlib import Path
 from typing import Iterator, Optional
 
-from . import layout
-from .catalogo_erros import explicar_campo
-from .layout import XS, _documentacao, _modelo_de_conteudo, _sem_ns
-from .localizacao import localizar
+from ..nucleo import layout
+from ..nucleo.catalogo_erros import explicar_campo
+from ..nucleo.layout import XS, _documentacao, _modelo_de_conteudo, _sem_ns
+from ..nucleo.localizacao import localizar
 
 # Profundidade máxima da árvore de caminhos. O leiaute da NF-e não tem tipo
 # recursivo, mas um XSD futuro pode ter, e um estouro de pilha aqui seria um
@@ -162,7 +162,7 @@ def gerar_dicionario(raiz: str = "enviNFe", tipo_documento: str = "NFe",
                      versao: str = "4.00") -> dict[str, str]:
     """Monta {caminho_pontilhado: descrição} para todos os campos alcançáveis
     a partir de `raiz`. Devolve {} se o XSD não estiver instalado."""
-    from .schema import SCHEMAS_DIR
+    from ..nucleo.schema import SCHEMAS_DIR
 
     nome_entrada = RAIZES.get(raiz, "").format(versao=versao)
     if not nome_entrada:

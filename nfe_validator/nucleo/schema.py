@@ -33,7 +33,13 @@ from .localizacao import caminho_legivel, localizar
 # o validador degradaria em silêncio para o aviso XSD-INDISPONIVEL em toda
 # nota — perdendo validação estrutural, RN19 e as descrições oficiais.
 # A estrutura interna segue a RN14: schemas/v{versao}/{tipo}/.
-SCHEMAS_DIR = Path(__file__).resolve().parent / "schemas"
+#
+# `parents[1]` e nao `parent`: este modulo mora em `nfe_validator/nucleo/`, e
+# os XSD ficam na raiz do pacote, ao lado de `web/`. Errar esse nivel nao
+# levanta excecao - a pasta simplesmente nao existe e toda nota passa a sair
+# com XSD-INDISPONIVEL, que e exatamente o modo de falha silencioso que o
+# comentario acima descreve.
+SCHEMAS_DIR = Path(__file__).resolve().parents[1] / "schemas"
 
 NS_NFE = "http://www.portalfiscal.inf.br/nfe"
 

@@ -28,17 +28,17 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from nfe_validator import layout
-from nfe_validator.coletor_erp import (
+from nfe_validator.nucleo import layout
+from nfe_validator.ferramentas.coletor_erp import (
     extrair_xmls_do_log,
     resumir,
     revalidar,
 )
-from nfe_validator.parser import parsear_xml
-from nfe_validator.regras.campos_obrigatorios import validar_campos_obrigatorios
-from nfe_validator.regras.totais import calcular_vnf_esperado, validar_totais
-from nfe_validator.schema import _desembrulhar_envelope
-from nfe_validator.validador import validar
+from nfe_validator.nucleo.parser import parsear_xml
+from nfe_validator.nucleo.regras.campos_obrigatorios import validar_campos_obrigatorios
+from nfe_validator.nucleo.regras.totais import calcular_vnf_esperado, validar_totais
+from nfe_validator.nucleo.schema import _desembrulhar_envelope
+from nfe_validator.nucleo.validador import validar
 
 NS = 'xmlns="http://www.portalfiscal.inf.br/nfe"'
 

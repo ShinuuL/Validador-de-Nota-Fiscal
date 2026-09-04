@@ -12,13 +12,19 @@ dependencies = ["lxml>=5.0"]
 
 [project.scripts]
 nfe-validator = "nfe_validator.__main__:main"
-nfe-validator-dd = "nfe_validator.gerador_dd:main"
+nfe-validator-dd = "nfe_validator.ferramentas.gerador_dd:main"
 nfe-validator-web = "nfe_validator.web.servidor:main"
 
 [tool.setuptools]
 # Sem descoberta automática: `tests` e a raiz do projeto não são pacotes, e
 # `find` acabaria empacotando coisa errada.
-packages = ["nfe_validator", "nfe_validator.regras", "nfe_validator.web"]
+packages = [
+    "nfe_validator",
+    "nfe_validator.nucleo",
+    "nfe_validator.nucleo.regras",
+    "nfe_validator.ferramentas",
+    "nfe_validator.web",
+]
 
 [tool.setuptools.package-data]
 # Os .xsd são PARTE DA ENTREGA, não artefato de build.

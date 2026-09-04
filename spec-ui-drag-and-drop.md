@@ -12,7 +12,7 @@ Criar uma página web simples onde o usuário possa **arrastar e soltar** (drag-
 - O contrato de resposta é exatamente o já definido na especificação do backend (`valido`, `tipoDocumento`, `versaoLayout`, `chaveAcesso`, `erros[]`, `avisos[]`, cada item de erro com `codigo`, `campo`, `xpath`, `linha`, `mensagem_tecnica`, `motivo_rejeicao`, `origem`). A UI apenas **exibe** esses campos — não decide motivos de rejeição, não duplica o catálogo de erros.
 - **Endpoint sugerido (a implementar junto com a UI, fora do escopo de regra de negócio):**
   - `POST /api/validar` — corpo: `{ "conteudoXml": "<NFe ...>...</NFe>" }` — resposta: o JSON do contrato acima.
-  - Deve envolver `nfe_validator.validador.validar()` em um framework leve (ex. FastAPI/Flask), sem adicionar lógica de negócio nova nessa camada.
+  - Deve envolver `nfe_validator.nucleo.validador.validar()` em um framework leve (ex. FastAPI/Flask), sem adicionar lógica de negócio nova nessa camada.
 
 ## 3. Regras de Negócio da UI (o agente NÃO pode fugir destas regras)
 
@@ -71,7 +71,7 @@ Criar uma página web simples onde o usuário possa **arrastar e soltar** (drag-
 ## 7. Passo a Passo de Implementação (ordem obrigatória)
 
 1. **Expor o validador via API**
-   - Criar um endpoint HTTP simples (`POST /api/validar`) que recebe `{ conteudoXml }` e chama `nfe_validator.validador.validar()`.
+   - Criar um endpoint HTTP simples (`POST /api/validar`) que recebe `{ conteudoXml }` e chama `nfe_validator.nucleo.validador.validar()`.
    - Retornar o JSON exatamente como o `validar()` já produz — sem transformação de dados.
    - Tratar erros inesperados do backend (ex. exceção não prevista) devolvendo um JSON de erro padronizado (nunca um HTML de erro cru).
 

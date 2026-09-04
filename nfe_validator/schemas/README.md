@@ -188,7 +188,7 @@ Se instalou o pacote com `pip install .`, **reinstale** — os XSDs são
 
 Um XSD de entrada só declara a raiz global e inclui o `leiauteNFe_v4.00.xsd`.
 Qual deles é usado depende da **raiz do documento** validado
-(`ENTRADA_POR_RAIZ` em `nfe_validator/schema.py`):
+(`ENTRADA_POR_RAIZ` em `nfe_validator/nucleo/schema.py`):
 
 | Arquivo | Raiz global | Quando aparece |
 | --- | --- | --- |

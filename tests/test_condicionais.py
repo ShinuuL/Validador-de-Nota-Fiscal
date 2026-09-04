@@ -17,12 +17,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from nfe_validator import layout
-from nfe_validator.parser import parsear_xml
-from nfe_validator.regras.obrigatorios_condicionais import (
+from nfe_validator.nucleo import layout
+from nfe_validator.nucleo.parser import parsear_xml
+from nfe_validator.nucleo.regras.obrigatorios_condicionais import (
     validar_obrigatorios_condicionais,
 )
-from nfe_validator.validador import validar
+from nfe_validator.nucleo.validador import validar
 
 NS = 'xmlns="http://www.portalfiscal.inf.br/nfe"'
 
@@ -222,7 +222,7 @@ class TesteIntegracaoNoValidador(unittest.TestCase):
         self.assertFalse(any(c.startswith("RN19") for c in codigos_sem))
 
     def test_erros_da_rn19_respeitam_o_contrato_rn17(self):
-        from nfe_validator.validador import ORIGENS_VALIDAS
+        from nfe_validator.nucleo.validador import ORIGENS_VALIDAS
         resultado = validar(_nota("<ICMS><ICMS00><orig>0</orig><CST>00</CST></ICMS00></ICMS>"))
         rn19 = [e for e in resultado["erros"] if e["codigo"].startswith("RN19")]
         self.assertTrue(rn19)
@@ -235,7 +235,7 @@ class TesteIntegracaoNoValidador(unittest.TestCase):
         """Quando o XSD e a RN19 acham o mesmo campo faltante, quem fica é a
         mensagem que explica o gatilho — mesmo que o XSD tenha sido anexado
         primeiro."""
-        from nfe_validator.validador import _deduplicar, _riqueza
+        from nfe_validator.nucleo.validador import _deduplicar, _riqueza
         pobre = {"codigo": "XSD-X", "campo": "vBC", "xpath": "/a/vBC",
                  "detalhe": {"tagXml": "vBC", "tipoViolacao": "t"}}
         rico = {"codigo": "RN19-X", "campo": "vBC", "xpath": "/a/vBC",

@@ -17,8 +17,8 @@ Rodar com:
 import unittest
 from pathlib import Path
 
-from nfe_validator import schema, servicos
-from nfe_validator.validador import validar
+from nfe_validator.nucleo import schema, servicos
+from nfe_validator.nucleo.validador import validar
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
@@ -282,7 +282,7 @@ class TesteRegistroDeServicos(unittest.TestCase):
         self.assertIn("nfeProc", schema.ENTRADA_POR_RAIZ)
 
     def test_nota_e_envelopes_nao_sao_confundidos_com_servico(self):
-        from nfe_validator import parser
+        from nfe_validator.nucleo import parser
         conteudo = (FIXTURES / "nfe_exemplo_invalida.xml").read_text(encoding="utf-8")
         self.assertIsNone(servicos.identificar(parser.parsear_xml(conteudo)))
 

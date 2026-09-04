@@ -32,7 +32,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Optional
 
-from ..validador import validar
+from ..nucleo.validador import validar
 
 ESTATICOS = Path(__file__).resolve().parent / "estatico"
 

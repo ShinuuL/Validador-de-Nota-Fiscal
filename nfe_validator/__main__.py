@@ -14,7 +14,7 @@ import csv
 import json
 import sys
 
-from .validador import validar
+from .nucleo.validador import validar
 
 AJUDA = (
     "Uso: python -m nfe_validator <arquivo.xml | pasta | -> [opções]\n"
@@ -133,7 +133,7 @@ COLUNAS_CSV = (
 
 def _linhas_csv(resultado: dict, arquivo: str = "") -> list[dict]:
     """Achata um resultado de validação em uma linha por erro/aviso."""
-    from .localizacao import localizar
+    from .nucleo.localizacao import localizar
 
     linhas: list[dict] = []
     for item in resultado["erros"] + resultado["avisos"]:
@@ -167,7 +167,8 @@ def _escrever_csv(linhas: list[dict]) -> None:
     aparecem quebrados.
 
     Reconfigura por cima do UTF-8 que `main()` já pôs: aqui o que muda é o BOM
-    (`utf-8-sig`) e o `newline=""`, que o `csv` exige para não duplicar o ."""
+    (`utf-8-sig`) e o `newline=""`, que o `csv` exige para não duplicar o 
+."""
     sys.stdout.reconfigure(encoding="utf-8-sig", newline="")
     escritor = csv.DictWriter(
         sys.stdout, fieldnames=list(COLUNAS_CSV),
@@ -182,7 +183,7 @@ def _rodar_lote(origem: str, como_json: bool, aplicar_xsd: bool,
     """Revalida em lote os XMLs que o ERP deixou no disco (RF08).
 
     A pasta do ERP é lida e nada mais: o coletor não escreve nela."""
-    from .coletor_erp import resumir, revalidar
+    from .ferramentas.coletor_erp import resumir, revalidar
 
     resultados = revalidar(origem, aplicar_xsd=aplicar_xsd)
     resumo = resumir(resultados)

@@ -32,25 +32,27 @@ nfe_validator/
   __init__.py          -> expõe validar()
   __main__.py           -> CLI (python -m nfe_validator arquivo.xml)
   desktop.py             -> ponto de entrada do .exe: sem argumento abre a UI, com argumento é CLI
-  parser.py              -> boa formação + identificação de tipo/versão + extração de campos
-  servicos.py            -> registro dos documentos de serviço (eventos, consultas, inutilização)
-  schema.py               -> validação contra XSD oficial + classificação da mensagem do libxml2
-  layout.py               -> LEITOR do XSD: descrições oficiais, obrigatoriedade por variante, CST -> grupo
-  coletor_erp.py          -> coleta XMLs que o ERP deixou no disco (out/*.out.txt, .xml) e revalida em lote
-  gerador_dd.py           -> gera o dicionário .dd que o ERP sabe ler e nunca teve
+  nucleo/               -> tudo que decide se a nota passa; não importa web/ nem ferramentas/
+    parser.py              -> boa formação + identificação de tipo/versão + extração de campos
+    servicos.py            -> registro dos documentos de serviço (eventos, consultas, inutilização)
+    schema.py               -> validação contra XSD oficial + classificação da mensagem do libxml2
+    layout.py               -> LEITOR do XSD: descrições oficiais, obrigatoriedade por variante, CST -> grupo
+    localizacao.py          -> xpath técnico -> localização legível ("Item 3 > grupo ICMS00 > linha 28")
+    catalogo_erros.py       -> explicação de negócio por campo + composição da mensagem em 4 camadas
+    validador.py             -> orquestrador (junta tudo, deduplica, ordena e resume)
+    regras/
+      campos_obrigatorios.py  -> RN18 (campos não preenchidos, independente de XSD)
+      obrigatorios_condicionais.py -> RN19 (campos exigidos por CST/grupo, derivados do XSD)
+      chave_acesso.py         -> RN08/RN09 (dígito verificador + consistência da chave)
+      documento_fiscal.py     -> RN10 (CNPJ/CPF)
+      totais.py                -> RN11 (consistência de valores)
+      datas.py                  -> RN12 (formato de data/hora)
   web/
     servidor.py             -> POST /api/validar + serve a UI (http.server da stdlib)
     estatico/               -> index.html, estilo.css, app.js (sem biblioteca externa)
-  localizacao.py          -> xpath técnico -> localização legível ("Item 3 > grupo ICMS00 > linha 28")
-  catalogo_erros.py       -> explicação de negócio por campo + composição da mensagem em 4 camadas
-  validador.py             -> orquestrador (junta tudo, deduplica, ordena e resume)
-  regras/
-    campos_obrigatorios.py  -> RN18 (campos não preenchidos, independente de XSD)
-    obrigatorios_condicionais.py -> RN19 (campos exigidos por CST/grupo, derivados do XSD)
-    chave_acesso.py         -> RN08/RN09 (dígito verificador + consistência da chave)
-    documento_fiscal.py     -> RN10 (CNPJ/CPF)
-    totais.py                -> RN11 (consistência de valores)
-    datas.py                  -> RN12 (formato de data/hora)
+  ferramentas/            -> apoio, fora do caminho da validação; consomem o núcleo, ninguém as importa
+    coletor_erp.py          -> coleta XMLs que o ERP deixou no disco (out/*.out.txt, .xml) e revalida em lote
+    gerador_dd.py           -> gera o dicionário .dd que o ERP sabe ler e nunca teve
   schemas/                  -> DENTRO do pacote, para viajar no pip install
     README.md                 -> como obter e instalar os XSDs oficiais
     v4.00/nfe/                 -> XSDs oficiais de NF-e: INSTALADOS, com os pontos de
@@ -618,7 +620,7 @@ extraíamos a `<NFe>` e descartávamos o resto.
 ### O dicionário `.dd` para o ERP
 
 `enviNFe_v4.00.dd` na raiz do projeto, gerado por
-`python -m nfe_validator.gerador_dd enviNFe 4.00`. **1.016 chaves.**
+`python -m nfe_validator.ferramentas.gerador_dd enviNFe 4.00`. **1.016 chaves.**
 
 É o arquivo que `NfeServico.getXSDTagInf()` procura e nunca encontrou. Basta
 colocá-lo ao lado do `enviNFe_v4.00.xsd` no pacote de schemas do ERP para a

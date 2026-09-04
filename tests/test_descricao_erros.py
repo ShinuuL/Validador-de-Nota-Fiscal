@@ -19,12 +19,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from nfe_validator.catalogo_erros import DIAGNOSTICOS, montar_explicacao, explicar_campo
-from nfe_validator.localizacao import localizar, caminho_legivel
-from nfe_validator.parser import parsear_xml
-from nfe_validator.regras.campos_obrigatorios import validar_campos_obrigatorios
-from nfe_validator.schema import analisar_mensagem
-from nfe_validator.validador import validar
+from nfe_validator.nucleo.catalogo_erros import DIAGNOSTICOS, montar_explicacao, explicar_campo
+from nfe_validator.nucleo.localizacao import localizar, caminho_legivel
+from nfe_validator.nucleo.parser import parsear_xml
+from nfe_validator.nucleo.regras.campos_obrigatorios import validar_campos_obrigatorios
+from nfe_validator.nucleo.schema import analisar_mensagem
+from nfe_validator.nucleo.validador import validar
 
 NS = 'xmlns="http://www.portalfiscal.inf.br/nfe"'
 
@@ -183,7 +183,7 @@ class TesteComposicaoDaExplicacao(unittest.TestCase):
         self.assertIn("Como corrigir", texto)                # como
 
     def test_todo_campo_do_catalogo_tem_orientacao_de_correcao(self):
-        from nfe_validator.catalogo_erros import CATALOGO_CAMPOS
+        from nfe_validator.nucleo.catalogo_erros import CATALOGO_CAMPOS
         sem_orientacao = [k for k, v in CATALOGO_CAMPOS.items() if not v.como_corrigir]
         self.assertEqual(sem_orientacao, [])
 
@@ -193,7 +193,7 @@ class TesteIntegracaoComLeiauteOficial(unittest.TestCase):
     oficial do XSD em vez da frase genérica."""
 
     def setUp(self):
-        from nfe_validator import layout
+        from nfe_validator.nucleo import layout
         if not layout.disponivel():
             self.skipTest("XSD oficial de NF-e não instalado")
 
@@ -430,14 +430,14 @@ class TesteContratoDeSaida(unittest.TestCase):
         self.assertEqual(len(chaves), len(set(chaves)))
 
     def test_erros_vem_ordenados_por_origem_e_linha(self):
-        from nfe_validator.validador import PRIORIDADE_SUBORIGEM
+        from nfe_validator.nucleo.validador import PRIORIDADE_SUBORIGEM
         pesos = [PRIORIDADE_SUBORIGEM.get(e["subOrigem"], 99) for e in self.resultado["erros"]]
         self.assertEqual(pesos, sorted(pesos))
 
     def test_contrato_rn17_origem_e_mensagem(self):
         """RN17 fixa `origem` em dois valores e exige a chave `mensagem`.
         A granularidade fina vive em `subOrigem`, que é aditivo."""
-        from nfe_validator.validador import ORIGENS_VALIDAS, ORIGEM_DA_SUBORIGEM
+        from nfe_validator.nucleo.validador import ORIGENS_VALIDAS, ORIGEM_DA_SUBORIGEM
         for item in self.resultado["erros"] + self.resultado["avisos"]:
             self.assertIn(item["origem"], ORIGENS_VALIDAS, f"origem inválida em {item['codigo']}")
             self.assertTrue(item["mensagem"], f"sem mensagem em {item['codigo']}")

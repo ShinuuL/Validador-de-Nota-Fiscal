@@ -185,7 +185,7 @@ def revalidar(origem: str | Path, recursivo: bool = True,
     Cada item tem `rotulo`, `origem` e um destes: `resultado` (a saída de
     `validar()`), `foraDeEscopo` (documento que não é NF-e/NFC-e) ou
     `erroLeitura` (nem deu para interpretar)."""
-    from .validador import validar
+    from ..nucleo.validador import validar
 
     resultados: list[dict] = []
     for coletado in coletar(origem, recursivo):
