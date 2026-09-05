@@ -25,15 +25,20 @@ COMO USAR
 
      clique em "Mais informacoes"  ->  "Executar assim mesmo"
 
-4. Vai abrir uma JANELA PRETA e, alguns segundos depois, o navegador.
+4. Alguns segundos depois o navegador abre sozinho, na pagina do validador.
 
-   A janela preta e o proprio validador. NAO FECHE ela enquanto estiver
-   usando - se fechar, a pagina no navegador para de funcionar.
+   Nao aparece nenhuma janela do programa: ele fica rodando em segundo plano.
+   Enquanto voce estiver usando a pagina, ele precisa continuar rodando - por
+   isso NAO desligue nem reinicie a maquina no meio do uso.
 
 5. Arraste o arquivo XML para a area indicada na pagina, ou clique nela para
    escolher o arquivo.
 
-6. Terminou? Feche a janela preta.
+6. Terminou? Feche a aba do navegador.
+
+   O validador em si continua rodando em segundo plano ate voce desligar a
+   maquina. Para encerrar antes disso: Ctrl+Shift+Esc (Gerenciador de
+   Tarefas), procure por "nfe-validator" na aba Detalhes e finalize a tarefa.
 
 
 O QUE ELE VALIDA
@@ -72,11 +77,18 @@ PERGUNTAS COMUNS
 
 "Diz que a porta esta ocupada."
 
-  O validador ja esta aberto em outra janela. Use a janela que ja existe.
+  Ja tem um validador rodando em segundo plano. Ele deveria abrir a pagina
+  sozinho; se nao abriu, entre em http://127.0.0.1:8765 no navegador.
 
-"Fechei a janela preta sem querer."
+"A pagina fica em Validando... e nao sai disso."
 
-  Da dois cliques no nfe-validator.exe de novo.
+  Provavelmente sobrou uma copia antiga do validador rodando em segundo plano,
+  travada. Abra o Gerenciador de Tarefas (Ctrl+Shift+Esc), aba Detalhes,
+  finalize TODAS as tarefas chamadas "nfe-validator" e abra o programa de novo.
+
+"Fechei a aba do navegador sem querer."
+
+  Da dois cliques no nfe-validator.exe de novo - ele reabre a pagina.
 
 
 PARA QUEM VAI USAR NO ERP OU EM SCRIPT

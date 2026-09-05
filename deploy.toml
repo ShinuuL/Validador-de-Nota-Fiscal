@@ -1,0 +1,33 @@
+# Configuracao de deploy deste projeto (deploy-base)
+[deploy]
+app         = "nfe-validator"       # id do app: minusculas, sem espacos; vira prefixo da tag
+repo        = "ShinuuL/Releases"    # repo privado que guarda as releases de todos os apps
+gateway     = "https://updates-gateway.sofaltaumaletr.workers.dev"  # URL publica do Worker
+channel     = "stable"              # stable | beta
+private_key = 'C:/chaves/deploy-base.pem'       # PEM de assinatura -- FORA do repo; aspas simples = caminho literal
+public_key  = "104c81a81b05108f914c50d091cd184a210eae57528e20298d8835344b740045" # hex (Ed25519, publica -- pode versionar)
+
+# Este app NAO se atualiza sozinho. Diferente do MasterNote, nao ha updater
+# embutido: o .exe do PyInstaller e um arquivo solto, sem instalador e sem
+# processo de troca. O portal entrega a versao nova, e quem usa substitui o
+# arquivo. Se um dia isso incomodar, o caminho e o `deploybase.updater` (SDK do
+# deploy-base), nao um segundo mecanismo.
+
+# Executavel unico do PyInstaller. Gere com:
+#
+#     python -m PyInstaller --clean --noconfirm nfe-validator.spec
+#
+# O publish versiona a partir do nome do arquivo, produzindo
+# nfe-validator-0.3.0.exe. Enquanto `dist/nfe-validator.exe` nao existir, o
+# publish recusa com "artefato nao encontrado" e nao sobe release nenhuma.
+#
+# ATENCAO: confira que o .exe saiu com os .xsd dentro. O `nfe-validator.spec`
+# existe justamente para isso -- sem os schemas o programa ABRE E FUNCIONA, so
+# que degrada em silencio para o aviso XSD-INDISPONIVEL em toda nota. Um teste
+# rapido antes de publicar: `dist\nfe-validator.exe tests\fixtures\nfe_exemplo_invalida.xml --json`
+# tem de trazer erros de origem "xsd", nao so de regra de negocio.
+[[artifact]]
+path     = "dist/nfe-validator.exe"
+platform = "windows"
+arch     = "x64"
+kind     = "exe"

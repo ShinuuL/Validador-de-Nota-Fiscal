@@ -247,10 +247,45 @@ async function enviar(conteudo, rotulo) {
   el("carregando-nome").textContent = rotulo;
   mostrar("carregando");
 
-  const abortador = new AbortController();
-  const relogio = setTimeout(() => abortador.abort(), TEMPO_LIMITE);
+  // Cão de guarda do PAINEL, e não da requisição — é a diferença que importa.
+  //
+  // O `abortador` abaixo protege o `fetch`, mas só serve se o `fetch` de fato
+  // rejeitar quando o sinal dispara. Dois casos reais quebram isso e deixam a
+  // página em "Validando…" para sempre, sem mensagem nenhuma:
+  //
+  //   * navegador que tem `AbortController` mas ignora o `signal` no `fetch`
+  //     (Edge legado, Safari antigo). O `abort()` roda, a promessa nunca se
+  //     resolve, o `finally` nunca chega e o painel fica preso;
+  //   * qualquer exceção lançada aqui fora do `try` — que escapava como
+  //     rejeição não tratada, já com o painel de carregando visível.
+  //
+  // Este temporizador não depende de nenhum dos dois: ele olha o estado da
+  // tela. Se o painel de carregando ainda estiver visível depois do prazo, a
+  // falha aparece — não importa o que travou. Some segundos ao limite do
+  // `fetch` para que, quando o caminho normal funcionar, seja a mensagem dele
+  // que ganhe (ela sabe distinguir XML grande de janela fechada).
+  const guarda = setTimeout(() => {
+    if (!painel.carregando.hidden) {
+      mostrarFalha(
+        "A validação passou de " + Math.round((TEMPO_LIMITE + 5000) / 1000)
+        + " segundos sem resposta e a página parou de esperar. Confirme que o "
+        + "validador continua aberto — se você fechou a janela dele, ou se "
+        + "sobrou uma cópia antiga rodando em segundo plano, abra o validador "
+        + "de novo antes de tentar."
+      );
+    }
+  }, TEMPO_LIMITE + 5000);
+
+  let abortador = null;
+  let relogio = null;
 
   try {
+    // Dentro do `try` de propósito: em navegador sem `AbortController` o `new`
+    // estoura, e aqui isso vira uma falha visível em vez de uma promessa
+    // rejeitada que ninguém escuta.
+    abortador = new AbortController();
+    relogio = setTimeout(() => abortador.abort(), TEMPO_LIMITE);
+
     const resposta = await fetch("api/validar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -291,15 +326,17 @@ async function enviar(conteudo, rotulo) {
                  + "se ela foi fechada, abra o validador de novo. Se o XML é muito "
                  + "grande, vale tentar pela linha de comando.");
     } else {
-      // "o terminal onde você rodou 'nfe-validator-web'" não quer dizer nada
-      // para quem recebeu o .exe e nunca abriu um terminal. O que essa pessoa
-      // vê é a janela preta que abriu junto.
-      mostrarFalha("O validador não respondeu. A janela do validador precisa "
-                 + "continuar aberta enquanto você usa esta página — se ela foi "
-                 + "fechada, abra o validador de novo.");
+      // Quem recebeu o .exe e nunca abriu um terminal não sabe o que é
+      // "o terminal onde você rodou 'nfe-validator-web'". E desde que o
+      // executável passou a rodar sem console, também não há janela preta para
+      // citar: o validador fica em segundo plano, sem nada na tela.
+      mostrarFalha("O validador não respondeu. Ele precisa continuar rodando "
+                 + "enquanto você usa esta página — abra o nfe-validator.exe de "
+                 + "novo e recarregue.");
     }
   } finally {
     clearTimeout(relogio);
+    clearTimeout(guarda);
   }
 }
 
@@ -546,6 +583,40 @@ el("btn-copiar-json").addEventListener("click", async () => {
 });
 
 el("btn-validar-outro").addEventListener("click", irParaOcioso);
+
+/* ------------------------------------------------------------------ *
+ * Rede de segurança: nenhum erro pode deixar a página presa em silêncio
+ * ------------------------------------------------------------------ */
+//
+// O pior defeito desta UI não é mostrar a mensagem errada — é não mostrar
+// mensagem nenhuma. Um erro que escapa com o painel de carregando visível
+// deixa "Validando…" na tela para sempre, e quem está do outro lado não tem
+// como saber se o arquivo é grande, se o validador caiu ou se a página travou.
+// Fica esperando.
+//
+// Estes dois ouvintes são o último recurso: qualquer exceção não tratada ou
+// promessa rejeitada sem `catch` vira uma falha visível, desde que a página
+// esteja justamente no estado onde o silêncio custa caro. Fora dele não
+// interferem — um erro no botão de copiar JSON não deve trocar a tela de
+// resultado por uma de falha.
+function _resgatarDoCarregando(detalhe) {
+  if (painel.carregando.hidden) return;
+  mostrarFalha(
+    "A validação foi interrompida por um erro na página (" + detalhe + "). "
+    + "Recarregue e tente de novo; se repetir, use a linha de comando: "
+    + "nfe-validator.exe nota.xml"
+  );
+}
+
+window.addEventListener("unhandledrejection", (evento) => {
+  _resgatarDoCarregando(
+    (evento.reason && (evento.reason.name || evento.reason.message)) || "falha assíncrona"
+  );
+});
+
+window.addEventListener("error", (evento) => {
+  _resgatarDoCarregando((evento.error && evento.error.name) || evento.message || "erro");
+});
 
 /* Estado inicial. */
 mostrar("entrada");

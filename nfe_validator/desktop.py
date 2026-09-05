@@ -177,18 +177,22 @@ def main(argumentos: list[str] | None = None) -> None:
     # Aviso antes de servir, e não depois: `serve_forever()` bloqueia, então
     # qualquer coisa impressa depois só apareceria no encerramento.
     #
-    # O `servir()` já imprime o endereço e "Ctrl+C para encerrar", que é
-    # linguagem de quem vive no terminal. Quem recebeu este .exe por e-mail vê
-    # uma janela preta e não tem motivo para saber que fechá-la derruba o
-    # validador no meio do uso - a página no navegador simplesmente para de
-    # responder, e o erro que aparece é "o validador não respondeu".
+    # No .exe distribuído este texto NÃO é lido por ninguém: com
+    # `console=False` no `.spec` não há console, e `_garantir_saidas()` mandou
+    # o stdout para o dispositivo nulo. Ele serve a quem roda
+    # `python -m nfe_validator.desktop` ou redireciona a saída para arquivo.
+    #
+    # A consequência de não haver console é do usuário final, não daqui: o
+    # programa fica em segundo plano sem nada na tela e sem como ser encerrado
+    # a não ser pelo Gerenciador de Tarefas. O `LEIA-ME-distribuicao.txt`
+    # explica isso — e cópias antigas presas na porta são uma causa conhecida
+    # de "a página fica em Validando... para sempre".
     print()
     print("=" * 62)
-    print("  NAO FECHE ESTA JANELA enquanto estiver usando o validador.")
-    print("  Ela e o proprio validador: a pagina no navegador para de")
-    print("  funcionar se ela for fechada.")
+    print("  O validador esta rodando. Deixe-o rodando enquanto usa a")
+    print("  pagina no navegador - ela para de funcionar sem ele.")
     print()
-    print("  Terminou? Feche esta janela para encerrar.")
+    print("  Terminou? Ctrl+C encerra.")
     print("=" * 62)
     print()
 
